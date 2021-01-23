@@ -18,15 +18,26 @@ public class ServicioJPA implements Serializable {
 	@Column (name = "id_servicio")
 	private int idServicio;
 	
-	@Column (name="nombre_servicio", nullable=false, length=50)
+	@Column (name="codigo_servicio" , nullable=false , length= 50 , unique= true)
+	private String codigo_servicio;
+	
+	@Column (name="nombre_servicio", nullable=false, length= 50)
 	private String nombreServicio;
-
+	
 	public int getIdServicio() {
 		return idServicio;
 	}
 
 	public void setIdServicio(int idServicio) {
 		this.idServicio = idServicio;
+	}
+
+	public String getCodigo_servicio() {
+		return codigo_servicio;
+	}
+
+	public void setCodigo_servicio(String codigo_servicio) {
+		this.codigo_servicio = codigo_servicio;
 	}
 
 	public String getNombreServicio() {
@@ -36,22 +47,22 @@ public class ServicioJPA implements Serializable {
 	public void setNombreServicio(String nombreServicio) {
 		this.nombreServicio = nombreServicio;
 	}
-	
+
 	public ServicioJPA() {
 		
 	}
 
-	public ServicioJPA(int idServicio, String nombreServicio) {
+	public ServicioJPA(int idServicio, String codigo_servicio, String nombreServicio) {
 		super();
 		this.idServicio = idServicio;
+		this.codigo_servicio = codigo_servicio;
 		this.nombreServicio = nombreServicio;
 	}
 
 	@Override
 	public String toString() {
-		return "ServicioJPA [idServicio=" + idServicio + ", nombreServicio=" + nombreServicio + "]";
-	}
-	
-	
+		return "ServicioJPA [idServicio=" + idServicio + ", codigo_servicio=" + codigo_servicio + ", nombreServicio="
+				+ nombreServicio + "]";
+	}	
 
 }

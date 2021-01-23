@@ -1,12 +1,14 @@
 package proyectoServicio.demo.dao.impl;
 
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import proyectoServicio.demo.cnx.JPAUtil;
-import proyectoServicio.demo.dao.turismo.RolDAO;
+import proyectoServicio.demo.dao.RolDAO;
 import proyectoServicio.demo.jpa.entity.RolJPA;
 
 
@@ -37,6 +39,18 @@ public class RolDAOImpl implements RolDAO {
 			manager.close();
 		}
 		return rol;
+	}
+
+	@Override
+	public RolJPA getRolByDescripcion(String descripcion) {
+		
+		EntityManager  em = JPAUtil.getEntityManager();
+		String hql = "SELECT r FROM RolJPA r WHERE r.descripcion = :p_nombre";
+		Query q = em.createQuery(hql);
+		q.setParameter("p_nombre", descripcion);
+		 RolJPA empleado = (RolJPA) q.getSingleResult();
+		
+		return empleado;
 	}
 
 }

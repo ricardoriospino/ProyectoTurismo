@@ -1,12 +1,13 @@
 package proyectoServicio.demo.dao.impl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import proyectoServicio.demo.cnx.JPAUtil;
-import proyectoServicio.demo.dao.turismo.ServicioDAO;
+import proyectoServicio.demo.dao.ServicioDAO;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
 
 
@@ -34,6 +35,18 @@ public class ServicioDAOImpl implements ServicioDAO {
 		}finally {
 			manager.close();
 		}
+		return servicio;
+	}
+
+	@Override
+	public ServicioJPA getServicioByTipoServicio(String tipoServicio) {
+		
+		EntityManager  em = JPAUtil.getEntityManager();
+		String hql = "SELECT s FROM ServicioJPA s WHERE s.nombreServicio = :p_nombre";
+		Query q = em.createQuery(hql);
+		q.setParameter("p_nombre", tipoServicio );
+		ServicioJPA servicio = (ServicioJPA) q.getSingleResult();
+		
 		return servicio;
 	}
 

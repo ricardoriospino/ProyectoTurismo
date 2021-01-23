@@ -3,6 +3,7 @@ USE bdturismo;
 
 CREATE TABLE IF NOT EXISTS tb_lugar_turistico (
 id_lugar_turistico INTEGER UNSIGNED PRIMARY KEY auto_increment,
+codigo_lugar_turistico VARCHAR (50) UNIQUE KEY NOT NULL ,
 nombre VARCHAR (200) NOT NULL,
 descripcion VARCHAR (300) NOT NULL,
 url_imagen VARCHAR (200) NOT NULL,
@@ -15,6 +16,7 @@ fecha_update DATE DEFAULT NULL
 
 CREATE TABLE IF NOT EXISTS tb_servicio (
 id_servicio INTEGER UNSIGNED PRIMARY KEY auto_increment,
+codigo_servicio VARCHAR (50) UNIQUE KEY NOT NULL ,
 nombre_servicio VARCHAR (50)NOT NULL
 );
 
@@ -32,6 +34,7 @@ menu VARCHAR (50) NOT NULL
 
 CREATE TABLE IF NOT EXISTS tb_rol (
 id_rol INTEGER UNSIGNED PRIMARY KEY auto_increment,
+codigo_rol VARCHAR (50) UNIQUE KEY NOT NULL ,
 descripcion VARCHAR (100) NOT NULL
 );
 
@@ -91,3 +94,17 @@ SELECT * FROM tb_rol_menu;
 SELECT * FROM tb_incluye;
 SELECT * FROM tb_usuario;
 SELECT * FROM tb_compra;
+
+
+/*
+ DROP TABLE tb_compra;
+ DROP TABLE tb_usuario;
+ DROP TABLE tb_incluye;
+ DROP TABLE tb_rol_menu;
+ DROP TABLE tb_rol_permiso;
+ DROP TABLE tb_rol;
+ DROP TABLE tb_menu;
+ DROP TABLE tb_permiso;
+ DROP TABLE tb_servicio;
+ DROP TABLE tb_lugar_turistico;
+ */

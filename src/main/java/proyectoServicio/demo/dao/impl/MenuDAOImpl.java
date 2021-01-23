@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import proyectoServicio.demo.cnx.JPAUtil;
-import proyectoServicio.demo.dao.turismo.MenuDAO;
+import proyectoServicio.demo.dao.MenuDAO;
 import proyectoServicio.demo.jpa.entity.MenuJPA;
 
 

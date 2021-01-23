@@ -22,6 +22,10 @@ public class LugarTuristicoJPA implements Serializable {
 	@Column (name = "id_lugar_turistico")
 	private int idLugarTuristico;
 	
+	@Column (name="codigo_lugar_turistico" , nullable=false , length= 50 , unique= true)
+	private String codigoLugarTuristico;
+	
+	
 	@Column (name="nombre" , nullable=false , length= 200)
 	private String nombre;
 	
@@ -48,90 +52,141 @@ public class LugarTuristicoJPA implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaUpdate;
 
-	
 
 	public int getIdLugarTuristico() {
 		return idLugarTuristico;
 	}
 
+
+
 	public void setIdLugarTuristico(int idLugarTuristico) {
 		this.idLugarTuristico = idLugarTuristico;
 	}
+
+
+
+	public String getCodigoLugarTuristico() {
+		return codigoLugarTuristico;
+	}
+
+
+
+	public void setCodigoLugarTuristico(String codigoLugarTuristico) {
+		this.codigoLugarTuristico = codigoLugarTuristico;
+	}
+
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+
 
 	public String getUrlImagen() {
 		return urlImagen;
 	}
 
+
+
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
+
+
 
 	public double getPrecioXpersona() {
 		return precioXpersona;
 	}
 
+
+
 	public void setPrecioXpersona(double precioXpersona) {
 		this.precioXpersona = precioXpersona;
 	}
+
+
 
 	public String getInsertadoPor() {
 		return insertadoPor;
 	}
 
+
+
 	public void setInsertadoPor(String insertadoPor) {
 		this.insertadoPor = insertadoPor;
 	}
+
+
 
 	public String getModificadoPor() {
 		return modificadoPor;
 	}
 
+
+
 	public void setModificadoPor(String modificadoPor) {
 		this.modificadoPor = modificadoPor;
 	}
+
+
 
 	public Date getFechaInsert() {
 		return fechaInsert;
 	}
 
+
+
 	public void setFechaInsert(Date fechaInsert) {
 		this.fechaInsert = fechaInsert;
 	}
+
+
 
 	public Date getFechaUpdate() {
 		return fechaUpdate;
 	}
 
+
+
 	public void setFechaUpdate(Date fechaUpdate) {
 		this.fechaUpdate = fechaUpdate;
 	}
-	
+
+
+
 	public LugarTuristicoJPA() {
 		
 	}
 
 	
 
-	public LugarTuristicoJPA(int idLugarTuristico, String nombre, String descripcion, String urlImagen,
-			double precioXpersona, String insertadoPor, String modificadoPor, Date fechaInsert, Date fechaUpdate) {
+	
+
+	public LugarTuristicoJPA(int idLugarTuristico, String codigoLugarTuristico, String nombre, String descripcion,
+			String urlImagen, double precioXpersona, String insertadoPor, String modificadoPor, Date fechaInsert,
+			Date fechaUpdate) {
 		super();
 		this.idLugarTuristico = idLugarTuristico;
+		this.codigoLugarTuristico = codigoLugarTuristico;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.urlImagen = urlImagen;
@@ -142,14 +197,14 @@ public class LugarTuristicoJPA implements Serializable {
 		this.fechaUpdate = fechaUpdate;
 	}
 
+
 	@Override
 	public String toString() {
-		return "LugarTuristicoJPA [idLugarTuristico=" + idLugarTuristico + ", nombre=" + nombre + ", descripcion="
-				+ descripcion + ", urlImagen=" + urlImagen + ", precioXpersona=" + precioXpersona + ", insertadoPor="
-				+ insertadoPor + ", modificadoPor=" + modificadoPor + ", fechaInsert=" + fechaInsert + ", fechaUpdate="
-				+ fechaUpdate + "]";
+		return "LugarTuristicoJPA [idLugarTuristico=" + idLugarTuristico + ", codigoLugarTuristico="
+				+ codigoLugarTuristico + ", nombre=" + nombre + ", descripcion=" + descripcion + ", urlImagen="
+				+ urlImagen + ", precioXpersona=" + precioXpersona + ", insertadoPor=" + insertadoPor
+				+ ", modificadoPor=" + modificadoPor + ", fechaInsert=" + fechaInsert + ", fechaUpdate=" + fechaUpdate
+				+ "]";
 	}
-	
-	
 
 }

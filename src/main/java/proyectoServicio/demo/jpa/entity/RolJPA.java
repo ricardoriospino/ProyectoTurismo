@@ -18,6 +18,9 @@ public class RolJPA implements Serializable {
 	@Column (name = "id_rol")
 	private int idRol;
 	
+	@Column (name="codigo_rol" , nullable=false , length= 50 , unique= true)
+	private String codigoRol;
+	
 	@Column (name="descripcion" , nullable=false , length= 100)
 	private String descripcion;
 
@@ -29,6 +32,14 @@ public class RolJPA implements Serializable {
 		this.idRol = idRol;
 	}
 
+	public String getCodigoRol() {
+		return codigoRol;
+	}
+
+	public void setCodigoRol(String codigoRol) {
+		this.codigoRol = codigoRol;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -36,21 +47,25 @@ public class RolJPA implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+
 	public RolJPA() {
 		
 	}
 
-	public RolJPA(int idRol, String descripcion) {
+	
+	public RolJPA(int idRol, String codigoRol, String descripcion) {
 		super();
 		this.idRol = idRol;
+		this.codigoRol = codigoRol;
 		this.descripcion = descripcion;
 	}
 
 	@Override
 	public String toString() {
-		return "RolJPA [idRol=" + idRol + ", descripcion=" + descripcion + "]";
+		return "RolJPA [idRol=" + idRol + ", codigoRol=" + codigoRol + ", descripcion=" + descripcion + "]";
 	}
+
+	
 	
 
 }
