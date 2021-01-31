@@ -6,6 +6,7 @@ public interface UsuarioDAO {
 	
 	public UsuarioJPA getUsuarioById (int id);
 	
+	public UsuarioJPA validarUsuarioClave (String usuario, String clave);
 	
 
 }

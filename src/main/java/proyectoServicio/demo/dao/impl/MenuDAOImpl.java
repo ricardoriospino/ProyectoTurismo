@@ -1,6 +1,11 @@
 package proyectoServicio.demo.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +42,44 @@ public class MenuDAOImpl implements MenuDAO {
 		}
 		
 		return menu;
+	}
+
+	@Override
+	public MenuJPA getMenuByCodigo(String codigo) {
+		
+		EntityManager  em = JPAUtil.getEntityManager();
+		String hql = "SELECT m FROM MenuJPA m WHERE m.codigoMenu = :p_codigo";
+		Query q = em.createQuery(hql);
+		q.setParameter("p_codigo", codigo);
+		MenuJPA menu = (MenuJPA) q.getSingleResult();
+		return menu;
+	}
+
+	@Override
+	public List<MenuJPA> listarMenu() {
+		
+		EntityManager manager = null;
+		List<MenuJPA>lst = new ArrayList<MenuJPA>();
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql ="SELECT lm FROM MenuJPA lm ";
+			Query q = manager.createQuery(hql);
+			MenuJPA menu =null;
+			
+			lst = (List<MenuJPA>) q.getResultList();
+			
+			lst.add(menu);
+			
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+			
+		}finally {
+			manager.close();
+		
+		}
+		return lst;
 	}
 
 }

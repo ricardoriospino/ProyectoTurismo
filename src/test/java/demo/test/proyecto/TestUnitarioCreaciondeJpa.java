@@ -211,15 +211,15 @@ public class TestUnitarioCreaciondeJpa {
 			
 			MenuJPA menu1 = new MenuJPA();
 			menu1.setCodigoMenu("001");
-			menu1.setMenu("Menu del administrador");
+			menu1.setMenu("Gestionar Lugares Turisticos");
 			
 			MenuJPA menu2 = new MenuJPA();
 			menu2.setCodigoMenu("002");
-			menu2.setMenu("Menu del Trabajador");
+			menu2.setMenu("Gestionar Servicio");
 			
 			MenuJPA menu3 = new MenuJPA();
 			menu3.setCodigoMenu("003");
-			menu3.setMenu("Menu del Usuario");
+			menu3.setMenu("Gestionar Usuario");
 			
 			MenuJPA menu4 = new MenuJPA();
 			menu4.setCodigoMenu("004");
@@ -229,11 +229,16 @@ public class TestUnitarioCreaciondeJpa {
 			menu5.setCodigoMenu("005");
 			menu5.setMenu("Comprar Boletos Turisticos");
 			
+			MenuJPA menu6 = new MenuJPA();
+			menu6.setCodigoMenu("006");
+			menu6.setMenu("Consultar ventas");
+			
 			crudService.insertar(menu1);
 			crudService.insertar(menu2);
 			crudService.insertar(menu3);
 			crudService.insertar(menu4);
 			crudService.insertar(menu5);
+			crudService.insertar(menu6);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

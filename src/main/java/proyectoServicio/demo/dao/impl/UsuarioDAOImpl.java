@@ -1,6 +1,10 @@
 package proyectoServicio.demo.dao.impl;
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,6 +38,41 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		
 		return usuario;
+	}
+	
+	
+
+	@Override
+	public UsuarioJPA validarUsuarioClave(String usuario, String clave) {
+		
+		
+		
+		EntityManager manager = null;
+		UsuarioJPA permisoUsuario = null;
+		
+		try {
+			 manager = JPAUtil.getEntityManager();
+			
+			String hql = "SELECT v FROM UsuarioJPA v WHERE v.usuario = :p_usuario AND v.clave = :p_clave";
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_usuario", usuario);
+			q.setParameter("p_clave", clave);
+			
+			
+			 
+			permisoUsuario = (UsuarioJPA)  q.getSingleResult();
+			
+			
+			if (permisoUsuario == null) {
+				log.warn("No existe usuario :  " + permisoUsuario);
+			}
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+		} finally {
+			manager.close();
+		}
+		return permisoUsuario ;
 	}
 
 }

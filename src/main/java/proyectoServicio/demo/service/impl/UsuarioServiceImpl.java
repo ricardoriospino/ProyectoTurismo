@@ -17,5 +17,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return usuarioDAO.getUsuarioById(id);
 	}
+	@Override
+	public UsuarioJPA validarUsuarioClave(String usuario, String clave) {
+		
+		return usuarioDAO.validarUsuarioClave(usuario, clave);
+	}
 
 }
