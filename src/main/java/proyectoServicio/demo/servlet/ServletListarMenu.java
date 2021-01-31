@@ -49,6 +49,8 @@ public class ServletListarMenu extends HttpServlet {
 		
 		request.setAttribute("lstMenu", lista);
 		
+		log.debug("lista menu : " +  lista.size());
+		
 		RequestDispatcher despachador = null;
 		
 		despachador = request.getRequestDispatcher("index.jsp");

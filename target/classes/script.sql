@@ -29,7 +29,8 @@ descripcion_permiso VARCHAR (200) NOT NULL
 CREATE TABLE IF NOT EXISTS tb_menu (
 id_menu INTEGER UNSIGNED PRIMARY KEY auto_increment,
 codigo_menu VARCHAR (50) UNIQUE KEY NOT NULL ,
-menu VARCHAR (50) NOT NULL 
+menu VARCHAR (50) NOT NULL ,
+url_menu VARCHAR (500) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tb_rol (

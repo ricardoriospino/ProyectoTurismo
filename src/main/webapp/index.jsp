@@ -77,56 +77,16 @@
             <hr class="sidebar-divider d-none d-md-block">
        		
        		<c:forEach var="menu" items="${lstMenu}">
-       		
-       		
-			
-	            <!-- Nav Item - Dashboard -->
-	            
-	            <li class="nav-item">
-	                <a class="nav-link" href="index.html" >
-	                    
-	                    ${menu.descripcion}</a>
+       				
+		            <!-- Nav Item - Menu-->   
+		            <li class="nav-item">
+		                <a class="nav-link"  href="${menu.urlMenu}" >${menu.menu}</a>
+	             
+	                
 	            </li>
-	
-	         
-	            <!-- Nav Item - Pages Collapse Menu -->
-	            <li class="nav-item">
-	                <a class="nav-link collapsed" href="#" >
-	                          
-	                ${menu.descripcion} </a>
-	            </li>
-	
-	            <!-- Nav Item - Utilities Collapse Menu -->
-	            <li class="nav-item">
-	                <a class="nav-link collapsed" href="#" >
-          
-	                 ${menu.descripcion}</a>
-	            </li>
-	
-	            
-	            <!-- Nav Item - Pages Collapse Menu -->
-	            <li class="nav-item">
-	                <a class="nav-link collapsed" href="#" >
-	                    
-	                     ${menu.descripcion} </a>
-	            </li>
-	
-	            <!-- Nav Item - Charts -->
-	            <li class="nav-item">
-	                <a class="nav-link" href="#">
-	                    
-	                     ${menu.descripcion}</a>
-	            </li>
-	
-	            <!-- Nav Item - Tables -->
-	            <li class="nav-item">
-	                <a class="nav-link" href="#">
-	                    
-	                     ${menu.descripcion}</a>
-	            </li>
-            
-            
             </c:forEach>
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -135,8 +95,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-           
 
         </ul>
         <!-- End of Sidebar -->

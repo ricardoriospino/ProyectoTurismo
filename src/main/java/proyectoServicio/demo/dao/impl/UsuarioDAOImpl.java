@@ -1,5 +1,6 @@
 package proyectoServicio.demo.dao.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -59,8 +60,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			q.setParameter("p_clave", clave);
 			
 			
+			List<UsuarioJPA> usuarios = q.getResultList();
+			
+			// cuando la lista es vacia entra a isEmty
+			if (usuarios.isEmpty()){ 
+			log.warn("No existe usuario :  " + permisoUsuario);
+			return null;
+			}
+			else if(usuarios.size() > 1) log.error("Usuario duplicado"); 
+			
+			else if (usuarios.size() == 1) return usuarios.get(0);
+			
+			
 			 
-			permisoUsuario = (UsuarioJPA)  q.getSingleResult();
+			permisoUsuario = (UsuarioJPA)  q.getResultList();
 			
 			
 			if (permisoUsuario == null) {

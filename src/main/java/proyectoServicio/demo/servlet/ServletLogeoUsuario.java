@@ -69,7 +69,7 @@ public class ServletLogeoUsuario extends HttpServlet {
 			
 			HttpSession misession = request.getSession(true); 
 			misession.setAttribute("usuarioSession", usuario);
-			despachador = request.getRequestDispatcher("/index.jsp");
+			despachador = request.getRequestDispatcher("ServletListarMenu");
 			
 		}else {
 			request.setAttribute("error", true);

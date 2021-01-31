@@ -24,6 +24,9 @@ public class MenuJPA implements Serializable {
 	@Column (name="menu" , nullable=false , length= 50 )
 	private String menu;
 
+	@Column (name= "url_menu" , nullable =false , length = 500 )
+	private String urlMenu;
+
 	public int getIdMenu() {
 		return idMenu;
 	}
@@ -47,23 +50,32 @@ public class MenuJPA implements Serializable {
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
+
+	public String getUrlMenu() {
+		return urlMenu;
+	}
+
+	public void setUrlMenu(String urlMenu) {
+		this.urlMenu = urlMenu;
+	}
 	
 	public MenuJPA() {
 		
 	}
 
-	public MenuJPA(int idMenu, String codigoMenu, String menu) {
+	public MenuJPA(int idMenu, String codigoMenu, String menu, String urlMenu) {
 		super();
 		this.idMenu = idMenu;
 		this.codigoMenu = codigoMenu;
 		this.menu = menu;
+		this.urlMenu = urlMenu;
 	}
 
 	@Override
 	public String toString() {
-		return "MenuJPA [idMenu=" + idMenu + ", codigoMenu=" + codigoMenu + ", menu=" + menu + "]";
+		return "MenuJPA [idMenu=" + idMenu + ", codigoMenu=" + codigoMenu + ", menu=" + menu + ", urlMenu=" + urlMenu
+				+ "]";
 	}
-	
 	
 	
 

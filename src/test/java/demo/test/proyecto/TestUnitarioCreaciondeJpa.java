@@ -212,26 +212,32 @@ public class TestUnitarioCreaciondeJpa {
 			MenuJPA menu1 = new MenuJPA();
 			menu1.setCodigoMenu("001");
 			menu1.setMenu("Gestionar Lugares Turisticos");
+			menu1.setUrlMenu("ServletGestionLugaresTutistico.java");
 			
 			MenuJPA menu2 = new MenuJPA();
 			menu2.setCodigoMenu("002");
 			menu2.setMenu("Gestionar Servicio");
+			menu2.setUrlMenu("ServletGestionServicio.java");
 			
 			MenuJPA menu3 = new MenuJPA();
 			menu3.setCodigoMenu("003");
 			menu3.setMenu("Gestionar Usuario");
+			menu3.setUrlMenu("ServletGestionUsuario.java");
 			
 			MenuJPA menu4 = new MenuJPA();
 			menu4.setCodigoMenu("004");
 			menu4.setMenu("Ver Lugares Turisticos");
+			menu4.setUrlMenu("ServletLugaresTuristicos.java");
 			
 			MenuJPA menu5 = new MenuJPA();
 			menu5.setCodigoMenu("005");
 			menu5.setMenu("Comprar Boletos Turisticos");
+			menu5.setUrlMenu("ServletComprarBoletosTuristicos.java");
 			
 			MenuJPA menu6 = new MenuJPA();
 			menu6.setCodigoMenu("006");
 			menu6.setMenu("Consultar ventas");
+			menu6.setUrlMenu("ServletConsultarVentas.java");
 			
 			crudService.insertar(menu1);
 			crudService.insertar(menu2);
