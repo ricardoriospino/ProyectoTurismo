@@ -1,6 +1,10 @@
 package proyectoServicio.demo.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
@@ -47,5 +51,57 @@ public class LugarTuristicoDAOImpl implements LugarTuristicoDAO {
 		LugarTuristicoJPA lugarTuristico = (LugarTuristicoJPA) q.getSingleResult();
 		return lugarTuristico ;
 	}
+
+	@Override
+	public List<LugarTuristicoJPA> listarLugaresTuristicos() {
+		
+		EntityManager manager = null;
+		List<LugarTuristicoJPA>lst = new ArrayList<LugarTuristicoJPA>();
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql = "SELECT lt FROM LugarTuristicoJPA lt";
+			Query q = manager.createQuery(hql);
+			LugarTuristicoJPA lugarTuristico = null;
+			
+			lst =(List<LugarTuristicoJPA>) q.getResultList();
+			
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+			
+		}finally {
+			manager.close();
+		}
+		return lst;
+	}
+
+	@Override
+	public LugarTuristicoJPA obtenerLugaresTuristicosByid(int idLugarTuristico) {
+		
+		EntityManager manager = null;
+		LugarTuristicoJPA lugarTuristico = null;
+		
+		try {
+				
+			manager = JPAUtil.getEntityManager();
+			String hql= "SELECT olt FROM LugarTuristicoJPA olt WHERE olt.idLugarTuristico = :p_id ";
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_id", idLugarTuristico );
+			
+			lugarTuristico = (LugarTuristicoJPA) q.getSingleResult();
+			
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+			
+		}finally {
+			manager.close();
+		}
+	
+		return lugarTuristico;
+	}
+
+
 
 }

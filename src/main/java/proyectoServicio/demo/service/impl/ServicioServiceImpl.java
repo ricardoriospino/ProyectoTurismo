@@ -1,5 +1,7 @@
 package proyectoServicio.demo.service.impl;
 
+import java.util.List;
+
 import proyectoServicio.demo.dao.ServicioDAO;
 import proyectoServicio.demo.dao.impl.ServicioDAOImpl;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
@@ -22,6 +24,11 @@ public class ServicioServiceImpl implements ServicioService {
 	public ServicioJPA getServicioByTipoServicio(String tipoServicio) {
 		
 		return servicioDAO.getServicioByTipoServicio(tipoServicio);
+	}
+	@Override
+	public List<ServicioJPA> listarServiciosTour(int idTour) {
+		
+		return servicioDAO.listarServiciosTour(idTour);
 	}
 
 }

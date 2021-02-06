@@ -1,5 +1,7 @@
 package proyectoServicio.demo.dao;
 
+import java.util.List;
+
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
 
 public interface ServicioDAO {
@@ -7,5 +9,7 @@ public interface ServicioDAO {
 	public ServicioJPA getServicioById (int id);
 	
 	public ServicioJPA getServicioByTipoServicio (String tipoServicio);
+	
+	public List<ServicioJPA> listarServiciosTour (int idTour);
 
 }

@@ -1,5 +1,7 @@
 package proyectoServicio.demo.service.impl;
 
+import java.util.List;
+
 import proyectoServicio.demo.dao.LugarTuristicoDAO;
 import proyectoServicio.demo.dao.impl.LugarTuristicoDAOImpl;
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
@@ -23,6 +25,18 @@ public class LugarTuristicoServiceImpl implements LugarTuristicoService {
 	public LugarTuristicoJPA getLugarTuristicoByNombre(String nombre) {
 		
 		return lugarTuristicoDAO.getLugarTuristicoByNombre(nombre);
+	}
+
+	@Override
+	public List<LugarTuristicoJPA> listarLugaresTuristicos() {
+		
+		return lugarTuristicoDAO.listarLugaresTuristicos();
+	}
+
+	@Override
+	public LugarTuristicoJPA obtenerLugaresTuristicosByid(int idLugarTuristico) {
+		
+		return lugarTuristicoDAO.obtenerLugaresTuristicosByid(idLugarTuristico);
 	}
 
 }

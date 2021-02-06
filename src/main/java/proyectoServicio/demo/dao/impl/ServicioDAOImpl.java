@@ -1,10 +1,15 @@
 package proyectoServicio.demo.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.w3c.dom.ls.LSInput;
 
 import proyectoServicio.demo.cnx.JPAUtil;
 import proyectoServicio.demo.dao.ServicioDAO;
@@ -48,6 +53,37 @@ public class ServicioDAOImpl implements ServicioDAO {
 		ServicioJPA servicio = (ServicioJPA) q.getSingleResult();
 		
 		return servicio;
+	}
+
+	@Override
+	public List<ServicioJPA> listarServiciosTour(int idTour) {
+		
+		EntityManager manager = null;
+		List<ServicioJPA>lst = new ArrayList<ServicioJPA>();
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql =("SELECT a " +
+						"FROM ServicioJPA AS a ,IncluyeJPA AS b " +
+						"WHERE a.idServicio = b.servicio.idServicio " +
+						"AND b.lugarTuristico.idLugarTuristico = :p_idTour ");	
+		log.debug("el hql trae" + hql);
+
+			
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_idTour", idTour);
+			ServicioJPA servicio = null;
+			
+			lst = (List<ServicioJPA>) q.getResultList();
+			lst.add(servicio);
+			
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+		}finally {
+			manager.close();
+		}
+		return lst;
 	}
 
 }

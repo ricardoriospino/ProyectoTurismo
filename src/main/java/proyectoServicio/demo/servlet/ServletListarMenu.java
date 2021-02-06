@@ -53,12 +53,26 @@ public class ServletListarMenu extends HttpServlet {
 		
 		RequestDispatcher despachador = null;
 		
-		despachador = request.getRequestDispatcher("index.jsp");
+		String menu = request.getParameter("menu");
 		
+		if("I".equals(menu)) {
+			
+			despachador = request.getRequestDispatcher("index.jsp");
+		}else if ("T1".equals(menu)) {
+			despachador = request.getRequestDispatcher("lugaresTuristicos/tourMachuPicchu.jsp");
+		}else if ("T2".equals(menu)) {
+			despachador = request.getRequestDispatcher("lugaresTuristicos/tourNevadoHuascaran.jsp");
+		}else if ("T3".equals(menu)) {
+			despachador = request.getRequestDispatcher("lugaresTuristicos/tourParacas.jsp");
+		}else if ("T4".equals(menu)) {
+			despachador = request.getRequestDispatcher("lugaresTuristicos/tourPuntaSal.jsp");
+		}else if ("T5".equals(menu)) {
+			despachador = request.getRequestDispatcher("lugaresTuristicos/tourPozuzo.jsp");
+		}else if ("T6".equals(menu)) {
+			despachador = request.getRequestDispatcher("lugaresTuristicos/tourKuelap.jsp");
+		}
 		despachador.forward(request, response);
-		
-		
-		
+	
 		log.info("fin: ServletListarMenu - doGet ");
 	}
 

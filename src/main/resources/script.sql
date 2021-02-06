@@ -96,6 +96,10 @@ SELECT * FROM tb_incluye;
 SELECT * FROM tb_usuario;
 SELECT * FROM tb_compra;
 
+-- seleccionar servicios de cada tour turistico
+SELECT b.nombre_servicio FROM tb_incluye AS a
+JOIN tb_servicio AS b ON a.id_servicio = b.id_servicio
+WHERE id_lugar_turistico = 1;
 
 /*
  DROP TABLE tb_compra;

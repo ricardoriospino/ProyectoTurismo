@@ -13,8 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import proyectoServicio.demo.jpa.entity.MenuJPA;
 import proyectoServicio.demo.jpa.entity.UsuarioJPA;
+import proyectoServicio.demo.service.MenuService;
 import proyectoServicio.demo.service.UsuarioService;
+import proyectoServicio.demo.service.impl.MenuServiceImpl;
 import proyectoServicio.demo.service.impl.UsuarioServiceImpl;
 
 
@@ -60,16 +63,24 @@ public class ServletLogeoUsuario extends HttpServlet {
 		// verificacion con la base de datos
 		
 		UsuarioService usuarioService = new UsuarioServiceImpl();
+		//MenuService menuService = new MenuServiceImpl();
+		
 		
 		UsuarioJPA usuario = usuarioService.validarUsuarioClave(usuarioForm, claveForm);
+		//MenuJPA menu = (MenuJPA) menuService.listarMenu();
 		
+				
 		RequestDispatcher despachador = null;
+		//RequestDispatcher despachador2 = null;
 		
 		if(usuario!= null) {
 			
 			HttpSession misession = request.getSession(true); 
 			misession.setAttribute("usuarioSession", usuario);
-			despachador = request.getRequestDispatcher("ServletListarMenu");
+			//misession.setAttribute("menuSession", menu);
+			//despachador = request.getRequestDispatcher("/ServletListarMenu?menu=I");
+			despachador = request.getRequestDispatcher("/ServletListarLugaresTuristicos");
+			
 			
 		}else {
 			request.setAttribute("error", true);
@@ -77,6 +88,7 @@ public class ServletLogeoUsuario extends HttpServlet {
 		}
 		
 		despachador.forward(request, response);
+		
 		
 		log.info("fin: ServletLogeo");
 	}
