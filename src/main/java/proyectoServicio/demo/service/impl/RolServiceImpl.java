@@ -1,5 +1,7 @@
 package proyectoServicio.demo.service.impl;
 
+import java.util.List;
+
 import proyectoServicio.demo.dao.RolDAO;
 import proyectoServicio.demo.dao.impl.RolDAOImpl;
 import proyectoServicio.demo.jpa.entity.RolJPA;
@@ -21,6 +23,11 @@ public class RolServiceImpl implements RolService {
 	public RolJPA getRolByDescripcion(String descripcion) {
 		
 		return rolDAO.getRolByDescripcion(descripcion);
+	}
+	@Override
+	public List<RolJPA> listarRol() {
+		
+		return rolDAO.listarRol();
 	}
 
 }

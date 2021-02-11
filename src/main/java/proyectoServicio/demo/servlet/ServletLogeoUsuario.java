@@ -1,6 +1,7 @@
 package proyectoServicio.demo.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,22 +64,26 @@ public class ServletLogeoUsuario extends HttpServlet {
 		// verificacion con la base de datos
 		
 		UsuarioService usuarioService = new UsuarioServiceImpl();
-		//MenuService menuService = new MenuServiceImpl();
+		
 		
 		
 		UsuarioJPA usuario = usuarioService.validarUsuarioClave(usuarioForm, claveForm);
-		//MenuJPA menu = (MenuJPA) menuService.listarMenu();
+		
 		
 				
 		RequestDispatcher despachador = null;
-		//RequestDispatcher despachador2 = null;
+		
 		
 		if(usuario!= null) {
 			
 			HttpSession misession = request.getSession(true); 
 			misession.setAttribute("usuarioSession", usuario);
-			//misession.setAttribute("menuSession", menu);
-			//despachador = request.getRequestDispatcher("/ServletListarMenu?menu=I");
+			
+			//seteamos el menu en la session
+			MenuService menuService = new MenuServiceImpl();
+			List<MenuJPA>listaMenu = menuService.listarMenuByRol(usuario.getRol().getIdRol());
+			misession.setAttribute("lstMenu", listaMenu);
+			
 			despachador = request.getRequestDispatcher("/ServletListarLugaresTuristicos");
 			
 			

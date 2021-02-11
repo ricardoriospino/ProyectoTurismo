@@ -13,5 +13,7 @@ public interface LugarTuristicoDAO {
 	public List<LugarTuristicoJPA> listarLugaresTuristicos ();
 	
 	public LugarTuristicoJPA obtenerLugaresTuristicosByid (int idLugarTuristico);
+	
+	public int insertarLugarTuristico (LugarTuristicoJPA lugarTuristico);
 
 }

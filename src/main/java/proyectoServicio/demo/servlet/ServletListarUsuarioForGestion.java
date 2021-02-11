@@ -13,21 +13,22 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
-import proyectoServicio.demo.service.LugarTuristicoService;
-import proyectoServicio.demo.service.impl.LugarTuristicoServiceImpl;
+import proyectoServicio.demo.jpa.entity.UsuarioJPA;
+import proyectoServicio.demo.service.UsuarioService;
+import proyectoServicio.demo.service.impl.UsuarioServiceImpl;
 
 /**
- * Servlet implementation class ServletListarLugaresTuristicos
+ * Servlet implementation class ServletListarUsuarioForGestion
  */
-@WebServlet("/ServletListarLugaresTuristicos")
-public class ServletListarLugaresTuristicos extends HttpServlet {
+@WebServlet("/ServletListarUsuarioForGestion")
+public class ServletListarUsuarioForGestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log= LogManager.getLogger(ServletListarLugaresTuristicos.class);
+	private static final Logger log= LogManager.getLogger(ServletListarUsuarioForGestion.class);
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletListarLugaresTuristicos() {
+    public ServletListarUsuarioForGestion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +40,20 @@ public class ServletListarLugaresTuristicos extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		log.info("init: ServletListarLugaresTuristicos - doGet ");
+		log.info("init: ServletListarTourForGestion - doGet ");
 		
-		LugarTuristicoService lugarTuristicoService = new LugarTuristicoServiceImpl();
-		List<LugarTuristicoJPA>lista = lugarTuristicoService.listarLugaresTuristicos();
+		UsuarioService usuarioService = new UsuarioServiceImpl();
+		List<UsuarioJPA>listarUsuario = usuarioService.listarUsuarios();
 		
-		request.setAttribute("lstLugaresTuristicos", lista);
-		
-		log.debug("lista lugares turisticos : " +  lista.size());
+		request.setAttribute("lstUsuarios", listarUsuario);
 		
 		RequestDispatcher despachador = null;
-		
-
-		despachador = request.getRequestDispatcher("index.jsp");
+			
+		despachador = request.getRequestDispatcher("/listados/listaUsuarios.jsp");
 		
 		despachador.forward(request, response);
 		
-		log.info("init: ServletListarLugaresTuristicos - doGet ");
+		log.info("init: ServletListarTourForGestion - doGet ");
 	}
 
 	/**

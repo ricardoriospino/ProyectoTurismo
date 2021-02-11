@@ -11,5 +11,7 @@ public interface MenuService {
 	public MenuJPA getMenuByCodigo (String codigo);
 	
 	public List<MenuJPA> listarMenu();
+	
+	public List<MenuJPA> listarMenuByRol (int idRol );
 
 }

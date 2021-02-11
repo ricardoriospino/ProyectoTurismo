@@ -62,7 +62,7 @@ public class LugarTuristicoDAOImpl implements LugarTuristicoDAO {
 			manager = JPAUtil.getEntityManager();
 			String hql = "SELECT lt FROM LugarTuristicoJPA lt";
 			Query q = manager.createQuery(hql);
-			LugarTuristicoJPA lugarTuristico = null;
+			
 			
 			lst =(List<LugarTuristicoJPA>) q.getResultList();
 			
@@ -100,6 +100,39 @@ public class LugarTuristicoDAOImpl implements LugarTuristicoDAO {
 		}
 	
 		return lugarTuristico;
+	}
+
+	@Override
+	public int insertarLugarTuristico(LugarTuristicoJPA lugarTuristico) {
+		
+		EntityManager manager = null;
+		int registros = 0;
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql="INSERT INTO LugarTuristicoJPA(codigoLugarTuristico, nombre , descripcion , urlImagen1,"
+					+ " urlImagen2 , urlImagen3 , precioXpersona , insertadoPor , fechaInsert ,"
+					+ " calificacionEstrellas , habilitadoODeshabilitado , climaTour)"
+					
+					+ " SELECT codigoLugarTuristico, nombre , descripcion , urlImagen1, " 
+					+ " urlImagen2 , urlImagen3 , precioXpersona , insertadoPor , fechaInsert , " 
+					+ " calificacionEstrellas , habilitadoODeshabilitado , climaTour "
+					+ " FROM LugarTuristicoJPA ";
+			
+			
+			Query q = manager.createQuery(hql);
+			manager.getTransaction().begin(); 
+			manager.getTransaction().commit();
+			
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+			e.printStackTrace();
+			log.error("Error al insertarLugarTuristicos " + e);
+		}finally {
+			manager.close();
+		}
+		
+		return registros;
 	}
 
 

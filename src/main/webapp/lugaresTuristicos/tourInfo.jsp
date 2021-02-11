@@ -52,33 +52,12 @@ response.sendRedirect("login.jsp");
 <!-- fin:validamos session -->
 	<!--  Pagina Incio -->
     <div id="wrapper">
+    
     	<!-- ini: Menu dinamico -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
-                <div class="sidebar-brand-icon">
-	                <img src="img/logo.png" class="img-fluid" height="100px" width="100px" >
-                </div>
-                <div class="sidebar-brand-text mx-2">Menú </div>
-            </a>
-            
-			<!-- lista menu	 -->
-       		<c:forEach var="menu" items="${lstMenu}">
-			<!--Item Menu -->
-		        <li class="nav-item">
-		             <a class="nav-link"  href="${menu.urlMenu}" >${menu.menu}</a>            
-			<!-- Divider -->
-            	     <hr class="sidebar-divider d-none d-md-block">          
-	            </li>
-            </c:forEach>
-
-            <!-- Esconder Menu -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>   
+		<jsp:include page="../menuPrincipal.jsp"/>
         <!-- fin Menu dinamico  -->
+    	
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
         
@@ -99,7 +78,7 @@ response.sendRedirect("login.jsp");
 			            <div class="carousel-inner">
 			              <div class="carousel-item active">
 			                <img
-			                  src="https://cutt.ly/hjkeSwO"
+			                  src="<c:out value='${objLugarTuristico.urlImagen1}'></c:out>"
 			                  class="d-block w-100"
 			                  alt="..."
 			                  width="200px"
@@ -108,7 +87,7 @@ response.sendRedirect("login.jsp");
 			              </div>
 			              <div class="carousel-item">
 			                <img
-			                  src="https://cutt.ly/OkaglHX"
+			                  src="<c:out value='${objLugarTuristico.urlImagen2}'></c:out>"
 			                  class="d-block w-100"
 			                  alt="..."
 			                  width="200px"
@@ -117,7 +96,7 @@ response.sendRedirect("login.jsp");
 			              </div>
 			              <div class="carousel-item">
 			                <img
-			                  src="https://cutt.ly/1kaf9YV"
+			                  src="<c:out value='${objLugarTuristico.urlImagen3}'></c:out>"
 			                  class="d-block w-100"
 			                  alt="..."
 			                  width="200px"
@@ -157,15 +136,17 @@ response.sendRedirect("login.jsp");
 			        <div class="col-md-5">
 				          <p class="tour text-center">Free</p>
 				          <h2>Tour  <c:out value='${objLugarTuristico.nombre}'></c:out></h2>
-				          <p>Servicio codigo: <c:out value='${objLugarTuristico.codigoLugarTuristico}'></c:out></p>
-				          <span class="fa fa-star checked"></span>
-				          <span class="fa fa-star checked"></span>
-				          <span class="fa fa-star checked"></span>
-				          <span class="fa fa-star checked"></span>
-				          <span class="fa fa-star checked"></span>
+				          <p>Servicio código: <c:out value='${objLugarTuristico.codigoLugarTuristico}'></c:out></p>
+	
+		          		<p><b>Puntuación: </b></p>
+				          <c:forEach begin="1" step="1"  end='${objLugarTuristico.calificacionEstrellas}' >
+				          		<span class="fa fa-star checked"></span>
+				          </c:forEach>			          
+				          
+				          
 				          <p class="precio">S/. <c:out value='${objLugarTuristico.precioXpersona}'></c:out> </p>
-				          <p><b>Habilitado: </b>Cantidad ilimitada</p>
-				          <p><b>Clima: </b>Variado 15-28°C</p>
+				          <p><b>Habilitado/Deshabilitado: </b><c:out value='${objLugarTuristico.habilitadoODeshabilitado}'></c:out></p>
+				          <p><b>Clima: </b><c:out value='${objLugarTuristico.climaTour}'></c:out></p>
 				          <p><b>Servicios: </b></p>
 				        
 					          <c:forEach var="lstServiciosIncluidos" items="${lstServiciosIncluidos}">

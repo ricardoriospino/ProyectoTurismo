@@ -64,7 +64,7 @@ public class ServletInfoTour extends HttpServlet {
 			
 		request.setAttribute("idLugarTuristico", idLugarTuristico);
 		
-		despachador = request.getRequestDispatcher("/lugaresTuristicos/tourMachuPicchu.jsp");
+		despachador = request.getRequestDispatcher("/lugaresTuristicos/tourInfo.jsp");
 		
 		despachador.forward(request, response);
 		

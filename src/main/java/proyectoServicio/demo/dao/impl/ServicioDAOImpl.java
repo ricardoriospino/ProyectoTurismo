@@ -72,10 +72,10 @@ public class ServicioDAOImpl implements ServicioDAO {
 			
 			Query q = manager.createQuery(hql);
 			q.setParameter("p_idTour", idTour);
-			ServicioJPA servicio = null;
+			
 			
 			lst = (List<ServicioJPA>) q.getResultList();
-			lst.add(servicio);
+			//lst.add(servicio);
 			
 		} catch (NoResultException e) {
 			e.printStackTrace();

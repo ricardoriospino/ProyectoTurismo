@@ -13,21 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
-import proyectoServicio.demo.service.LugarTuristicoService;
-import proyectoServicio.demo.service.impl.LugarTuristicoServiceImpl;
+import proyectoServicio.demo.jpa.entity.RolJPA;
+import proyectoServicio.demo.service.RolService;
+import proyectoServicio.demo.service.impl.RolServiceImpl;
+
+
 
 /**
- * Servlet implementation class ServletListarLugaresTuristicos
+ * Servlet implementation class ServletRol
  */
-@WebServlet("/ServletListarLugaresTuristicos")
-public class ServletListarLugaresTuristicos extends HttpServlet {
+@WebServlet("/ServletRol")
+public class ServletRol extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log= LogManager.getLogger(ServletListarLugaresTuristicos.class);
+	private static final Logger log= LogManager.getLogger(ServletRol.class);
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletListarLugaresTuristicos() {
+    public ServletRol() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,23 +42,20 @@ public class ServletListarLugaresTuristicos extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		log.info("init: ServletListarLugaresTuristicos - doGet ");
+		log.info("init: ServletRol - doGet ");
 		
-		LugarTuristicoService lugarTuristicoService = new LugarTuristicoServiceImpl();
-		List<LugarTuristicoJPA>lista = lugarTuristicoService.listarLugaresTuristicos();
+		RolService service = new RolServiceImpl();
 		
-		request.setAttribute("lstLugaresTuristicos", lista);
+		List<RolJPA> lista = service.listarRol();
 		
-		log.debug("lista lugares turisticos : " +  lista.size());
+		request.setAttribute("lstRoles", lista);
+		request.setAttribute("btnAccion", "insert");
 		
 		RequestDispatcher despachador = null;
-		
-
-		despachador = request.getRequestDispatcher("index.jsp");
-		
+		despachador = request.getRequestDispatcher("/formulario/formularioUsuario.jsp");
 		despachador.forward(request, response);
+		log.info("fin: ServletRol - doGet ");
 		
-		log.info("init: ServletListarLugaresTuristicos - doGet ");
 	}
 
 	/**

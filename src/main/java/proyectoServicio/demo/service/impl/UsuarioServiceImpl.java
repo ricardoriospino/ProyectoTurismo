@@ -1,5 +1,7 @@
 package proyectoServicio.demo.service.impl;
 
+import java.util.List;
+
 import proyectoServicio.demo.dao.UsuarioDAO;
 import proyectoServicio.demo.dao.impl.UsuarioDAOImpl;
 import proyectoServicio.demo.jpa.entity.UsuarioJPA;
@@ -21,6 +23,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public UsuarioJPA validarUsuarioClave(String usuario, String clave) {
 		
 		return usuarioDAO.validarUsuarioClave(usuario, clave);
+	}
+	@Override
+	public List<UsuarioJPA> listarUsuarios() {
+		
+		return usuarioDAO.listarUsuarios();
+	}
+	@Override
+	public UsuarioJPA obtenerUsuarioById(int idUsuario) {
+		
+		return usuarioDAO.obtenerUsuarioById(idUsuario);
 	}
 
 }

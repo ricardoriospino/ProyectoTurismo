@@ -39,4 +39,10 @@ public class LugarTuristicoServiceImpl implements LugarTuristicoService {
 		return lugarTuristicoDAO.obtenerLugaresTuristicosByid(idLugarTuristico);
 	}
 
+	@Override
+	public int insertarLugarTuristico(LugarTuristicoJPA lugarTuristico) {
+		
+		return lugarTuristicoDAO.insertarLugarTuristico(lugarTuristico);
+	}
+
 }

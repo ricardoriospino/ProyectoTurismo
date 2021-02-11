@@ -65,16 +65,42 @@ public class MenuDAOImpl implements MenuDAO {
 			manager = JPAUtil.getEntityManager();
 			String hql ="SELECT lm FROM MenuJPA lm ";
 			Query q = manager.createQuery(hql);
-			MenuJPA menu =null;
+			//MenuJPA menu =null;
 			
 			lst = (List<MenuJPA>) q.getResultList();
 			
-			lst.add(menu);
+			//lst.add(menu);
 			
 		} catch (NoResultException e) {
 			e.printStackTrace();
 			log.error("Error al realizar la validacion : " + e);
 			
+		}finally {
+			manager.close();
+		
+		}
+		return lst;
+	}
+
+	@Override
+	public List<MenuJPA> listarMenuByRol(int idRol) {
+		
+		EntityManager manager = null;
+		List<MenuJPA>lst = new ArrayList<MenuJPA>();
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql="SELECT m FROM MenuJPA m ,RolMenuJPA rm " +
+						"where m.idMenu = rm.menu.idMenu and rm.rol.idRol = :p_idRol";
+			Query q = manager.createQuery(hql);
+			
+			q.setParameter("p_idRol", idRol);
+			lst = (List<MenuJPA>) q.getResultList();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al cargar  : " + e);
+
 		}finally {
 			manager.close();
 		

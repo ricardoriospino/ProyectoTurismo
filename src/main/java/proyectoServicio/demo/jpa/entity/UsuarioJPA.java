@@ -97,6 +97,17 @@ public class UsuarioJPA implements Serializable {
 		this.clave = clave;
 		this.rol = rol;
 	}
+	
+	
+
+	public UsuarioJPA(String nombreUsuario, String apellido, String usuario, String clave, RolJPA rol) {
+		super();
+		this.nombreUsuario = nombreUsuario;
+		this.apellido = apellido;
+		this.usuario = usuario;
+		this.clave = clave;
+		this.rol = rol;
+	}
 
 	@Override
 	public String toString() {

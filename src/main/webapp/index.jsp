@@ -39,31 +39,7 @@ if(!valido){
     <div id="wrapper">
 
         <!-- ini: Menu dinamico -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" >
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
-                <div class="sidebar-brand-icon">
-	                <img src="img/logo.png" class="img-fluid" height="100px" width="100px" >
-                </div>
-                <div class="sidebar-brand-text mx-2">Menú </div>
-            </a>
-            
-            <!-- lista menu-->	
-       		<c:forEach var="menu" items="${lstMenu}">
-		        <!-- Item Menu-->   
-		        <li class="nav-item">
-		             <a class="nav-link"  href="${menu.urlMenu}" >${menu.menu}</a>            
-	                 <!-- Divider -->
-            	     <hr class="sidebar-divider d-none d-md-block">          
-	            </li>
-            </c:forEach>
-
-            <!-- Esconder Menu -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-        </ul>   
+		<jsp:include page="menuPrincipal.jsp"/>
         <!-- fin Menu dinamico  -->
 
         <!-- Content Wrapper -->
@@ -170,7 +146,7 @@ if(!valido){
 				            <div class="col-lg-4 col-md-12 mb-4">
 				              <div  class="card">
 				                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-				                  <img src="${lugaresTuristicos.urlImagen }" class="img-fluid" />
+				                  <img src="${lugaresTuristicos.urlImagen1 }" class="img-fluid" />
 				                  <a href="#!">
 				                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
 				                  </a>
@@ -180,8 +156,7 @@ if(!valido){
 				                  <h6> S/. ${lugaresTuristicos.precioXpersona }</h6>
 				                  <p class="card-text">${lugaresTuristicos.descripcion}</p>
 				                  
-				                  <!-- servlet lista menu esta comentado -->
-<%-- 				                  <a class="btn btn-primary" href=" <%=request.getContextPath()%>/ServletListarMenu?menu=T1&idLugaresTuristicos=${lugaresTuristicos.idLugarTuristico}">ver</a> --%>
+				                
 				                <a class="btn btn-primary" href=" <%=request.getContextPath()%>/ServletInfoTour?idLugarTuristico=${lugaresTuristicos.idLugarTuristico}">ver</a>
 				                </div>
 				              </div>

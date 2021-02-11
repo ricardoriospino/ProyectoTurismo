@@ -12,4 +12,6 @@ public interface MenuDAO {
 	
 	public List<MenuJPA> listarMenu();
 
+	public List<MenuJPA> listarMenuByRol(int idRol);
+
 }

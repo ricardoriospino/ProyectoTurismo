@@ -1,6 +1,9 @@
 package proyectoServicio.demo.dao.impl;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -51,6 +54,29 @@ public class RolDAOImpl implements RolDAO {
 		 RolJPA empleado = (RolJPA) q.getSingleResult();
 		
 		return empleado;
+	}
+
+	@Override
+	public List<RolJPA> listarRol() {
+		
+		EntityManager manager = null;
+		List<RolJPA>lst = new ArrayList<RolJPA>();
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql = "SELECT lr FROM RolJPA lr";
+			Query q = manager.createQuery(hql);
+			
+			lst =(List<RolJPA>) q.getResultList();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+			
+		}finally {
+			manager.close();
+		}
+		return lst;
 	}
 
 }

@@ -1,5 +1,6 @@
 package proyectoServicio.demo.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,6 +87,59 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			manager.close();
 		}
 		return permisoUsuario ;
+	}
+
+
+
+	@Override
+	public List<UsuarioJPA> listarUsuarios() {
+		
+		EntityManager manager = null;
+		List<UsuarioJPA> lst = new ArrayList<UsuarioJPA>();
+		
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql =("SELECT b  " +
+						 "FROM RolJPA AS a , UsuarioJPA AS b " +
+						 "WHERE a.idRol = b.rol.idRol ");
+			
+			Query q = manager.createQuery(hql);
+			lst = (List<UsuarioJPA>) q.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+			
+		}finally {
+			manager.close();
+		}
+		return lst;
+	}
+
+
+
+	@Override
+	public UsuarioJPA obtenerUsuarioById(int idUsuario) {
+		
+		EntityManager manager = null;
+		UsuarioJPA usuario = null;
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql ="SELECT ou FROM UsuarioJPA ou WHERE ou.idUsuario = :p_idUsuario";
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_idUsuario", idUsuario );
+			
+			usuario = (UsuarioJPA) q.getSingleResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al realizar la validacion : " + e);
+			
+		}finally {
+			manager.close();
+		}
+		return usuario;
 	}
 
 }

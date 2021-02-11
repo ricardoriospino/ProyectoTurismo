@@ -29,5 +29,10 @@ public class MenuServiceImpl implements MenuService {
 		
 		return menuDAO.listarMenu();
 	}
+	@Override
+	public List<MenuJPA> listarMenuByRol(int idRol) {
+		
+		return menuDAO.listarMenuByRol(idRol);
+	}
 
 }
