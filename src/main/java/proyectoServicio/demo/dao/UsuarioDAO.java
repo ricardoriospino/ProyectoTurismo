@@ -14,5 +14,9 @@ public interface UsuarioDAO {
 
 	public UsuarioJPA obtenerUsuarioById(int idUsuario);
 	
+	public Long obtenerUsuarioCompra (int idUsuario);
+	
+	public Long validarUsuario (String usuario);
+	
 
 }

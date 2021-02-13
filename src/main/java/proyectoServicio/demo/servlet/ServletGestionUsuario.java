@@ -54,17 +54,19 @@ public class ServletGestionUsuario extends HttpServlet {
 		RequestDispatcher despachador = null;
 		log.debug( "Accion : " + accion);
 		
+		UsuarioService serviceUsuario = new UsuarioServiceImpl();
+		
 		if("editar".equals(accion)){
 			
 			String idUsuario = (String) request.getParameter("idUsuario");
 			log.debug("idUsuario: "+ idUsuario);
 			
-			UsuarioService service = new UsuarioServiceImpl();
-			UsuarioJPA usuario = service.obtenerUsuarioById(Integer.valueOf(idUsuario));
+			
+			UsuarioJPA usuario = serviceUsuario.obtenerUsuarioById(Integer.valueOf(idUsuario));
 			request.setAttribute("objUsuario", usuario  );
 			
-			RolService service2 = new RolServiceImpl();
-			List<RolJPA> lista = service2.listarRol();
+			RolService serviceRol = new RolServiceImpl();
+			List<RolJPA> lista = serviceRol.listarRol();
 			request.setAttribute("lstRoles", lista);
 			
 			request.setAttribute("idUsuario", idUsuario);
@@ -75,21 +77,37 @@ public class ServletGestionUsuario extends HttpServlet {
 			
 			log.debug("accion:"+accion);
 			
-			UsuarioService service4 = new UsuarioServiceImpl();
-			CRUDService service3 = new CRUDServiceImpl();
-			int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
-			service3.eliminar(idUsuario);
-			int bandera = 1;
 			
-			if (bandera == 0) {
+			CRUDService serviceCrud = new CRUDServiceImpl();
+			
+			int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
+		
+			// si el usuario tiene compra			
+			UsuarioJPA usuarioJPA = new UsuarioJPA();		
+			usuarioJPA.setIdUsuario(idUsuario);
+			
+			Long usuarioCompra = (Long) serviceUsuario.obtenerUsuarioCompra(idUsuario);
+			
+			if (usuarioCompra >=1L) {
 				request.setAttribute("error",true);
-				log.debug("error true");		
-			}else if (bandera == 1) {
-				request.setAttribute("eliminado", true);
-				log.debug("eliminado correctamente");	
+				log.debug("error true");	
+			}else if(usuarioCompra == 0L) {
+				
+				int bandera = serviceCrud.eliminar(usuarioJPA);
+				
+				if(bandera == 0) {
+					
+					log.debug("no se logro eliminar " + bandera);
+					
+				}else if(bandera == 1) {
+					
+					request.setAttribute("eliminado", true);
+					log.debug("eliminado correctamente");
+					
+				}
 			}
 			
-			List<UsuarioJPA>lstUsuario = service4.listarUsuarios();
+			List<UsuarioJPA>lstUsuario = serviceUsuario.listarUsuarios();
 			request.setAttribute("lstUsuarios", lstUsuario);
 			despachador = request.getRequestDispatcher("/listados/listaUsuarios.jsp");
 		}

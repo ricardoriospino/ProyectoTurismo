@@ -58,14 +58,20 @@ if(!valido){
 	        	
 	        	<div class="container-fluid ">
 					<h3 class="text-center ">Listado de Usuarios </h3>
-					<hr>			
+					<hr>
+					<c:if test="${error == true}">
+						<div class="alert alert-danger">
+							<strong>Error!</strong> Usuario Tiene Compras.
+						</div>
+					</c:if>
+						
 					<c:if test="${eliminado == true}">
 						<div class="alert alert-success" role="alert">
 							<strong>Eliminado!</strong> Eliminado Correctamente
 						</div>
 					</c:if>
 					<div id=botonAgregar class="container text-left text-left">
-						<a href="<%=request.getContextPath()%>/ServletRol" class="btn btn-success">Agregar Nuevo lugar</a>
+						<a href="<%=request.getContextPath()%>/ServletRol" class="btn btn-success">Agregar Nuevo Usuario</a>
 						<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTATOUR0002" class="btn btn-success">Exportar a Excel</a>
 					</div>
 					<br>
@@ -77,7 +83,6 @@ if(!valido){
 								<th>NOMBRE</th>
 								<th>APELLIDO</th>
 								<th>USUARIO</th>
-								<th>CLAVE</th>
 								<th>ROL</th>
 								<th>EDITAR/ELIMINAR</th>
 							</tr>
@@ -89,7 +94,6 @@ if(!valido){
 									<td>${varUsuario.nombreUsuario}</td>
 									<td>${varUsuario.apellido}</td>
 									<td>${varUsuario.usuario}</td>
-									<td>${varUsuario.clave}</td>
 									<td>${varUsuario.rol.descripcion}</td>
 									<td><a href="<%=request.getContextPath()%>/ServletGestionUsuario?p_accion=editar&idUsuario=${varUsuario.idUsuario}">Editar</a>
 									&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/ServletGestionUsuario?p_accion=eliminar&idUsuario=${varUsuario.idUsuario}">Eliminar</a></td>

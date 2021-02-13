@@ -41,6 +41,8 @@ if(!valido){
 	response.sendRedirect("login.jsp");
 }
 %>
+
+
 	<div id="wrapper">
 		
 		<!-- ini: Menu dinamico -->
@@ -64,7 +66,7 @@ if(!valido){
 						</div>
 					</c:if>
 					<div id=botonAgregar class="container text-left text-left">
-						<a href="<%=request.getContextPath()%>/ServletDistrito?formulario=E" class="btn btn-success">Agregar Nuevo lugar</a>
+						<a href="<%=request.getContextPath()%>/ServletTour" class="btn btn-success">Agregar Nuevo lugar</a>
 						<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTATOUR0002" class="btn btn-success">Exportar a Excel</a>
 					</div>
 					<br>
@@ -88,8 +90,8 @@ if(!valido){
 									<td>${varTour.nombre}</td>
 									<td>${varTour.precioXpersona}</td>
 									<td>${varTour.habilitadoODeshabilitado}</td>
-									<td><a href="<%=request.getContextPath()%>/ServletGestionEmpleado?p_accion=editar&idEmpleado=${varTour.idLugarTuristico}">Editar</a>
-									&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/ServletGestionEmpleado?p_accion=eliminar&idEmpleado=${varTour.idLugarTuristico}">Eliminar</a></td>
+									<td><a href="<%=request.getContextPath()%>/ServletGestionarLugaresTuristicos?p_accion=editar&idTour=${varTour.idLugarTuristico}">Editar</a>
+									&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/ServletGestionarLugaresTuristicos?p_accion=eliminar&idTour=${varTour.idLugarTuristico}">Eliminar</a></td>
 								</tr>							
 							</c:forEach>
 						</tbody>	

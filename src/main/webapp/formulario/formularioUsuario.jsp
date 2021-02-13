@@ -56,6 +56,19 @@ if(!valido){
 						<div class="card-header">
 							<h3 class="mb-0">Ingrese datos Usuario</h3>
 						</div>
+						
+						
+						<c:if test="${error == true}">
+							<div class="alert alert-danger">
+								<strong>Error!</strong> Usuario ya existe, Crear otro Usuario.
+							</div>
+						</c:if>
+						
+						<c:if test="${actualizado == true}">
+							<div class="alert alert-success" role="alert">
+								${msg}
+							</div>
+						</c:if>
 		
 						<c:if test="${ingresado == true}">
 							<div class="alert alert-success" role="alert">
@@ -92,7 +105,7 @@ if(!valido){
 									</div>
 									
 									<div class="form-group row">
-										<label class="col-lg-3 col-form-label form-control-label">Nombre Usuario </label>
+										<label class="col-lg-3 col-form-label form-control-label"> Usuario </label>
 										<div class="col-lg-9">
 											<input class="form-control" type="text" value="<c:out value='${objUsuario.usuario}'/>"
 												name="usuario" required>
@@ -102,7 +115,7 @@ if(!valido){
 									</div>
 									
 									<div class="form-group row">
-										<label class="col-lg-3 col-form-label form-control-label">Clave Usuario</label>
+										<label class="col-lg-3 col-form-label form-control-label">Clave </label>
 										<div class="col-lg-9">
 											<input class="form-control" type="text" value="<c:out value='${objUsuario.clave}'/>"
 												name="clave" required>
@@ -135,7 +148,7 @@ if(!valido){
 										<label class="col-lg-3 col-form-label form-control-label"></label>
 										<div class="col-lg-9">
 											<input type="reset" class="btn btn-secondary" value="Cancelar">
-											<input type="submit" class="btn btn-primary" value="Enviar" >
+											<input type="submit" class="btn btn-primary" value="Guardar" >
 											<a href="<%=request.getContextPath()%>/ServletListarUsuarioForGestion" class="btn btn-primary offset-lg-5"><i class="fa fa-undo"></i></a>
 										</div>
 									</div>

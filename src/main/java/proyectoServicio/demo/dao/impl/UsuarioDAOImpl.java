@@ -134,12 +134,71 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("Error al realizar la validacion : " + e);
+			log.error("Error al realizar obtenerUsuarioById  : " + e);
 			
 		}finally {
 			manager.close();
 		}
 		return usuario;
+	}
+
+	@Override
+	public Long obtenerUsuarioCompra(int idUsuario) {
+		
+		EntityManager manager = null;
+		
+		Long numeroDeCompras = 0L;
+		
+		try {
+			
+			
+			manager = JPAUtil.getEntityManager();
+			String hql = "SELECT COUNT(a) FROM UsuarioJPA a , CompraJPA b  " +
+						 " WHERE a.idUsuario = b.usuario.idUsuario  " +
+						 " AND a.idUsuario = :p_idUsuario";
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_idUsuario", idUsuario );
+			
+			numeroDeCompras =  (Long) q.getSingleResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al realizar obtenerUsuarioVenta  : " + e);
+			
+		}finally {
+			manager.close();
+		}	
+		return numeroDeCompras;
+	}
+
+	@Override
+	public Long validarUsuario(String usuario) {
+		
+		EntityManager manager = null;
+		
+		Long  cuentaExistente = 0L;
+		
+		try {
+			
+			//SELECT COUNT(usuario) FROM tb_usuario WHERE usuario = "anival123";
+		
+			manager = JPAUtil.getEntityManager();
+			String hql ="SELECT COUNT(a) FROM UsuarioJPA a " +
+					     "WHERE a.usuario = :p_usuario";
+			
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_usuario", usuario );
+			
+			cuentaExistente =  (Long) q.getSingleResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al realizar validarUsuario  : " + e);
+			
+		}finally {
+			manager.close();
+		}
+		return cuentaExistente;
 	}
 
 }

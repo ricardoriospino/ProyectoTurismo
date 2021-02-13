@@ -34,5 +34,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return usuarioDAO.obtenerUsuarioById(idUsuario);
 	}
+	@Override
+	public Long obtenerUsuarioCompra(int idUsuario) {
+		
+		return usuarioDAO.obtenerUsuarioCompra(idUsuario);
+	}
+	@Override
+	public Long validarUsuario(String usuario) {
+		
+		return usuarioDAO.validarUsuario(usuario);
+	}
 
 }

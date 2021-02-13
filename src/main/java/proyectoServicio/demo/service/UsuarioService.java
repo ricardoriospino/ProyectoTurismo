@@ -13,5 +13,9 @@ public interface UsuarioService {
 	public List<UsuarioJPA> listarUsuarios ();
 
 	public UsuarioJPA obtenerUsuarioById(int idUsuario);
+	
+	public Long obtenerUsuarioCompra (int idUsuario);
+	
+	public Long validarUsuario (String usuario);
 
 }

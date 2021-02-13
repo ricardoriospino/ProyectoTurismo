@@ -67,10 +67,12 @@ public class CrudDAOImpl implements CrudDAO {
 
 
 	@Override
-	public void eliminar(Object objeto) {
+	public int eliminar(Object objeto) {
 		
-		log.info("fin:  eliminar");
 		
+		log.info("ini:  eliminar");
+		
+		int exito = 1;
 		EntityManager manager = null;
 		try {
 			
@@ -81,14 +83,17 @@ public class CrudDAOImpl implements CrudDAO {
 			manager.getTransaction().commit();
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			manager.getTransaction().rollback();
 			log.error("Error al eliminar: " + e);
+			exito = 0;
 			
 		}finally {
-			manager.close();
+			manager.close();		
 		}
 		
 		log.info("fin:  eliminar");
+		return exito;
 		
 		
 	}	

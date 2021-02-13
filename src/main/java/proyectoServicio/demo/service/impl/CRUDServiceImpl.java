@@ -25,8 +25,8 @@ public class CRUDServiceImpl implements CRUDService {
 	}
 
 	@Override
-	public void eliminar(Object objeto) {
-		crudDAO.eliminar(objeto);
+	public int eliminar(Object objeto) {
+		return crudDAO.eliminar(objeto);
 		
 	}
 

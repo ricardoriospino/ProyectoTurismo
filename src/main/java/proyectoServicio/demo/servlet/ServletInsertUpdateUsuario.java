@@ -2,6 +2,7 @@ package proyectoServicio.demo.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +17,11 @@ import org.apache.logging.log4j.Logger;
 import proyectoServicio.demo.jpa.entity.RolJPA;
 import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 import proyectoServicio.demo.service.CRUDService;
+import proyectoServicio.demo.service.RolService;
+import proyectoServicio.demo.service.UsuarioService;
 import proyectoServicio.demo.service.impl.CRUDServiceImpl;
+import proyectoServicio.demo.service.impl.RolServiceImpl;
+import proyectoServicio.demo.service.impl.UsuarioServiceImpl;
 
 
 /**
@@ -68,44 +73,74 @@ public class ServletInsertUpdateUsuario extends HttpServlet {
 		log.debug("Datos ingresados , nombre: " + nombreForm + " , apellido : " + apellidoForm + " ,usuario : " + usuarioForm
 				  + " clave : " + claveForm + " id Rol : " + idRolForm);
 		
-		CRUDService service = new CRUDServiceImpl();
+		CRUDService serviceCrud = new CRUDServiceImpl();
 		int estado = 0;
 		UsuarioJPA usuario = null;
 		String mensaje="";
 		
+		UsuarioService serviceUsuario = new UsuarioServiceImpl();
+		
+		Long validarUsuario = (Long) serviceUsuario.validarUsuario(usuarioForm);
+		
+		RequestDispatcher despachador =null;
+		
 		if("insert".equals(accion)) {
 			
-			usuario = new UsuarioJPA(nombreForm, apellidoForm, usuarioForm, claveForm,  idRolForm);
-			service.insertar(usuario);
 			estado = 1;
-			mensaje = "<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";
+			if(validarUsuario == 0L && estado == 1) {
+				
+				usuario = new UsuarioJPA(nombreForm, apellidoForm, usuarioForm, claveForm,  idRolForm);
+				serviceCrud.insertar(usuario);
+				
+				mensaje = "<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";
+					
+				request.setAttribute("ingresado", true);
+				request.setAttribute("msg", mensaje);
+				despachador= request.getRequestDispatcher("/ServletRol");
+						
+				
+			}else if(validarUsuario == 1L ) {
+				
+				request.setAttribute("error",true);
+				log.debug("error true");
+				despachador= request.getRequestDispatcher("/ServletRol");
+				
+			}
 			
 		}else if("update".equals(accion)) {
 			
-			String idUsuario = request.getParameter("hdnIdUsuario");
-			usuario = new UsuarioJPA(Integer.valueOf(idUsuario), nombreForm, apellidoForm, usuarioForm, claveForm, idRolForm);
-			service.actualizar(usuario);
 			estado = 1;
-			mensaje ="<strong>Actualizado!</strong> Datos Actualizados  la base de datos.";
-		}
-		
-		PrintWriter salida = response.getWriter();
-		RequestDispatcher disparador =null;
-		
-		if (estado == 1) {
-			request.setAttribute("ingresado", true);
-			request.setAttribute("msg", mensaje);
-			disparador= request.getRequestDispatcher("/ServletRol");
 			
-		}else {
-			salida.println("<html><body>");
-			salida.println("<h3>Alerta</h3>");
-			salida.println("producto invalido!");
-			salida.println("</html></body>");
-			
+			if( estado == 1) {
+	
+				String idUsuario = request.getParameter("hdnIdUsuario");
+				usuario = new UsuarioJPA(Integer.valueOf(idUsuario), nombreForm, apellidoForm, usuarioForm, claveForm, idRolForm);
+				serviceCrud.actualizar(usuario);
+				
+				mensaje ="<strong>Actualizado!</strong> Datos Actualizados  la base de datos.";
+				request.setAttribute("actualizado", true);
+				request.setAttribute("msg", mensaje);
+				despachador= request.getRequestDispatcher("/ServletRol");
+				
+			}else if(validarUsuario == 0L  ) {
+				
+				request.setAttribute("error",true);
+				log.debug("error true");
+				
+				String idUsuario = request.getParameter("hdnIdUsuario");	
+				UsuarioService service = new UsuarioServiceImpl();
+				UsuarioJPA usuarioById = service.obtenerUsuarioById(Integer.valueOf(idUsuario));
+				request.setAttribute("objUsuario", usuarioById  );
+				
+				RolService service2 = new RolServiceImpl();
+				List<RolJPA> lista = service2.listarRol();	
+				request.setAttribute("lstRoles", lista);
+				
+				despachador= request.getRequestDispatcher("/ServletRol");
+			}
 		}
-		
-		disparador.forward(request, response);	
+
+		despachador.forward(request, response);	
 		log.info("Fin: ServletInsertUpdateUsuario doPost");
 	}
 

@@ -46,7 +46,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                                     </div>
-                                    <form action="ServletLogeoUsuario" method="post">
+                                    <form action="ServletLogeoUsuario?listar=L" method="post">
 	                                        <div class="form-group">
 	                                        	<input class="form-control" type="text" placeholder="usuario" name="usuario"  id="username" autofocus>
 	                                    	</div>
@@ -61,7 +61,7 @@
 	                                        </div>
 	                                        
 	                                        <div class="btn btn-primary btn-user btn-block">
-	                                        	<input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Enviar">
+	                                        	<input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Ingresar">
 	                                        </div>
 	                                         
 	                                         

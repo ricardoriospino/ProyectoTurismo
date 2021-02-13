@@ -84,7 +84,13 @@ public class ServletLogeoUsuario extends HttpServlet {
 			List<MenuJPA>listaMenu = menuService.listarMenuByRol(usuario.getRol().getIdRol());
 			misession.setAttribute("lstMenu", listaMenu);
 			
-			despachador = request.getRequestDispatcher("/ServletListarLugaresTuristicos");
+			String listar = request.getParameter("listar");
+			if("L".equals(listar)) {
+				despachador = request.getRequestDispatcher("/ServletListarLugaresTuristicos");
+			}else if("E".equals(listar)) {
+				despachador = request.getRequestDispatcher("/index.jsp");
+			}
+			
 			
 			
 		}else {

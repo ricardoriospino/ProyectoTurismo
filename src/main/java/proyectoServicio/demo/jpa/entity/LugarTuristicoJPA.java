@@ -253,6 +253,7 @@ public class LugarTuristicoJPA implements Serializable {
 		this.habilitadoODeshabilitado = habilitadoODeshabilitado;
 		this.climaTour = climaTour;
 	}
+	
 
 	@Override
 	public String toString() {

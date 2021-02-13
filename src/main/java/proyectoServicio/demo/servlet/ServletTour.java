@@ -1,7 +1,6 @@
 package proyectoServicio.demo.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,32 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
-import proyectoServicio.demo.jpa.entity.MenuJPA;
-import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 import proyectoServicio.demo.service.LugarTuristicoService;
-import proyectoServicio.demo.service.MenuService;
-import proyectoServicio.demo.service.UsuarioService;
 import proyectoServicio.demo.service.impl.LugarTuristicoServiceImpl;
-import proyectoServicio.demo.service.impl.MenuServiceImpl;
-import proyectoServicio.demo.service.impl.UsuarioServiceImpl;
 
 /**
- * Servlet implementation class ServletListarLugaresTuristicos
+ * Servlet implementation class ServletTour
  */
-@WebServlet("/ServletListarLugaresTuristicos")
-public class ServletListarLugaresTuristicos extends HttpServlet {
+@WebServlet("/ServletTour")
+public class ServletTour extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log= LogManager.getLogger(ServletListarLugaresTuristicos.class);
+	private static final Logger log= LogManager.getLogger(ServletTour.class);
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletListarLugaresTuristicos() {
+    public ServletTour() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,24 +39,14 @@ public class ServletListarLugaresTuristicos extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		log.info("init: ServletListarLugaresTuristicos - doGet ");
-		
-		LugarTuristicoService lugarTuristicoService = new LugarTuristicoServiceImpl();
-		List<LugarTuristicoJPA>lista = lugarTuristicoService.listarLugaresTuristicos();
-		
-		request.setAttribute("lstLugaresTuristicos", lista);
-		
-		log.debug("lista lugares turisticos : " +  lista.size());
-		
+		log.info("init: ServletTour - doGet ");
+	
+		request.setAttribute("btnAccion", "insert");	
 		RequestDispatcher despachador = null;
-		
-		
-
-		despachador = request.getRequestDispatcher("index.jsp");
-		
+		despachador = request.getRequestDispatcher("/formulario/formularioTour.jsp");
 		despachador.forward(request, response);
 		
-		log.info("init: ServletListarLugaresTuristicos - doGet ");
+		log.info("fin: ServletTour - doGet ");
 	}
 
 	/**
