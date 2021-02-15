@@ -1,17 +1,25 @@
  CREATE DATABASE bdturismo;
 USE bdturismo;
 
+CREATE DATABASE bdturismo;
+USE bdturismo;
+
 CREATE TABLE IF NOT EXISTS tb_lugar_turistico (
 id_lugar_turistico INTEGER UNSIGNED PRIMARY KEY auto_increment,
 codigo_lugar_turistico VARCHAR (50) UNIQUE KEY NOT NULL ,
 nombre VARCHAR (200) NOT NULL,
 descripcion VARCHAR (300) NOT NULL,
-url_imagen VARCHAR (200) NOT NULL,
+url_imagen1 VARCHAR (200) NOT NULL,
+url_imagen2 VARCHAR (200) NOT NULL,
+url_imagen3 VARCHAR (200) NOT NULL,
 precio_x_persona DECIMAL (10,2) NOT NULL,
 insertado_por VARCHAR (50) ,
 modificado_por VARCHAR (50) ,
-fecha_insert DATE NOT NULL,
-fecha_update DATE DEFAULT NULL
+fecha_insert DATE DEFAULT NULL,
+fecha_update DATE DEFAULT NULL,
+calificacion_estrellas INTEGER (10)  NOT NULL,
+habilitado_o_deshabilitado VARCHAR(100) NOT NULL,
+clima_tour VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tb_servicio (
@@ -29,7 +37,7 @@ descripcion_permiso VARCHAR (200) NOT NULL
 CREATE TABLE IF NOT EXISTS tb_menu (
 id_menu INTEGER UNSIGNED PRIMARY KEY auto_increment,
 codigo_menu VARCHAR (50) UNIQUE KEY NOT NULL ,
-menu VARCHAR (50) NOT NULL ,
+menu VARCHAR (50) NOT NULL, 
 url_menu VARCHAR (500) NOT NULL
 );
 
@@ -84,22 +92,27 @@ FOREIGN KEY (id_usuario) REFERENCES tb_usuario(id_usuario),
 FOREIGN KEY (id_lugar_turistico) REFERENCES tb_lugar_turistico(id_lugar_turistico)
 );
 
-
-SELECT * FROM tb_lugar_turistico;
-SELECT * FROM tb_servicio;
-SELECT * FROM tb_permiso;
-SELECT * FROM tb_menu;
-SELECT * FROM tb_rol;
-SELECT * FROM tb_rol_permiso;
-SELECT * FROM tb_rol_menu;
-SELECT * FROM tb_incluye;
-SELECT * FROM tb_usuario;
-SELECT * FROM tb_compra;
-
 -- seleccionar servicios de cada tour turistico
 SELECT b.nombre_servicio FROM tb_incluye AS a
 JOIN tb_servicio AS b ON a.id_servicio = b.id_servicio
 WHERE id_lugar_turistico = 1;
+
+-- opciones de un admin
+SELECT m. * FROM tb_rol r, tb_rol_menu rm , tb_menu m 
+WHERE 
+r.id_rol = rm.id_rol and
+rm.id_menu =m.id_menu and
+r.codigo_rol = "04";
+
+-- select lista de usuarios con descripción
+SELECT a.id_usuario , a.nombre_usuario , a.apellido , a.usuario , a.clave , b.descripcion FROM tb_usuario AS a
+JOIN tb_rol AS b ON a.id_rol = b.id_rol;
+
+-- select si usuario tiene mas de una venta
+SELECT  COUNT(a.id_usuario) FROM tb_usuario AS a INNER JOIN tb_compra AS b ON a.id_usuario = b.id_usuario WHERE a.id_usuario = 1;
+
+-- validar si usuario
+SELECT COUNT(usuario) FROM tb_usuario WHERE usuario = "ricardo123";
 
 /*
  DROP TABLE tb_compra;
