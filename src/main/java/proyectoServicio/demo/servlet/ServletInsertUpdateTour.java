@@ -61,13 +61,9 @@ public class ServletInsertUpdateTour extends HttpServlet {
 		String accion = request.getParameter("hdnAccion");
 		log.debug("accion " + accion );
 		
-		//LugarTuristicoJPA lugarTuristicoservice  = new LugarTuristicoJPA();
 		HttpSession misession = request.getSession(true); 
 		UsuarioJPA usuario = (UsuarioJPA) misession.getAttribute("usuarioSession");
 
-		//Date date = new Date();
-		//DateFormat  formato = new SimpleDateFormat("yyyy/MM/dd");
- 
 		String codigoForm = request.getParameter("codigo_lugar_turistico");
 		String nombreForm = request.getParameter("nombre");
 		String descripcionForm = request.getParameter("descripcion");
@@ -82,10 +78,7 @@ public class ServletInsertUpdateTour extends HttpServlet {
 		Date fechaUpdateForm = new Date();
 		
 		int calificacionEstrellasForm = Integer.parseInt(request.getParameter("calificacion_estrellas"));
-		
-		
-		//String habilitadoODeshabilitadoForm = request.getParameter("habilitado_o_deshabilitado");
-		String habilitadoODeshabilitadoForm = "Habilitado";
+		String habilitadoODeshabilitadoForm = request.getParameter("habilitado_o_deshabilitado");
 		
 		String climaTourForm = request.getParameter("clima_tour");
 		
@@ -97,51 +90,72 @@ public class ServletInsertUpdateTour extends HttpServlet {
 		
 		
 		CRUDService serviceCrud = new CRUDServiceImpl();
-		
-		
+		LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
+	
 		LugarTuristicoJPA lugarTuristico = null;
 		int estado = 0;
 		String mensaje ="";
 		
+		Long validarTour = (Long) serviceTour.validarTourExist(codigoForm);
+		
+		RequestDispatcher despachador =null;
 		// entra cuando es insert
 		if("insert".equals(accion)) {
-	
-				lugarTuristico = new LugarTuristicoJPA(codigoForm, nombreForm, descripcionForm, urlImagen1Form, urlImagen2Form, 
-														urlImagen3Form, precioxPersonaForm, insertadoPorForm, fechaInsertForm, 
-														calificacionEstrellasForm, habilitadoODeshabilitadoForm, climaTourForm);
-				
-				serviceCrud.insertar(lugarTuristico);
 				estado = 1;
-				mensaje ="<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";
-				
+				if(validarTour == 0L && estado ==1) {
+					
+					fechaUpdateForm = null;
+					lugarTuristico = new LugarTuristicoJPA(codigoForm, nombreForm, descripcionForm, urlImagen1Form, urlImagen2Form, 
+															urlImagen3Form, precioxPersonaForm, insertadoPorForm,   fechaInsertForm, fechaUpdateForm, 
+															calificacionEstrellasForm, habilitadoODeshabilitadoForm, climaTourForm);
+					
+					serviceCrud.insertar(lugarTuristico);
+					mensaje ="<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";		
+					request.setAttribute("ingresado", true);
+					request.setAttribute("msg", mensaje);
+					despachador= request.getRequestDispatcher("/ServletTour");
+				}else  {
+					
+					request.setAttribute("error",true);
+					log.debug("error true");
+					despachador= request.getRequestDispatcher("/ServletTour");
+					
+				}
+					
 		// entra cuando es update
 		}else if ("update".equals(accion)) {
 			
-			String idLugarTuristico = request.getParameter("hdnIdLugarTuristico");
-			lugarTuristico = new LugarTuristicoJPA(Integer.valueOf(idLugarTuristico), codigoForm, nombreForm, descripcionForm, urlImagen1Form , urlImagen2Form, 
-													urlImagen3Form, precioxPersonaForm,  modificadoPorForm,  fechaUpdateForm, calificacionEstrellasForm, 
-													habilitadoODeshabilitadoForm, climaTourForm);
-			serviceCrud.actualizar(lugarTuristico);
 			estado = 1;
-			mensaje ="<strong>Actualizado!</strong> Datos Actualizados  la base de datos.";
-		}
-		
-		PrintWriter salida = response.getWriter();
-		RequestDispatcher disparador =null;
-		
-		if (estado == 1) {
-			request.setAttribute("ingresado", true);
-			request.setAttribute("msg", mensaje);
-			disparador= request.getRequestDispatcher("/ServletTour");
 			
-		}else {
-			salida.println("<html><body>");
-			salida.println("<h3>Alerta</h3>");
-			salida.println("Tour invalido!");
-			salida.println("</html></body>");
+			LugarTuristicoService lugarTuristicoService = new LugarTuristicoServiceImpl();
+			
+			String idLugarTuristico = request.getParameter("hdnIdLugarTuristico");
+			
+			lugarTuristico = lugarTuristicoService.getLugarTuristicoById(Integer.parseInt(idLugarTuristico));
+			
+			lugarTuristico = new LugarTuristicoJPA(Integer.valueOf(idLugarTuristico), codigoForm, nombreForm, descripcionForm, urlImagen1Form , urlImagen2Form, 
+													urlImagen3Form, precioxPersonaForm, lugarTuristico.getInsertadoPor() ,modificadoPorForm, lugarTuristico.getFechaInsert()  ,
+													fechaUpdateForm, calificacionEstrellasForm, habilitadoODeshabilitadoForm, climaTourForm );
+			serviceCrud.actualizar(lugarTuristico);
+			
+			mensaje ="<strong>Actualizado!</strong> Datos Actualizados  la base de datos.";
+			
+			PrintWriter salida = response.getWriter();
+			
+			if (estado == 1) {
+				request.setAttribute("actualizado", true);
+				request.setAttribute("msg", mensaje);
+				despachador= request.getRequestDispatcher("/ServletTour");
+				
+			}else {
+				salida.println("<html><body>");
+				salida.println("<h3>Alerta</h3>");
+				salida.println("Tour invalido!");
+				salida.println("</html></body>");
+			}
 		}
-		
-		disparador.forward(request, response);	
+
+		despachador.forward(request, response);	
 		
 		log.info("fin: ServletInsertUpdateTour doPost");
 	}

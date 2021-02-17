@@ -57,7 +57,7 @@ public class ServletGestionarLugaresTuristicos extends HttpServlet {
 			String idTour = (String) request.getParameter("idTour");
 			log.debug("idUsuario es: " + idTour);
 				
-			LugarTuristicoJPA tour = serviceTour.obtenerLugaresTuristicosByid(Integer.valueOf(idTour));
+			LugarTuristicoJPA tour = serviceTour.getLugarTuristicoById(Integer.valueOf(idTour));
 			request.setAttribute("objTour", tour);
 			
 			request.setAttribute("idTour", idTour);

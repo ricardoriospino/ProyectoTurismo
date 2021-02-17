@@ -30,5 +30,10 @@ public class ServicioServiceImpl implements ServicioService {
 		
 		return servicioDAO.listarServiciosTour(idTour);
 	}
+	@Override
+	public List<ServicioJPA> listarServicios() {
+		
+		return servicioDAO.listarServicios();
+	}
 
 }

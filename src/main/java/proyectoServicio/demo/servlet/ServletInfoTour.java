@@ -55,11 +55,11 @@ public class ServletInfoTour extends HttpServlet {
 		
 		
 		LugarTuristicoService service = new LugarTuristicoServiceImpl();
-		LugarTuristicoJPA lugarTuristico = service.obtenerLugaresTuristicosByid(Integer.valueOf(idLugarTuristico));
+		LugarTuristicoJPA lugarTuristico = service.getLugarTuristicoById(Integer.parseInt(idLugarTuristico));
 		request.setAttribute("objLugarTuristico", lugarTuristico);
 		
-		ServicioService service2 = new ServicioServiceImpl();
-		List<ServicioJPA>lista = service2.listarServiciosTour(Integer.valueOf(idLugarTuristico));
+		ServicioService serviceServicio = new ServicioServiceImpl();
+		List<ServicioJPA>lista = serviceServicio.listarServiciosTour(Integer.valueOf(idLugarTuristico));
 		request.setAttribute("lstServiciosIncluidos", lista);
 			
 		request.setAttribute("idLugarTuristico", idLugarTuristico);

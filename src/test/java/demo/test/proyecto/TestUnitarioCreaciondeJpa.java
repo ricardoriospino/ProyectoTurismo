@@ -47,9 +47,9 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico1.setCodigoLugarTuristico("001MP");
 			lugarTuristico1.setNombre("Machu Picchu");
 			lugarTuristico1.setDescripcion("Es una de las 7 nuevas maravillas del mundo localizada en Perú, en el Departamento del Cuzco");
-			lugarTuristico1.setUrlImagen1("https://cutt.ly/hjkeSwO");
-			lugarTuristico1.setUrlImagen2("https://cutt.ly/OkaglHX");
-			lugarTuristico1.setUrlImagen3("https://cutt.ly/1kaf9YV");
+			lugarTuristico1.setUrlImagen1("https://i.imgur.com/zbU6Ifl.jpg?1");
+			lugarTuristico1.setUrlImagen2("https://i.imgur.com/bV5P1RK.jpg?1");
+			lugarTuristico1.setUrlImagen3("https://i.imgur.com/Led9fRe.jpg?1");
 			lugarTuristico1.setPrecioXpersona(250.50);
 			lugarTuristico1.setInsertadoPor("Ricardo");
 			lugarTuristico1.setFechaInsert(sdf.parse("08/01/2021"));
@@ -61,9 +61,9 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico2.setCodigoLugarTuristico("002NH");
 			lugarTuristico2.setNombre("Nevado Huscaran");
 			lugarTuristico2.setDescripcion("Nevado Huascarán es el nevado más alto del Perú con 6 768 msnm pico sur, y 6 655 msnm pico norte, ubicado en la Cordillera Blanca, en la Provincia de Yungay");
-			lugarTuristico2.setUrlImagen1("https://cutt.ly/7kduBO0");
-			lugarTuristico2.setUrlImagen2("https://cutt.ly/Mkdu7VD");
-			lugarTuristico2.setUrlImagen3("https://cutt.ly/wkdidNf");
+			lugarTuristico2.setUrlImagen1("https://i.imgur.com/TvvTlOn.jpg?1");
+			lugarTuristico2.setUrlImagen2("https://i.imgur.com/b5bIbOF.png?1");
+			lugarTuristico2.setUrlImagen3("https://i.imgur.com/WgsZYfK.jpg?1");
 			lugarTuristico2.setPrecioXpersona(150.00);
 			lugarTuristico2.setInsertadoPor("Ricardo");
 			lugarTuristico2.setFechaInsert(sdf.parse("08/01/2021"));
@@ -75,9 +75,9 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico3.setCodigoLugarTuristico("003P");
 			lugarTuristico3.setNombre("Paracas");
 			lugarTuristico3.setDescripcion("La reserva nacional de Paracas es una zona protegida del Perú ubicada en la provincia de Pisco, dentro del departamento de Ica");
-			lugarTuristico3.setUrlImagen1("https://cutt.ly/Pkdph5m");
-			lugarTuristico3.setUrlImagen2("https://cutt.ly/kkdpvoc");
-			lugarTuristico3.setUrlImagen3("https://cutt.ly/ZkdpAke");
+			lugarTuristico3.setUrlImagen1("https://i.imgur.com/Pr5RZwK.jpg?1");
+			lugarTuristico3.setUrlImagen2("https://i.imgur.com/3uUqXXQ.jpg?1");
+			lugarTuristico3.setUrlImagen3("https://i.imgur.com/pqeicP9.jpg?1");
 			lugarTuristico3.setPrecioXpersona(110.00);
 			lugarTuristico3.setInsertadoPor("Ricardo");
 			lugarTuristico3.setFechaInsert(sdf.parse("03/01/2021"));
@@ -89,9 +89,9 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico4.setCodigoLugarTuristico("004PS");
 			lugarTuristico4.setNombre("Punta sal");
 			lugarTuristico4.setDescripcion("Balneareo muy reconocido en el Norte del Peru, ubicado en el departamento de Tumbes , Peru");
-			lugarTuristico4.setUrlImagen1("https://cutt.ly/FjlvC4P");
-			lugarTuristico4.setUrlImagen2("https://cutt.ly/6kdaXhZ");
-			lugarTuristico4.setUrlImagen3("https://cutt.ly/Xkdsi2Z");
+			lugarTuristico4.setUrlImagen1("https://i.imgur.com/LfHk5iW.jpg?1");
+			lugarTuristico4.setUrlImagen2("https://i.imgur.com/pqIuXMS.jpg?1");
+			lugarTuristico4.setUrlImagen3("https://i.imgur.com/Trq3FF9.jpg");
 			lugarTuristico4.setPrecioXpersona(200.50);
 			lugarTuristico4.setInsertadoPor("Ricardo");
 			lugarTuristico4.setFechaInsert(sdf.parse("03/01/2021"));
@@ -103,9 +103,9 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico5.setCodigoLugarTuristico("005P");
 			lugarTuristico5.setNombre("Pozuzo");
 			lugarTuristico5.setDescripcion("Pozuzo fue la primera colonia de su tipo fundada en 1859, cuatro años después de que el gobierno peruano les concediera las tierras a los colonos austriacos");
-			lugarTuristico5.setUrlImagen1("https://cutt.ly/ijlv3OG");
-			lugarTuristico5.setUrlImagen2("https://cutt.ly/gkddlGE");
-			lugarTuristico5.setUrlImagen3("https://cutt.ly/AkddOpG");
+			lugarTuristico5.setUrlImagen1("https://i.imgur.com/Of5mcoE.jpg?1");
+			lugarTuristico5.setUrlImagen2("https://i.imgur.com/S6DfUGm.jpg?1");
+			lugarTuristico5.setUrlImagen3("https://i.imgur.com/DHvX4Bc.jpg?1");
 			lugarTuristico5.setPrecioXpersona(95.90);
 			lugarTuristico5.setInsertadoPor("Ricardo");
 			lugarTuristico5.setFechaInsert(sdf.parse("08/01/2021"));
@@ -117,9 +117,9 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico6.setCodigoLugarTuristico("006K");
 			lugarTuristico6.setNombre("kuelap");
 			lugarTuristico6.setDescripcion("Importante sitio arqueológico preinca ubicado en los Andes nororientales del Perú, en la Provincia de Luya, fue construido por la cultura Chachapoyas");
-			lugarTuristico6.setUrlImagen1("https://cutt.ly/7jlbw1c");
-			lugarTuristico6.setUrlImagen2("https://cutt.ly/VkdfEew");
-			lugarTuristico6.setUrlImagen3("https://cutt.ly/pkdfPBF");
+			lugarTuristico6.setUrlImagen1("https://i.imgur.com/wxLmoSr.jpg?1");
+			lugarTuristico6.setUrlImagen2("https://i.imgur.com/JFWSaRQ.jpg?1");
+			lugarTuristico6.setUrlImagen3("https://i.imgur.com/Y9HYhtp.jpg?1");
 			lugarTuristico6.setPrecioXpersona(270.00);
 			lugarTuristico6.setInsertadoPor("Ricardo");
 			lugarTuristico6.setFechaInsert(sdf.parse("08/01/2021"));
@@ -245,7 +245,7 @@ public class TestUnitarioCreaciondeJpa {
 			MenuJPA menu2 = new MenuJPA();
 			menu2.setCodigoMenu("002");
 			menu2.setMenu("Gestionar Servicio");
-			menu2.setUrlMenu("ServletGestionServicio");
+			menu2.setUrlMenu("/ServletGestionServicios?p_accion=inicioGestionServicios");
 			
 			MenuJPA menu3 = new MenuJPA();
 			menu3.setCodigoMenu("003");
@@ -278,10 +278,8 @@ public class TestUnitarioCreaciondeJpa {
 			e.printStackTrace();
 			
 		}
-		
-		
-		log.info("fin : crearMenu()");
-		
+			
+		log.info("fin : crearMenu()");	
 	}
 
 	private static void crearRol() {

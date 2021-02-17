@@ -77,64 +77,31 @@ public class LugarTuristicoDAOImpl implements LugarTuristicoDAO {
 	}
 
 	@Override
-	public LugarTuristicoJPA obtenerLugaresTuristicosByid(int idLugarTuristico) {
+	public Long validarTourExist(String codigo) {
 		
 		EntityManager manager = null;
-		LugarTuristicoJPA lugarTuristico = null;
 		
-		try {
-				
-			manager = JPAUtil.getEntityManager();
-			String hql= "SELECT olt FROM LugarTuristicoJPA olt WHERE olt.idLugarTuristico = :p_id ";
-			Query q = manager.createQuery(hql);
-			q.setParameter("p_id", idLugarTuristico );
-			
-			lugarTuristico = (LugarTuristicoJPA) q.getSingleResult();
-			
-		} catch (NoResultException e) {
-			e.printStackTrace();
-			log.error("Error al realizar la validacion : " + e);
-			
-		}finally {
-			manager.close();
-		}
-	
-		return lugarTuristico;
-	}
-
-	@Override
-	public int insertarLugarTuristico(LugarTuristicoJPA lugarTuristico) {
-		
-		EntityManager manager = null;
-		int registros = 0;
+		Long  tourExistente = 0L;
 		
 		try {
 			manager = JPAUtil.getEntityManager();
-			String hql="INSERT INTO LugarTuristicoJPA(codigoLugarTuristico, nombre , descripcion , urlImagen1,"
-					+ " urlImagen2 , urlImagen3 , precioXpersona , insertadoPor , fechaInsert ,"
-					+ " calificacionEstrellas , habilitadoODeshabilitado , climaTour)"
-					
-					+ " SELECT codigoLugarTuristico, nombre , descripcion , urlImagen1, " 
-					+ " urlImagen2 , urlImagen3 , precioXpersona , insertadoPor , fechaInsert , " 
-					+ " calificacionEstrellas , habilitadoODeshabilitado , climaTour "
-					+ " FROM LugarTuristicoJPA ";
-			
+			String hql ="SELECT COUNT(a) FROM LugarTuristicoJPA a " +
+						" WHERE a.codigoLugarTuristico = :p_codigoTour ";
 			
 			Query q = manager.createQuery(hql);
-			manager.getTransaction().begin(); 
-			manager.getTransaction().commit();
+			q.setParameter("p_codigoTour", codigo );
+			
+			tourExistente = (Long) q.getSingleResult();
 			
 		} catch (Exception e) {
-			manager.getTransaction().rollback();
 			e.printStackTrace();
-			log.error("Error al insertarLugarTuristicos " + e);
+			log.error("Error al realizar validarTourExist  : " + e);
 		}finally {
 			manager.close();
 		}
 		
-		return registros;
+		return tourExistente;
 	}
-
 
 
 }

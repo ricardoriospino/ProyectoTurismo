@@ -41,7 +41,7 @@ public class JunitCreacionJPA {
 
 	
 	@Test
-	@Ignore
+	
 	public void ju1crearRolPermiso() {
 		
 		log.info("ini : ju1crearRolPermiso()");
@@ -111,7 +111,7 @@ public class JunitCreacionJPA {
 	
 	
 	@Test
-	@Ignore
+	
 	public void ju2crearRolMenu() {
 		log.info("ini : ju2crearRolMenu()");
 		
@@ -219,7 +219,7 @@ public class JunitCreacionJPA {
 	
 	
 	@Test
-	@Ignore
+	
 	public void ju3crearIncluye() {
 		log.info("ini : ju3crearIncluye()");
 		
@@ -368,7 +368,7 @@ public class JunitCreacionJPA {
 	}
 	
 	@Test
-	@Ignore
+	
 	public void ju4crearUsuario() {
 		log.info("ini : ju4crearUsuario()");
 		
@@ -421,7 +421,7 @@ public class JunitCreacionJPA {
 	}
 	
 	@Test
-	@Ignore
+	
 	public void ju5crearCompra() {
 		log.info("ini : ju5crearCompra()");
 		

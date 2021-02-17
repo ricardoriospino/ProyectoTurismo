@@ -1,7 +1,6 @@
-<%@page import="proyectoServicio.demo.jpa.entity.LugarTuristicoJPA"%>
+
 <%@page import="proyectoServicio.demo.jpa.entity.UsuarioJPA"%>
-<%@ page import = "java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -70,7 +69,18 @@ if(!valido){
 						<div class="card-header">
 							<h3 class="mb-0">Ingrese datos Tour</h3>
 						</div>
-		
+						
+						<c:if test="${error == true}">
+							<div class="alert alert-danger">
+								<strong>Error!</strong> Codigo Tour ya existe, Crear otro Codigo Tour.
+							</div>
+						</c:if>
+						
+						<c:if test="${actualizado == true}">
+							<div class="alert alert-success" role="alert">
+								${msg}
+							</div>
+						</c:if>
 						<c:if test="${ingresado == true}">
 							<div class="alert alert-success" role="alert">
 								${msg}
@@ -166,22 +176,22 @@ if(!valido){
 									</div>
 									
 									 	 
-<!-- 										<div class="form-group row"> -->
-<!-- 											<label class="col-lg-3 col-form-label form-control-label"> Habilitado o Deshabilitado </label> -->
-<!-- 											  <div class="form-check form-check-inline"> -->
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label form-control-label"> Habilitado o Deshabilitado </label>
+											  <div class="form-check form-check-inline">
 												  
-<!-- 												  <input class="form-check-input" type="radio" -->
-<!-- 												   name="habilitado_o_deshabilitado" id="inlineRadio1" value="habilitado" required> -->
-<!-- 												  <label class="form-check-label" for="inlineRadio1">Habilitado</label> -->
+												  <input class="form-check-input" type="radio"
+												   name="habilitado_o_deshabilitado" id="inlineRadio1" value="H"  checked="checked">
+												  <label class="form-check-label" for="inlineRadio1">Habilitado</label>
+												  &nbsp;&nbsp;&nbsp;
+												  <input class="form-check-input" type="radio"   
+												  name="habilitado_o_deshabilitado" id="inlineRadio2" value="D" >		 
+												  <label class="form-check-label" for="inlineRadio2">Deshabilitado</label>
 												  
-<!-- 												  <input class="form-check-input" type="radio"    -->
-<!-- 												  name="habilitado_o_deshabilitado" id="inlineRadio2" value="deshabilitado" required>		  -->
-<!-- 												  <label class="form-check-label" for="inlineRadio2">Deshabilitado</label> -->
-												  
-<!-- 												  <div class="valid-feedback">Dato ingresado correctamente</div> -->
-<!-- 											    <div class="invalid-feedback">Seleccione un campo</div> -->
-<!-- 											</div> -->
-<!-- 									   </div> -->
+												  <div class="valid-feedback">Dato ingresado correctamente</div>
+											    <div class="invalid-feedback">Seleccione un campo</div>
+											</div>
+									   </div>
 								   
 								   
 								   <div class="form-group row">

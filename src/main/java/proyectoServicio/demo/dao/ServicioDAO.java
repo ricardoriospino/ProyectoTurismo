@@ -11,5 +11,7 @@ public interface ServicioDAO {
 	public ServicioJPA getServicioByTipoServicio (String tipoServicio);
 	
 	public List<ServicioJPA> listarServiciosTour (int idTour);
+	
+	public List<ServicioJPA> listarServicios ();
 
 }

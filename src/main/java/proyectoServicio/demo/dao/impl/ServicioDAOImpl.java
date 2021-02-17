@@ -67,21 +67,42 @@ public class ServicioDAOImpl implements ServicioDAO {
 						"FROM ServicioJPA AS a ,IncluyeJPA AS b " +
 						"WHERE a.idServicio = b.servicio.idServicio " +
 						"AND b.lugarTuristico.idLugarTuristico = :p_idTour ");	
-		log.debug("el hql trae" + hql);
+			log.debug("el hql trae" + hql);
 
-			
 			Query q = manager.createQuery(hql);
 			q.setParameter("p_idTour", idTour);
 			
-			
 			lst = (List<ServicioJPA>) q.getResultList();
-			//lst.add(servicio);
-			
+				
 		} catch (NoResultException e) {
 			e.printStackTrace();
-			log.error("Error al realizar la validacion : " + e);
+			log.error("Error al realizar la listarServiciosTour : " + e);
 		}finally {
 			manager.close();
+		}
+		return lst;
+	}
+
+	@Override
+	public List<ServicioJPA> listarServicios() {
+		
+		EntityManager manager = null;
+		List<ServicioJPA>lst = new ArrayList<ServicioJPA>();
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql =("SELECT a FROM ServicioJPA a  ");
+			
+			Query q = manager.createQuery(hql);
+			lst = (List<ServicioJPA>) q.getResultList();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error al realizar la listarServicios : " + e);
+			
+		}finally {
+			manager.close();
+		
 		}
 		return lst;
 	}

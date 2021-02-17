@@ -34,15 +34,11 @@ public class LugarTuristicoServiceImpl implements LugarTuristicoService {
 	}
 
 	@Override
-	public LugarTuristicoJPA obtenerLugaresTuristicosByid(int idLugarTuristico) {
+	public Long validarTourExist(String codigo) {
 		
-		return lugarTuristicoDAO.obtenerLugaresTuristicosByid(idLugarTuristico);
+		return lugarTuristicoDAO.validarTourExist(codigo);
 	}
 
-	@Override
-	public int insertarLugarTuristico(LugarTuristicoJPA lugarTuristico) {
-		
-		return lugarTuristicoDAO.insertarLugarTuristico(lugarTuristico);
-	}
+	
 
 }
