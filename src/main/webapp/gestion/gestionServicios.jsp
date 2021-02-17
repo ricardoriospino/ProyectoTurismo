@@ -52,97 +52,101 @@ if(!valido){
 	            <jsp:include page="../navbarPrincipal.jsp"/>
 	        	<!-- fin:navbar principal -->
 	        	
-	        	<div class="container-fluid ">
-					<h3 class="text-center ">Gestion Servicio Tour </h3>
-					<hr>
-					
-					<c:if test="${actualizado == true}">
-							<div class="alert alert-success" role="alert">
-								${msg}
-							</div>
-						</c:if>
-					<table id="tblTour" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">
-			
-						<thead>
-							<tr>
-								<th>ID </th>
-								<th>CODIGO TOUR</th>
-								<th>NOMBRE</th>
-								<th>SELECCIONAR</th>	
-							</tr>
-						</thead>
-						<tbody>
+	        	<div class="col-md-8 offset-md-2">
+					<span class="anchor" id="formUserEdit"></span>
+	        	
+		        	<div class="container-fluid  border-left-primary ">
+						<h3 class="text-center ">Gestion Servicio Tour </h3>
+						<hr>
 						
-							<c:forEach var="varTour" items="${lstLugaresTuristicos}">
+						<c:if test="${actualizado == true}">
+								<div class="alert alert-success" role="alert">
+									${msg}
+								</div>
+							</c:if>
+						<table id="tblTour" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">
+				
+							<thead>
 								<tr>
-									<td>${varTour.idLugarTuristico}</td>
-									<td>${varTour.codigoLugarTuristico}</td>
-									<td>${varTour.nombre}</td>
-									<td><a href="<%=request.getContextPath()%>/ServletGestionServicios?p_accion=seleccionar&idTour=${varTour.idLugarTuristico}"> 
-										<button type="button" class="btn btn-dataTable "><i class="fa fa-check-square"></i></button></a>
-									</td>
-								</tr>							
-							</c:forEach>
-						</tbody>	
-					</table>
-				</div> 
-				<br><br>
-	        	<div class="container-fluid ">
-	        		<span class="anchor" id="formUserEdit"></span>
-	        		
-	        		<div class="card card-outline-secondary">
-						<div class="card-header">
-							<h5 class="mb-0">Datos seleccionados Tour</h5>
-							<form>
-								<div class="form-row">
-									<div class="col-md-2 mb-3">
-										<label for="validationDefault01">id Tour</label> <input
-											type="text" class="form-control" id="validationDefault01"
-											 disabled="disabled" value="${tourSeleccionado.idLugarTuristico}" required>
-									</div>
-									<div class="col-md-5 mb-3">
-										<label for="validationDefault02">Codigo Tour</label> <input
-											type="text" class="form-control" id="validationDefault02"
-											 disabled="disabled" value="${tourSeleccionado.codigoLugarTuristico}" required>
-									</div>
-									<div class="col-md-5 mb-3">
-										<label for="validationDefault02">Nombre Tour</label> <input
-											type="text" class="form-control" id="validationDefault02"
-											 disabled="disabled" value="${tourSeleccionado.nombre}" required>
-									</div>
-								</div>					
-							</form>				
-						</div>				
-					</div>
-	        	</div> 	
-	        	<br>
-	        	<div class="container-fluid ">
-	        		
-	        		<div class="card card-outline-secondary">
-						<div class="card-header">
-							<h5 class="mb-0">Servicios Incluidos Tour</h5>
-							<br>
-								<c:forEach var="lstServicios" items="${lstServicios}">
-									
-							        <div class="form-check checkbox-xl">
-									  <input class="form-check-input" type="checkbox" value="" id="checkbox-3">
-									  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
-									</div>
-						        </c:forEach>
-						        
-								<div id=botonSiguiente class="container col-md-5 ">	
-									<input type="reset" class="btn btn-secondary" value="cancelar">
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<a href="<%=request.getContextPath()%>" class="btn btn-primary">Guardar</a>
-								</div>	
-	        			</div>
-	        		</div>
-	        	</div>
-        	</div>
-        	<br><br>
-        		<!--ini :footer -->
-				<jsp:include page="../pages/footer.jsp"/>
-				<!--fin :footer -->
+									<th>ID </th>
+									<th>CODIGO TOUR</th>
+									<th>NOMBRE</th>
+									<th>SELECCIONAR</th>	
+								</tr>
+							</thead>
+							<tbody>
+							
+								<c:forEach var="varTour" items="${lstLugaresTuristicos}">
+									<tr>
+										<td>${varTour.idLugarTuristico}</td>
+										<td>${varTour.codigoLugarTuristico}</td>
+										<td>${varTour.nombre}</td>
+										<td><a href="<%=request.getContextPath()%>/ServletGestionServicios?p_accion=seleccionar&idTour=${varTour.idLugarTuristico}"> 
+											<button type="button" class="btn btn-dataTable "><i class="fa fa-check-square"></i></button></a>
+										</td>
+									</tr>							
+								</c:forEach>
+							</tbody>	
+						</table>
+					</div> 
+					<br><br>
+		        	<div class="container-fluid  border-left-primary">
+		        		<span class="anchor" id="formUserEdit"></span>
+		        		
+		        		<div class="card card-outline-secondary">
+							<div class="card-header">
+								<h5 class="mb-0">Datos seleccionados Tour</h5>
+								<form>
+									<div class="form-row">
+										<div class="col-md-2 mb-3">
+											<label for="validationDefault01">id Tour</label> <input
+												type="text" class="form-control" id="validationDefault01"
+												 disabled="disabled" value="${tourSeleccionado.idLugarTuristico}" required>
+										</div>
+										<div class="col-md-5 mb-3">
+											<label for="validationDefault02">Codigo Tour</label> <input
+												type="text" class="form-control" id="validationDefault02"
+												 disabled="disabled" value="${tourSeleccionado.codigoLugarTuristico}" required>
+										</div>
+										<div class="col-md-5 mb-3">
+											<label for="validationDefault02">Nombre Tour</label> <input
+												type="text" class="form-control" id="validationDefault02"
+												 disabled="disabled" value="${tourSeleccionado.nombre}" required>
+										</div>
+									</div>					
+								</form>				
+							</div>				
+						</div>
+		        	</div> 	
+	        		<br>
+		        	<div class="container-fluid  border-left-primary ">
+		        		
+		        		<div class="card card-outline-secondary">
+							<div class="card-header">
+								<h5 class="mb-0">Servicios Incluidos Tour</h5>
+								<br>
+									<c:forEach var="lstServicios" items="${lstServicios}">
+										
+								        <div class="form-check checkbox-xl">
+										  <input class="form-check-input" type="checkbox" value="" id="checkbox-3">
+										  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
+										</div>
+							        </c:forEach>
+							        
+									<div id=botonSiguiente class="container col-md-5 ">	
+										<input type="reset" class="btn btn-secondary" value="cancelar">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="<%=request.getContextPath()%>" class="btn btn-primary">Guardar</a>
+									</div>	
+		        			</div>
+		        		</div>
+		        	</div>
+        		</div>
+	        	<br><br>
+	        		<!--ini :footer -->
+					<jsp:include page="../pages/footer.jsp"/>
+					<!--fin :footer -->
+			</div>
 		</div>
 	</div>
 		<!--ini:Js -->

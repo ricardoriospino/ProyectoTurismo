@@ -63,7 +63,7 @@ if(!valido){
 	        	
 	        	<div class="col-md-8 offset-md-2">
 					<span class="anchor" id="formUserEdit"></span>
-					<hr class="my-5">
+					
 		
 					<div class="card card-outline-secondary">
 						<div class="card-header">
@@ -87,7 +87,7 @@ if(!valido){
 							</div>
 						</c:if>
 		
-						<div class="card shadow-lg p-3 mb-5 bg-white">
+						<div class="card shadow-lg p-3 mb-5 bg-white border-left-primary ">
 							<div class="card-header">
 								<form class="needs-validation " role="form" autocomplete="off"
 									action="ServletInsertUpdateTour" method="post" novalidate>
