@@ -78,7 +78,7 @@
                                         <a class="small" href="forgot-password.html">Olvidaste tu contraseña?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Crear usuario!</a>
+                                        <a class="small" href="register.jsp">Crear usuario!</a>
                                     </div>
                                 </div>
                             </div>

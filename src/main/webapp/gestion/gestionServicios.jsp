@@ -132,12 +132,13 @@ if(!valido){
 										  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
 										</div>
 							        </c:forEach>
-							        
+							        <br>
 									<div id=botonSiguiente class="container col-md-5 ">	
 										<input type="reset" class="btn btn-secondary" value="cancelar">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										
 										<a href="<%=request.getContextPath()%>" class="btn btn-primary">Guardar</a>
-									</div>	
+									</div>
+									<br><br><br>
 		        			</div>
 		        		</div>
 		        	</div>

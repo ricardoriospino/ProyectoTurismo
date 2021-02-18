@@ -176,6 +176,9 @@ if(!valido){
                             </div>
                         </li>
                         
+                        <li class="nav-item dropdown no-arrow">    
+                        	<a class="nav-link text-dark  font-weight-bold " aria-haspopup="true" href="register.jsp" role="button">Registrate</a>
+                        </li>
 
                         <!-- Usuario Info -->
                         <li class="nav-item dropdown no-arrow">
