@@ -72,7 +72,7 @@ if(!valido){
 					</c:if>
 					<div id=botonAgregar class="container text-left text-left">
 						<a href="<%=request.getContextPath()%>/ServletRol" class="btn btn-success">Agregar Nuevo Usuario</a>
-						<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTATOUR0002" class="btn btn-success">Exportar a Excel</a>
+						<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTAUSU0002" class="btn btn-success">Exportar a Excel</a>
 					</div>
 					<br>
 					<table id="tblUsuarios" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">

@@ -36,17 +36,7 @@ else {valido = true;}
 if(!valido){
 	response.sendRedirect("login.jsp");
 }
-
-
-
 %>
-
-<%
-
-(new java.util.Date()).toLocaleString();
-
-%>
-
 
 	<div id="wrapper">
 		
@@ -61,18 +51,18 @@ if(!valido){
 	            <jsp:include page="../navbarPrincipal.jsp"/>
 	        	<!-- fin:navbar principal -->
 	        	
-	        	<div class="col-md-8 offset-md-2">
+	        	<div class="col-md-10 offset-md-1">
 					<span class="anchor" id="formUserEdit"></span>
 					
 		
 					<div class="card card-outline-secondary">
 						<div class="card-header">
-							<h3 class="mb-0">Ingrese datos Tour</h3>
+							<h3 class="mb-0">Ingrese datos Paquete Turistico</h3>
 						</div>
 						
 						<c:if test="${error == true}">
 							<div class="alert alert-danger">
-								<strong>Error!</strong> Codigo Tour ya existe, Crear otro Codigo Tour.
+								<strong>Error!</strong> Codigo Paquete Turistico ya existe, Crear otro Codigo Paquete Turistico .
 							</div>
 						</c:if>
 						
@@ -96,7 +86,7 @@ if(!valido){
 									<input type="hidden" name="hdnIdLugarTuristico" value="${idTour}"/><!-- es una variable oculta o un comodin -->
 									
 									<div class="form-group row">
-										<label class="col-lg-3 col-form-label form-control-label">Codigo Tour</label>
+										<label class="col-lg-3 col-form-label form-control-label">Codigo Paquete Tour</label>
 										<div class="col-lg-9">
 											<input class="form-control" type="text" value="<c:out value='${objTour.codigoLugarTuristico}'/>"
 												name="codigo_lugar_turistico" required>
@@ -116,7 +106,7 @@ if(!valido){
 									</div>
 
 									 <div class="mb-1 form-group row">
-										  <label  class="form-label">Descripción Tour</label>
+										  <label  class="form-label">Descripción Paquete Turistico</label>
 										  <textarea class="form-control" rows="5" id="comment"  name="descripcion" required><c:out value='${objTour.descripcion}'/></textarea>
 											<div class="valid-feedback">Dato ingresado correctamente</div>
 									    <div class="invalid-feedback">Escriba La Descripción</div>
@@ -154,7 +144,7 @@ if(!valido){
 									</div>
 									
 									<div class="form-group row">
-										<label class="col-lg-3 col-form-label form-control-label">Precio Tour</label>
+										<label class="col-lg-3 col-form-label form-control-label">Precio Paquete turistico</label>
 										<div class="col-lg-9">
 											<input class="form-control" type="text" value="<c:out value='${objTour.precioXpersona}'/>"
 												name="precio_x_persona" required placeholder="S/. 00.00">

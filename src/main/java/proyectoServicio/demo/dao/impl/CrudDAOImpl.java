@@ -13,13 +13,13 @@ public class CrudDAOImpl implements CrudDAO {
 	private static final Logger log= LogManager.getLogger(CrudDAOImpl.class);
 
 	@Override
-	public void insertar(Object objeto) {
+	public int insertar(Object objeto) {
 		
 			log.info("ini:  insertar");
 		
 		// obtiene una cadena conexion de BD 
 				EntityManager manager = null;
-				
+				int exito = 1;
 				try {
 					manager = JPAUtil.getEntityManager();
 					manager.getTransaction().begin(); 
@@ -30,21 +30,24 @@ public class CrudDAOImpl implements CrudDAO {
 				} catch (Exception e) {
 					manager.getTransaction().rollback();
 					e.printStackTrace();
+					exito = 0;
 					
 				}finally {
 					manager.close();
 				}
 				
 			log.info("fin:  insertar");
+			return exito;
 			}
 	
 
 	@Override
-	public void actualizar(Object objeto) {
+	public int actualizar(Object objeto) {
 		
 		log.info("fin:  actualizar");
 		
 		EntityManager manager = null;
+		int exito = 1;
 		try {
 			
 			manager = JPAUtil.getEntityManager();
@@ -56,13 +59,14 @@ public class CrudDAOImpl implements CrudDAO {
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 			log.error("Error al actualizar: " + e);
+			exito = 0;
 			
 		}finally {
 			manager.close();
 		}
 		
 		log.info("fin:  actualizar");
-		
+		return exito;
 	}
 
 

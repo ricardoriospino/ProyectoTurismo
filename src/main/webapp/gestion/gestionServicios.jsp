@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-	<title>Gestión Servicios</title>
+	<title>Gestionar Servicio de Paquete Turistico</title>
 	
 	<!-- importar libreria a la clase -->
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -52,18 +52,18 @@ if(!valido){
 	            <jsp:include page="../navbarPrincipal.jsp"/>
 	        	<!-- fin:navbar principal -->
 	        	
-	        	<div class="col-md-8 offset-md-2">
+	        	<div class="col-md-12 ">
 					<span class="anchor" id="formUserEdit"></span>
 	        	
 		        	<div class="container-fluid  border-left-primary ">
-						<h3 class="text-center ">Gestion Servicio Tour </h3>
+						<h3 class="text-center ">Gestión Servicio de Paquete Turistico </h3>
 						<hr>
 						
-						<c:if test="${actualizado == true}">
+						<c:if test="${ingresado == true}">
 								<div class="alert alert-success" role="alert">
 									${msg}
 								</div>
-							</c:if>
+						</c:if>
 						<table id="tblTour" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">
 				
 							<thead>
@@ -95,7 +95,7 @@ if(!valido){
 		        		
 		        		<div class="card card-outline-secondary">
 							<div class="card-header">
-								<h5 class="mb-0">Datos seleccionados Tour</h5>
+								<h5 class="mb-0">Datos seleccionados Paquete Turistico</h5>
 								<form>
 									<div class="form-row">
 										<div class="col-md-2 mb-3">
@@ -103,43 +103,82 @@ if(!valido){
 												type="text" class="form-control" id="validationDefault01"
 												 disabled="disabled" value="${tourSeleccionado.idLugarTuristico}" required>
 										</div>
-										<div class="col-md-5 mb-3">
+										<div class="col-md-2 mb-3">
 											<label for="validationDefault02">Codigo Tour</label> <input
 												type="text" class="form-control" id="validationDefault02"
 												 disabled="disabled" value="${tourSeleccionado.codigoLugarTuristico}" required>
 										</div>
 										<div class="col-md-5 mb-3">
-											<label for="validationDefault02">Nombre Tour</label> <input
+											<label for="validationDefault02">Nombre Paquete Tour</label> <input
 												type="text" class="form-control" id="validationDefault02"
 												 disabled="disabled" value="${tourSeleccionado.nombre}" required>
+										</div>
+										<div class="col-md-3 mb-3">
+											<label for="validationDefault02">Precio S/.</label> <input
+												type="text" class="form-control" id="validationDefault02"
+												 disabled="disabled"   value= "${tourSeleccionado.precioXpersona}" required>
 										</div>
 									</div>					
 								</form>				
 							</div>				
-						</div>
+						</div> 
 		        	</div> 	
 	        		<br>
 		        	<div class="container-fluid  border-left-primary ">
 		        		
 		        		<div class="card card-outline-secondary">
-							<div class="card-header">
-								<h5 class="mb-0">Servicios Incluidos Tour</h5>
-								<br>
-									<c:forEach var="lstServicios" items="${lstServicios}">
+		        		
+		        			<form  autocomplete="off"
+									action="ServletGestionServicios" method="post" novalidate>
+								<div class="card-header">
+									<h5 class="mb-0">Servicios Incluidos Paquete Turistico</h5>
+									<br>
 										
-								        <div class="form-check checkbox-xl">
-										  <input class="form-check-input" type="checkbox" value="" id="checkbox-3">
-										  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
-										</div>
-							        </c:forEach>
-							        <br>
-									<div id=botonSiguiente class="container col-md-5 ">	
-										<input type="reset" class="btn btn-secondary" value="cancelar">
+											<%int contador=0;%>
+											
+												<c:forEach var="lstServicios" items="${lstServicios}">
+												<td><%=++contador%></td>
+												<div class="container">
+													<div class="row ">
+														<div class="col-md-4">
+													        <div class="form-check checkbox-xl">
+															  <input class="top-checkbox"  type="checkbox" id="idCheck<%=contador%>" value="<c:out value='${lstServicios.idServicio}'/>" name="chkServicio" /> 
+															  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
+															</div>
+														</div>
+
+															<div class="col-md-4 offset-md-1 form-inline">
+																<div class="input-group mb-3">
+																	<div class="input-group-prepend">
+																		 <span class="input-group-text">Costo S/.</span>
+																	</div>
+																	<input type="text" id="cajaCosto<%=contador%>" class="form-control"   name="costoServicio"  disabled="disabled" value="<c:out value='${lstServicios.costo}'/>" >
+						
+																	<div class="input-group-append">
+																				    
+																	</div>
+																</div>		
+														    </div>
+														    <script type="text/javascript" >
+
+																document.getElementById("idCheck<%=contador%>").onchange = function() {
+																    document.getElementById("cajaCosto<%=contador%>").disabled = !this.checked;
+																};	
+															</script>
+													</div>
+												</div>	
+									
+										        </c:forEach>
+										     
+									        <br>
+											<div id=botonSiguiente class="container col-md-5 ">	
+												<input type="reset" class="btn btn-secondary" value="cancelar">
+												<input type="submit" class="btn btn-primary" value="Guardar" >
+											</div>
+											<br><br><br>
 										
-										<a href="<%=request.getContextPath()%>" class="btn btn-primary">Guardar</a>
-									</div>
-									<br><br><br>
-		        			</div>
+			        			</div>
+		        			</form>
 		        		</div>
 		        	</div>
         		</div>
@@ -163,10 +202,13 @@ if(!valido){
 			"pageLength": 5,
 			"columnDefs": [
 			       {"className": "dt-center", "targets": "_all"}
-			    ]
+		]
+			    
 		});
 	});
+
 </script> 
+
 </html>
 
 				    	

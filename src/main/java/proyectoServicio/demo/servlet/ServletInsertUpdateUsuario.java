@@ -74,7 +74,6 @@ public class ServletInsertUpdateUsuario extends HttpServlet {
 				  + " clave : " + claveForm + " id Rol : " + idRolForm);
 		
 		CRUDService serviceCrud = new CRUDServiceImpl();
-		int estado = 0;
 		UsuarioJPA usuario = null;
 		String mensaje="";
 		
@@ -86,12 +85,11 @@ public class ServletInsertUpdateUsuario extends HttpServlet {
 		
 		if("insert".equals(accion)) {
 			
-			estado = 1;
-			if(validarUsuario == 0L && estado == 1) {
-				
-				usuario = new UsuarioJPA(nombreForm, apellidoForm, usuarioForm, claveForm,  idRolForm);
-				serviceCrud.insertar(usuario);
-				
+			usuario = new UsuarioJPA(nombreForm, apellidoForm, usuarioForm, claveForm,  idRolForm);
+			int bandera = serviceCrud.insertar(usuario);
+			
+			if(validarUsuario == 0L && bandera == 1) {
+
 				mensaje = "<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";
 					
 				request.setAttribute("ingresado", true);
@@ -109,14 +107,12 @@ public class ServletInsertUpdateUsuario extends HttpServlet {
 			
 		}else if("update".equals(accion)) {
 			
-			estado = 1;
+			String idUsuario = request.getParameter("hdnIdUsuario");
+			usuario = new UsuarioJPA(Integer.valueOf(idUsuario), nombreForm, apellidoForm, usuarioForm, claveForm, idRolForm);
+			int bandera = serviceCrud.actualizar(usuario);
 			
-			if( estado == 1) {
-	
-				String idUsuario = request.getParameter("hdnIdUsuario");
-				usuario = new UsuarioJPA(Integer.valueOf(idUsuario), nombreForm, apellidoForm, usuarioForm, claveForm, idRolForm);
-				serviceCrud.actualizar(usuario);
-				
+			if( bandera == 1) {
+
 				mensaje ="<strong>Actualizado!</strong> Datos Actualizados  la base de datos.";
 				request.setAttribute("actualizado", true);
 				request.setAttribute("msg", mensaje);
@@ -126,8 +122,7 @@ public class ServletInsertUpdateUsuario extends HttpServlet {
 				
 				request.setAttribute("error",true);
 				log.debug("error true");
-				
-				String idUsuario = request.getParameter("hdnIdUsuario");	
+
 				UsuarioService service = new UsuarioServiceImpl();
 				UsuarioJPA usuarioById = service.obtenerUsuarioById(Integer.valueOf(idUsuario));
 				request.setAttribute("objUsuario", usuarioById  );

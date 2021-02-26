@@ -239,12 +239,12 @@ public class TestUnitarioCreaciondeJpa {
 			
 			MenuJPA menu1 = new MenuJPA();
 			menu1.setCodigoMenu("001");
-			menu1.setMenu("Gestionar Lugares Turisticos");
+			menu1.setMenu("Gestionar Paquetes Turisticos");
 			menu1.setUrlMenu("/ServletListarTourForGestion");
 			
 			MenuJPA menu2 = new MenuJPA();
 			menu2.setCodigoMenu("002");
-			menu2.setMenu("Gestionar Servicio");
+			menu2.setMenu("Gestionar Servicio de Paquete Turistico");
 			menu2.setUrlMenu("/ServletGestionServicios?p_accion=inicioGestionServicios");
 			
 			MenuJPA menu3 = new MenuJPA();
@@ -255,12 +255,12 @@ public class TestUnitarioCreaciondeJpa {
 			MenuJPA menu4 = new MenuJPA();
 			menu4.setCodigoMenu("004");
 			menu4.setMenu("Ver Lugares Turisticos");
-			menu4.setUrlMenu("/ServletLugaresTuristicos");
+			menu4.setUrlMenu("/ServletListarLugaresTuristicos");
 			
 			MenuJPA menu5 = new MenuJPA();
 			menu5.setCodigoMenu("005");
-			menu5.setMenu("Comprar Boletos Turisticos");
-			menu5.setUrlMenu("/ServletComprarBoletosTuristicos");
+			menu5.setMenu("Comprar Paquete Turistico");
+			menu5.setUrlMenu("/ServletDatosVentaPaquete");
 			
 			MenuJPA menu6 = new MenuJPA();
 			menu6.setCodigoMenu("006");

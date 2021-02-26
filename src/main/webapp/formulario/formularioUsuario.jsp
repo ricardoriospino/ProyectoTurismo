@@ -48,7 +48,7 @@ if(!valido){
 	            <jsp:include page="../navbarPrincipal.jsp"/>
 	        	<!-- fin:navbar principal -->
 	        	
-	        	<div class="col-md-8 offset-md-2">
+	        	<div class="col-md-10 offset-md-1">
 					<span class="anchor" id="formUserEdit"></span>
 					
 		

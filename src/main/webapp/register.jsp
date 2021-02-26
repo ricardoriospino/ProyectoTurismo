@@ -76,7 +76,7 @@
                                 <a class="small" href="forgot-password.html">Olvido su Contraseña?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Ya tiene una cuenta? Acesso!</a>
+                                <a class="small" href="<%=request.getContextPath()%>/login.jsp"> Ya tiene una cuenta? Acesso!</a>
                             </div>
                         </div>
                     </div>

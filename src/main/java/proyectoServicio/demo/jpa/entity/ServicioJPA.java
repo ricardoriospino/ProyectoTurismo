@@ -24,12 +24,24 @@ public class ServicioJPA implements Serializable {
 	@Column (name="nombre_servicio", nullable=false, length= 50)
 	private String nombreServicio;
 	
+	// extra 
+	private double costo;
+	
 	public int getIdServicio() {
 		return idServicio;
 	}
 
 	public void setIdServicio(int idServicio) {
 		this.idServicio = idServicio;
+	}
+
+	// comodin 
+	public double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
 
 	public String getCodigo_servicio() {

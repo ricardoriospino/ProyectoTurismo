@@ -58,7 +58,7 @@ if(!valido){
 	        	<!-- fin:navbar principal -->
 	        	
 	        	<div class="container-fluid ">
-					<h3 class="text-center ">Listado de Lugares Turísticos </h3>
+					<h3 class="text-center ">Listado de Paquetes Turisticos </h3>
 					<hr>			
 					<c:if test="${eliminado == true}">
 						<div class="alert alert-success" role="alert">
@@ -66,8 +66,8 @@ if(!valido){
 						</div>
 					</c:if>
 					<div id=botonAgregar class="container text-left text-left">
-						<a href="<%=request.getContextPath()%>/ServletTour" class="btn btn-success">Agregar Nuevo lugar</a>
-						<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTATOUR0002" class="btn btn-success">Exportar a Excel</a>
+						<a href="<%=request.getContextPath()%>/ServletTour" class="btn btn-success">Agregar Nuevo Paquete Turistico</a>
+						<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTATOUR0001" class="btn btn-success">Exportar a Excel</a>
 					</div>
 					<br>
 					<table id="tblTour" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">

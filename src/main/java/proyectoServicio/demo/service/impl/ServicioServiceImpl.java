@@ -1,6 +1,7 @@
 package proyectoServicio.demo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import proyectoServicio.demo.dao.ServicioDAO;
 import proyectoServicio.demo.dao.impl.ServicioDAOImpl;
@@ -30,10 +31,16 @@ public class ServicioServiceImpl implements ServicioService {
 		
 		return servicioDAO.listarServiciosTour(idTour);
 	}
+	
 	@Override
-	public List<ServicioJPA> listarServicios() {
+	public int eliminarServicios(int idTour) {
 		
-		return servicioDAO.listarServicios();
+		return  servicioDAO.eliminarServicios(idTour);
+	}
+	@Override
+	public List<Map<String, Object>> listarServicios() {
+		
+		return  servicioDAO.listarServicios();
 	}
 
 }

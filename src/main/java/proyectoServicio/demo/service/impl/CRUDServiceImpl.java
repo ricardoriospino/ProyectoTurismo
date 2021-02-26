@@ -13,14 +13,14 @@ public class CRUDServiceImpl implements CRUDService {
 	}
 
 	@Override
-	public void insertar(Object objeto) {
-		crudDAO.insertar(objeto);
+	public int insertar(Object objeto) {
+		 return crudDAO.insertar(objeto);
 		
 	}
 
 	@Override
-	public void actualizar(Object objeto) {
-		crudDAO.actualizar(objeto);
+	public int actualizar(Object objeto) {
+		return crudDAO.actualizar(objeto);
 		
 	}
 

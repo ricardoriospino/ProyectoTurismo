@@ -2,6 +2,7 @@ package proyectoServicio.demo.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -83,18 +84,56 @@ public class ServicioDAOImpl implements ServicioDAO {
 		return lst;
 	}
 
+	
+	
+
 	@Override
-	public List<ServicioJPA> listarServicios() {
-		
+	public int eliminarServicios(int idTour) {
 		EntityManager manager = null;
-		List<ServicioJPA>lst = new ArrayList<ServicioJPA>();
+		int exito = 1;
+		
 		
 		try {
 			manager = JPAUtil.getEntityManager();
-			String hql =("SELECT a FROM ServicioJPA a  ");
+			manager.getTransaction().begin(); 
+			String hql =("DELETE FROM IncluyeJPA a WHERE a.lugarTuristico = :p_idTour  ");
+			
 			
 			Query q = manager.createQuery(hql);
-			lst = (List<ServicioJPA>) q.getResultList();
+			q.setParameter("p_idTour", idTour);
+			q.executeUpdate();
+			manager.getTransaction().commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			manager.getTransaction().rollback();
+			log.error("Error al eliminar: " + e);
+			exito = 0;
+		}finally {
+			manager.close();		
+		}
+		return exito;
+	}
+
+	@Override
+	public List<Map<String, Object>> listarServicios() {
+		
+		EntityManager manager = null;
+		//List<ServicioJPA>lista = new ArrayList<ServicioJPA>();
+		List<Map<String,Object >> lst = new ArrayList<Map<String,Object>>();
+		
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			String hql =("SELECT a.idServicio , a.nombreServicio , b.costo FROM ServicioJPA AS a , IncluyeJPA AS b  " +
+						"WHERE a.idServicio = b.servicio.idServicio " );
+			
+			Query q = manager.createQuery(hql);
+			
+			
+		//	List<Map<String,Object >> 
+			
+			lst =(List<Map<String,Object>>) q.getResultList();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +143,7 @@ public class ServicioDAOImpl implements ServicioDAO {
 			manager.close();
 		
 		}
+		
 		return lst;
 	}
 
