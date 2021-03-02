@@ -39,6 +39,12 @@ public class LugarTuristicoServiceImpl implements LugarTuristicoService {
 		return lugarTuristicoDAO.validarTourExist(codigo);
 	}
 
+	@Override
+	public int actualizarPrecioPaquete(int idTour, double costoNuevo) {
+		
+		return lugarTuristicoDAO.actualizarPrecioPaquete(idTour, costoNuevo);
+	}
+
 	
 
 }

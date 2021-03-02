@@ -130,54 +130,71 @@ if(!valido){
 		        		
 		        			<form  autocomplete="off"
 									action="ServletGestionServicios" method="post" novalidate>
-								<div class="card-header">
-									<h5 class="mb-0">Servicios Incluidos Paquete Turistico</h5>
-									<br>
-										
-											<%int contador=0;%>
+								<c:if test="${not empty lstServicios}">
+									<div class="card-header">
+										<h5 class="mb-0">Servicios Incluidos Paquete Turistico</h5>
+										<br>
 											
-												<c:forEach var="lstServicios" items="${lstServicios}">
-												<td><%=++contador%></td>
-												<div class="container">
-													<div class="row ">
-														<div class="col-md-4">
-													        <div class="form-check checkbox-xl">
-															  <input class="top-checkbox"  type="checkbox" id="idCheck<%=contador%>" value="<c:out value='${lstServicios.idServicio}'/>" name="chkServicio" /> 
-															  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
+												<%int contador=0;%>
+												
+													<c:forEach var="lstServicios" items="${lstServicios}">
+													<%++contador;%>
+													<div class="container">
+														<div class="row ">
+															<div class="col-md-4">
+														        <div class="form-check checkbox-xl">
+																  <input class="top-checkbox"  type="checkbox" id="idCheck<%=contador%>" value="<c:out value='${lstServicios.idServicio}'/>" name="chkServicio" /> 
+																  <label class="form-check-label" for="flexCheckDefault"> ${lstServicios.nombreServicio} </label>
+																</div>
 															</div>
-														</div>
-
-															<div class="col-md-4 offset-md-1 form-inline">
-																<div class="input-group mb-3">
-																	<div class="input-group-prepend">
-																		 <span class="input-group-text">Costo S/.</span>
-																	</div>
-																	<input type="text" id="cajaCosto<%=contador%>" class="form-control"   name="costoServicio"  disabled="disabled" value="<c:out value='${lstServicios.costo}'/>" >
-						
-																	<div class="input-group-append">
-																				    
-																	</div>
-																</div>		
-														    </div>
-														    <script type="text/javascript" >
-
+	
+																<div class="col-md-4 offset-md-1 form-inline">
+																	<div class="input-group mb-3">
+																		<div class="input-group-prepend">
+																			 <span class="input-group-text">Costo S/.</span>
+																		</div>
+																		<input type="text" id="cajaCosto<%=contador%>" class="form-control"   name="costoServicio"  disabled="disabled" value="<c:out value='${lstServicios.costo}'/>" >
+							
+																		<div class="input-group-append">
+																					    
+																		</div>
+																	</div>		
+															    </div>
+															    <script type="text/javascript" >
+															    
+															    var costo=document.getElementById("cajaCosto<%=contador%>").value; 
+															    // no check
+														        if(costo==""){
+														        	 document.getElementById("idCheck<%=contador%>").checked=false;
+														        	 document.getElementById("cajaCosto<%=contador%>").disabled = true;
+														        	 // check
+														        }else{
+														        	// marcas check
+														        	 document.getElementById("idCheck<%=contador%>").checked=true;
+														        	// habilitar
+														        	 document.getElementById("cajaCosto<%=contador%>").disabled = false;
+														        }
+																	// check y no check
 																document.getElementById("idCheck<%=contador%>").onchange = function() {
 																    document.getElementById("cajaCosto<%=contador%>").disabled = !this.checked;
-																};	
-															</script>
-													</div>
-												</div>	
-									
-										        </c:forEach>
-										     
-									        <br>
-											<div id=botonSiguiente class="container col-md-5 ">	
-												<input type="reset" class="btn btn-secondary" value="cancelar">
-												<input type="submit" class="btn btn-primary" value="Guardar" >
-											</div>
-											<br><br><br>
+																    document.getElementById("cajaCosto<%=contador%>").value = "";
+																};
+																
+																</script>
+														</div>
+													</div>	
 										
-			        			</div>
+											        </c:forEach>
+											     
+										        <br>
+												<div id=botonSiguiente class="container col-md-5 ">	
+													<input type="reset" class="btn btn-secondary" value="cancelar">
+													<input type="submit" class="btn btn-primary" value="Guardar" >
+												</div>
+												<br><br><br>
+											
+				        			</div>
+			        			</c:if>
 		        			</form>
 		        		</div>
 		        	</div>

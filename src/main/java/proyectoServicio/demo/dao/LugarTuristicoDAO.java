@@ -14,6 +14,8 @@ public interface LugarTuristicoDAO {
 	
 	public Long validarTourExist(String codigo);
 	
+	public int actualizarPrecioPaquete (int idTour, double costoNuevo);
+	
 	
 
 }

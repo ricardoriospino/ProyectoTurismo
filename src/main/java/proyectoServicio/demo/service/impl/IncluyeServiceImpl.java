@@ -22,4 +22,12 @@ public class IncluyeServiceImpl implements IncluyeService {
 		return incluyeDAO.listaCostoServicios();
 	}
 
+	@Override
+	public int eliminarServicios(int idTour) {
+		
+		return incluyeDAO.eliminarServicios(idTour);
+	}
+	
+	
+
 }

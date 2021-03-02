@@ -1,11 +1,11 @@
 package proyectoServicio.demo.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import java.util.stream.DoubleStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,16 +18,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import proyectoServicio.demo.Bean.ServicioBean;
 import proyectoServicio.demo.jpa.entity.IncluyeJPA;
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
-import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 import proyectoServicio.demo.service.CRUDService;
-
+import proyectoServicio.demo.service.IncluyeService;
 import proyectoServicio.demo.service.LugarTuristicoService;
 import proyectoServicio.demo.service.ServicioService;
 import proyectoServicio.demo.service.impl.CRUDServiceImpl;
-
+import proyectoServicio.demo.service.impl.IncluyeServiceImpl;
 import proyectoServicio.demo.service.impl.LugarTuristicoServiceImpl;
 import proyectoServicio.demo.service.impl.ServicioServiceImpl;
 
@@ -62,43 +62,25 @@ public class ServletGestionServicios extends HttpServlet {
 		String accion = request.getParameter("p_accion");
 		LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
 		HttpSession misession = request.getSession(true);  
-
 		
-		List<Map<String,Object >> list = new ArrayList<Map<String,Object>>();	
-		List<UsuarioJPA> listaNueva = new ArrayList<UsuarioJPA>();
-		
-		for (Map<String, Object> map : list) {
-			
-			listaNueva.add((UsuarioJPA) map);
-		}
+		ServicioService serviceServicio = new ServicioServiceImpl();
 
 		if("inicioGestionServicios".equals(accion)) {
 			
 			misession.removeAttribute("tourSeleccionado");
 			List<LugarTuristicoJPA>lstTour = serviceTour.listarLugaresTuristicos();
 			request.setAttribute("lstLugaresTuristicos", lstTour );
-			
-			ServicioService serviceServicio = new ServicioServiceImpl();
 	
-			List<Map<String, Object>> listaUsuario = serviceServicio.listarServicios();
-
-			request.setAttribute("lstServicios", listaUsuario);
-		
-			
 		}else if("seleccionar".equals(accion)) {
 			
 			String idTour = request.getParameter("idTour");
 			
 			LugarTuristicoJPA tour = serviceTour.getLugarTuristicoById(Integer.parseInt(idTour));
 			misession.setAttribute("tourSeleccionado", tour);
-	
-			ServicioService serviceServicio = new ServicioServiceImpl();
-			
-//			IncluyeJPA incluye = new IncluyeJPA();
-//			double costo = incluye.getCosto()  ;
-			
-			List<Map<String,Object >> lista = serviceServicio.listarServicios();
-			request.setAttribute("lstServicios", lista);
+
+			List<ServicioBean> listaNueva = serviceServicio.listarServiciosCostoByTour(Integer.parseInt(idTour));
+
+			request.setAttribute("lstServicios", listaNueva);
 			
 			List<LugarTuristicoJPA>lstTour = serviceTour.listarLugaresTuristicos();
 			request.setAttribute("lstLugaresTuristicos", lstTour );
@@ -131,9 +113,16 @@ public class ServletGestionServicios extends HttpServlet {
 		String[]  costoForm = request.getParameterValues("costoServicio");
 
 		double[] parseCostoForm = Arrays.stream(costoForm).mapToDouble(Double::parseDouble).toArray();
-	
+		double sumaCostos = DoubleStream.of(parseCostoForm).sum(); // suma los costos 
+		int idTour = tour.getIdLugarTuristico();
+		
+		// actualiza el precio
+		LugarTuristicoService lugarTuristicoService = new LugarTuristicoServiceImpl();
+		lugarTuristicoService.actualizarPrecioPaquete(idTour, sumaCostos);
 		
 		// elimininar todo lo corespondiente al paquete turistico
+		IncluyeService incluyeService = new IncluyeServiceImpl();
+		incluyeService.eliminarServicios(idTour);
 
 		for (int a = 0; a < servicioForm.length; a++) {  
 			
@@ -150,6 +139,7 @@ public class ServletGestionServicios extends HttpServlet {
 			inclusion.setServicio(servicio);
 			
 			serviceCrud.insertar(inclusion);
+
 		} 
 
 		String mensaje = "<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";
@@ -157,11 +147,8 @@ public class ServletGestionServicios extends HttpServlet {
 		request.setAttribute("msg", mensaje);
 		
 		LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
-		
-		ServicioService serviceServicio = new ServicioServiceImpl();
-		List<Map<String,Object >> lista = serviceServicio.listarServicios();
-		request.setAttribute("lstServicios", lista);
-
+	
+		misession.removeAttribute("tourSeleccionado");
 		List<LugarTuristicoJPA>lstTour = serviceTour.listarLugaresTuristicos();
 		request.setAttribute("lstLugaresTuristicos", lstTour );
 		
@@ -170,10 +157,6 @@ public class ServletGestionServicios extends HttpServlet {
 		despachador.forward(request, response);		
 		
 		log.info(" fin : ServletGestionServicios - doPost()");
-		
-		
-		
-		
-	}
-		
+
+	}	
 }

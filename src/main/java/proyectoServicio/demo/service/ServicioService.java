@@ -3,6 +3,7 @@ package proyectoServicio.demo.service;
 import java.util.List;
 import java.util.Map;
 
+import proyectoServicio.demo.Bean.ServicioBean;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
 
 public interface ServicioService {
@@ -13,7 +14,7 @@ public interface ServicioService {
 	
 	public List<ServicioJPA> listarServiciosTour (int idTour);
 	
-	public List<Map<String, Object>> listarServicios ();
+	public List<ServicioBean> listarServiciosCostoByTour(int idTour);
 	
-	public int eliminarServicios(int idTour);
+	
 }

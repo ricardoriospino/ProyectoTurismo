@@ -87,53 +87,27 @@ public class ServicioDAOImpl implements ServicioDAO {
 	
 	
 
-	@Override
-	public int eliminarServicios(int idTour) {
-		EntityManager manager = null;
-		int exito = 1;
-		
-		
-		try {
-			manager = JPAUtil.getEntityManager();
-			manager.getTransaction().begin(); 
-			String hql =("DELETE FROM IncluyeJPA a WHERE a.lugarTuristico = :p_idTour  ");
-			
-			
-			Query q = manager.createQuery(hql);
-			q.setParameter("p_idTour", idTour);
-			q.executeUpdate();
-			manager.getTransaction().commit();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			manager.getTransaction().rollback();
-			log.error("Error al eliminar: " + e);
-			exito = 0;
-		}finally {
-			manager.close();		
-		}
-		return exito;
-	}
+	
+
 
 	@Override
-	public List<Map<String, Object>> listarServicios() {
+	public List<Object[]> listarServiciosCostoByTour(int idTour) {
 		
 		EntityManager manager = null;
-		//List<ServicioJPA>lista = new ArrayList<ServicioJPA>();
-		List<Map<String,Object >> lst = new ArrayList<Map<String,Object>>();
+
+		List<Object[]> lst = new ArrayList<Object[]>();
 		
 		
 		try {
 			manager = JPAUtil.getEntityManager();
-			String hql =("SELECT a.idServicio , a.nombreServicio , b.costo FROM ServicioJPA AS a , IncluyeJPA AS b  " +
-						"WHERE a.idServicio = b.servicio.idServicio " );
+			String sql =("SELECT a.id_servicio , a.nombre_servicio , b.costo " +
+					 	 " FROM tb_servicio AS a LEFT JOIN tb_incluye AS b  " +
+						 " ON a.id_servicio = b.id_servicio AND b.id_lugar_turistico = :p_idTour" );
 			
-			Query q = manager.createQuery(hql);
+			Query q = manager.createNativeQuery(sql);
+			q.setParameter("p_idTour", idTour);
 			
-			
-		//	List<Map<String,Object >> 
-			
-			lst =(List<Map<String,Object>>) q.getResultList();
+			lst = (List<Object[]>) q.getResultList();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +119,8 @@ public class ServicioDAOImpl implements ServicioDAO {
 		}
 		
 		return lst;
+		
+		
 	}
 
 }

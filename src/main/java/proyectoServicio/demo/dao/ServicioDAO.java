@@ -13,8 +13,8 @@ public interface ServicioDAO {
 	
 	public List<ServicioJPA> listarServiciosTour (int idTour);
 	
-	public List<Map<String, Object>> listarServicios ();
+	public List<Object[]> listarServiciosCostoByTour(int idTour);
 	
-	public int eliminarServicios (int idTour);
+	
 
 }

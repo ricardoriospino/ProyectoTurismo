@@ -131,49 +131,57 @@ response.sendRedirect("login.jsp");
 			          </div>
 			        </div>
 			        
-			       <input type="hidden" name="hdnLugaresTuristicos" value="${idLugarTuristico}"/><!-- es una variable oculta o un comodin -->
+			       
 			        
-			        <div class="col-md-5">
-				          <p class="tour text-center">Free</p>
-				          <h2>Tour  <c:out value='${objLugarTuristico.nombre}'></c:out></h2>
-				          <p>Servicio código: <c:out value='${objLugarTuristico.codigoLugarTuristico}'></c:out></p>
-	
-		          		<p><b>Puntuación: </b></p>
-				          <c:forEach begin="1" step="1"  end='${objLugarTuristico.calificacionEstrellas}' >
-				          		<span class="fa fa-star checked"></span>
-				          </c:forEach>			          
-				          
-				          
-				          <p class="precio">S/. <c:out value='${objLugarTuristico.precioXpersona}'></c:out> </p>
-				          <p><b>Habilitado/Deshabilitado: </b><c:out value='${objLugarTuristico.habilitadoODeshabilitado}'></c:out></p>
-				          <p><b>Clima: </b><c:out value='${objLugarTuristico.climaTour}'></c:out></p>
-				          <p><b>Servicios: </b></p>
-				        
-					          <c:forEach var="lstServiciosIncluidos" items="${lstServiciosIncluidos}">
-						          <ul class="list-group list-group-flush">
-	
-						            	<li class="list-group-item">${lstServiciosIncluidos.nombreServicio}</li>   
-						          </ul>	
-					          </c:forEach>
-				          
-				          <br />
-				          <label>Cantidad: </label>
-				          <select name="cars" id="cars">
-				            <option value="volvo">1</option>
-				            <option value="saab">2</option>
-				            <option value="mercedes">3</option>
-				            <option value="audi">4</option>
-				            <option value="volvo">5</option>
-				            <option value="saab">6</option>
-				            <option value="mercedes">7</option>
-				            <option value="audi">8</option>
-				            <option value="volvo">9</option>
-				            <option value="saab">10</option>
-				          </select>
-				          <button type="button" class="btn btn-success">
-				            Agregar al carrito
-				          </button>
-			        </div>
+					     
+					        
+					        <div class="col-md-5">
+					        	
+						          <p class="tour text-center">Free</p>
+						          <h2>Tour  <c:out value='${objLugarTuristico.nombre}'></c:out></h2>
+						          <p>Servicio código: <c:out value='${objLugarTuristico.codigoLugarTuristico}'></c:out></p>
+			
+				          		<p><b>Puntuación: </b></p>
+						          <c:forEach begin="1" step="1"  end='${objLugarTuristico.calificacionEstrellas}' >
+						          		<span class="fa fa-star checked"></span>
+						          </c:forEach>			          
+						          
+						          
+						          <p class="precio">S/. <c:out value='${objLugarTuristico.precioXpersona}'></c:out> </p>
+						          <p><b>Habilitado/Deshabilitado: </b><c:out value='${objLugarTuristico.habilitadoODeshabilitado}'></c:out></p>
+						          <p><b>Clima: </b><c:out value='${objLugarTuristico.climaTour}'></c:out></p>
+						          <p><b>Servicios: </b></p>
+						        
+							          <c:forEach var="lstServiciosIncluidos" items="${lstServiciosIncluidos}">
+								          <ul class="list-group list-group-flush">
+			
+								            	<li class="list-group-item">${lstServiciosIncluidos.nombreServicio}</li>   
+								          </ul>	
+							          </c:forEach>
+						          
+						          <br />
+						          
+						          <form autocomplete="off" action="ServletInfoTour"  method="post" novalidate>
+						          	
+							          <input type="hidden" name="hdnLugaresTuristicos" value="${idLugarTuristico}"/><!-- es una variable oculta o un comodin -->
+							          	  
+							          <label>Cantidad: </label>
+							          <select name="cantidad" id="cars">
+							            <option value="1" >1</option>
+							            <option value="2">2</option>
+							            <option value="3">3</option>
+							            <option value="4">4</option>
+							            <option value="5">5</option>
+							            <option value="6">6</option>
+							            <option value="7">7</option>
+							            <option value="8">8</option>
+							            <option value="9">9</option>
+							            <option value="10">10</option>
+							          </select>
+							          	<input type="submit" class="btn btn-primary" value="Agregar al carrito" >
+							         
+						          </form>
+					        </div>
 			      </div>
 			    </div>
         	</div>	

@@ -38,13 +38,13 @@ public class ServletDatosVentaPaquete extends HttpServlet {
 		
 		log.info(" ini : ServletDatosVentaPaquete - doGe()");
 		
-		//String pagina ="/carritoCompra.jsp";
-	//	String accion = request.getParameter("p_accion");
+		String pagina ="/carritoCompra.jsp";
+		String accion = request.getParameter("p_accion");
 		
 		HttpSession misession = request.getSession(true);  
-		
+	
 		RequestDispatcher despachador = null;
-		
+	
 		despachador = request.getRequestDispatcher("/carritoCompra.jsp");
 		despachador.forward(request, response);		
 		

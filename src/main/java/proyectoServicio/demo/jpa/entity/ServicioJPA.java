@@ -25,7 +25,7 @@ public class ServicioJPA implements Serializable {
 	private String nombreServicio;
 	
 	// extra 
-	private double costo;
+	
 	
 	public int getIdServicio() {
 		return idServicio;
@@ -36,17 +36,13 @@ public class ServicioJPA implements Serializable {
 	}
 
 	// comodin 
-	public double getCosto() {
-		return costo;
-	}
-
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
+	
 
 	public String getCodigo_servicio() {
 		return codigo_servicio;
 	}
+
+	
 
 	public void setCodigo_servicio(String codigo_servicio) {
 		this.codigo_servicio = codigo_servicio;

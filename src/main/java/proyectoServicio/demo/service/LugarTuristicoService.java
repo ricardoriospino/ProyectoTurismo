@@ -13,5 +13,7 @@ public interface LugarTuristicoService {
 	public List<LugarTuristicoJPA> listarLugaresTuristicos ();
 	
 	public Long validarTourExist(String codigo);
+	
+	public int actualizarPrecioPaquete (int idTour, double costoNuevo);
 
 }

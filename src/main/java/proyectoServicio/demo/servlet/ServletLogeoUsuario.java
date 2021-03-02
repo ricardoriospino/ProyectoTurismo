@@ -64,15 +64,10 @@ public class ServletLogeoUsuario extends HttpServlet {
 		// verificacion con la base de datos
 		
 		UsuarioService usuarioService = new UsuarioServiceImpl();
-		
-		
-		
+
 		UsuarioJPA usuario = usuarioService.validarUsuarioClave(usuarioForm, claveForm);
-		
-		
-				
+	
 		RequestDispatcher despachador = null;
-		
 		
 		if(usuario!= null) {
 			
@@ -90,9 +85,7 @@ public class ServletLogeoUsuario extends HttpServlet {
 			}else if("E".equals(listar)) {
 				despachador = request.getRequestDispatcher("/index.jsp");
 			}
-			
-			
-			
+
 		}else {
 			request.setAttribute("error", true);
 			despachador = request.getRequestDispatcher("/login.jsp");

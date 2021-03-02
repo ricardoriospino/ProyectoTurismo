@@ -40,5 +40,33 @@ public class IncluyeDAOImpl implements IncluyeDAO {
 		}
 		return lst;
 	}
+	
+	@Override
+	public int eliminarServicios(int idTour) {
+		EntityManager manager = null;
+		int exito = 1;
+		
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			manager.getTransaction().begin(); 
+			String hql =("DELETE FROM IncluyeJPA a WHERE a.lugarTuristico.idLugarTuristico = :p_idTour ");
+			
+			
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_idTour", idTour);
+			q.executeUpdate();
+			manager.getTransaction().commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			manager.getTransaction().rollback();
+			log.error("Error al eliminar: " + e);
+			exito = 0;
+		}finally {
+			manager.close();		
+		}
+		return exito;
+	}
 
 }

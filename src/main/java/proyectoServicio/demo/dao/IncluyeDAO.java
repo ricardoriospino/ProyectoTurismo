@@ -7,5 +7,7 @@ import proyectoServicio.demo.jpa.entity.IncluyeJPA;
 public interface IncluyeDAO {
 	
 	public List<IncluyeJPA> listaCostoServicios ();
+	
+	public int eliminarServicios (int idTour);
 
 }

@@ -103,5 +103,35 @@ public class LugarTuristicoDAOImpl implements LugarTuristicoDAO {
 		return tourExistente;
 	}
 
+	@Override
+	public int actualizarPrecioPaquete(int idTour, double costoNuevo) {
+		
+		EntityManager manager = null;
+		int exito = 1;
+
+		try {
+			manager = JPAUtil.getEntityManager();
+			manager.getTransaction().begin(); 
+			String hql =("UPDATE LugarTuristicoJPA SET precioXpersona = :p_costoNuevo " +
+					 	 " WHERE idLugarTuristico = :p_idTour ");
+			
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_idTour", idTour);
+			q.setParameter("p_costoNuevo",costoNuevo );
+			q.executeUpdate();
+			manager.getTransaction().commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			manager.getTransaction().rollback();
+			log.error("Error al realizar actualizarPrecioPaquete  : " + e);
+			exito = 0;
+		}finally {
+			manager.close();
+		}
+		
+		return exito;
+	}
+
 
 }

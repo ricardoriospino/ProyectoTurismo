@@ -91,67 +91,50 @@ if(!valido){
 					      <div class="row">
 					        <!--Grid column-->
 					        <div class="col-lg-8">
-					          <!-- Card -->
-					          <div class="card wish-list mb-3">
-					            <div class="card-body">
-					              <h5 class="mb-4">Carrito de Compra</h5>
-					
-					              <div class="row mb-4">
-					                <div class="col-md-5 col-lg-3 col-xl-3">
-					                  <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-					                    <a href="#!">
-					                      <div class="mask waves-effect waves-light">
-					                        <img
-					                          class="img-fluid w-100"
-					                          src="https://i.imgur.com/zbU6Ifl.jpg?1"
-					                        />
-					                        <div
-					                          class="mask rgba-black-slight waves-effect waves-light"
-					                        ></div>
-					                      </div>
-					                    </a>
-					                  </div>
-					                </div>
-					                <div class="col-md-6 col-lg-9 col-xl-9">
-					                  <div>
-					                    <div class="d-flex justify-content-between">
-					                      <div>
-					                        <h5>Paquete Turistico Machu Picchu VIP</h5>
-					                        <p class="mb-3 text-muted text-uppercase small">
-					                         Servicios 
-					                        </p>
-					                      </div>
-					                      <div>
-					                        <div class="col-md-7 offset-md-2">
-					                        <label class="form-check-label" > Cantidad</label>
-					                        <input type="text" name="Cantidad" class="form-control"  disabled="disabled">
-					                          
-					                        </div>
-					                      </div>
-					                    </div>
-					                    <div
-					                      class="d-flex justify-content-between align-items-center"
-					                    >
-					                      <div>
-					                        <a
-					                          href="#!"
-					                          type="button"
-					                          class="card-link-secondary small text-uppercase mr-3"
-					                          ><i class="fas fa-trash-alt mr-1"></i> Eliminar
-					                        </a>
-					                      </div>
-					                      <p class="mb-0">
-					                        <span><strong>S/. 50.00</strong></span>
-					                      </p>
-					                    </div>
-					                  </div>
-					                </div>
-					              </div>
-					              <hr class="mb-4" />
-					            </div>
-					          </div>
-					          <!-- Card -->
-					
+					       
+						          <!-- Card -->
+						          <div class="card wish-list mb-3">
+						            <div class="card-body">
+						              <h5 class="mb-4">Carrito de Compra</h5>
+						              
+									 <c:forEach var="varCompra" items="${carritoCompras}">
+						              <div class="row mb-4">
+						                <div class="col-md-5 col-lg-3 col-xl-3">
+						                  <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+						                    <a href="#!">
+						                      <div class="mask waves-effect waves-light">
+						                        <img class="img-fluid w-100" src="${varCompra.imagenTour}"/>
+						                        <div class="mask rgba-black-slight waves-effect waves-light"></div>
+						                      </div>
+						                    </a>
+						                  </div>
+						                </div>
+						                <div class="col-md-6 col-lg-9 col-xl-9">
+						                    <div class="d-flex justify-content-between">
+						                      <div>
+						                        <h5>${varCompra.nombreTour}</h5>
+						                      </div>
+						                        <div class="col-md-7 offset-md-2">
+							                        <label class="form-check-label" >${varCompra.cantidad}</label>
+							                        <input type="text" name="Cantidad" class="form-control"  disabled="disabled">
+						                        </div>
+						                    </div>
+						                    <div class="d-flex justify-content-between align-items-center"><div>
+						                        <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Eliminar
+						                        </a>
+						                      </div>
+						                      <p class="mb-0">
+						                        <span><strong>${varCompra.subTotal}</strong></span>
+						                      </p>
+						                    </div>
+						                </div>
+						              </div>
+						               <hr class="mb-4" />
+						              </c:forEach>  
+						            </div>
+						          </div>
+						          <!-- Card -->
+
 					          <!-- Card -->
 					          <div class="card mb-3">
 					            <div class="card-body">
