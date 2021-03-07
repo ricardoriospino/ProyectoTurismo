@@ -65,17 +65,17 @@ if(!valido){
 									<div class="form-row">
 										<div class="col-md-3 mb-3">
 											<label for="validationDefault01">id Usuario</label> <input
-												type="text" class="form-control" id="validationDefault01"
+												type="text" class="form-control text-center" id="validationDefault01"
 												 disabled="disabled" value="<%=usuario.getIdUsuario() %>" required>
 										</div>
 										<div class="col-md-4 mb-3">
 											<label for="validationDefault02">Nombre </label> <input
-												type="text" class="form-control" id="validationDefault02"
+												type="text" class="form-control text-center" id="validationDefault02"
 												 disabled="disabled" value="<%=usuario.getNombreUsuario() %>" required>
 										</div>
 										<div class="col-md-4 mb-3">
 											<label for="validationDefault02">Apellido</label> <input
-												type="text" class="form-control" id="validationDefault02"
+												type="text" class="form-control text-center" id="validationDefault02"
 												 disabled="disabled" value="<%=usuario.getApellido() %>" required>
 										</div>
 										
@@ -110,27 +110,30 @@ if(!valido){
 						                  </div>
 						                </div>
 						                <div class="col-md-6 col-lg-9 col-xl-9">
-						                    <div class="d-flex justify-content-between">
+						                    <div class="d-flex justify-content-around">
+						                    
 						                      <div>
 						                        <h5>${varCompra.nombreTour}</h5>
 						                      </div>
-						                        <div class="col-md-7 offset-md-2">
-							                        <label class="form-check-label" >${varCompra.cantidad}</label>
-							                        <input type="text" name="Cantidad" class="form-control"  disabled="disabled">
+						                        <div class="col-md-3 offset-md-3">
+							                        <label class="form-check-label" >Cantidad</label>
+							                        <input type="text" name="Cantidad" class="form-control text-center"  disabled="disabled" value="${varCompra.cantidad}">
 						                        </div>
 						                    </div>
 						                    <div class="d-flex justify-content-between align-items-center"><div>
-						                        <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i class="fas fa-trash-alt mr-1"></i> Eliminar
+						                        <a type="button" class="card-link-secondary small text-uppercase mr-3" id="deleteItem" href="<%=request.getContextPath()%>/ServletEliminarItem?idTour=${varCompra.idTour}" >
+						                        <i class="fas fa-trash-alt mr-1"></i> Eliminar
 						                        </a>
 						                      </div>
 						                      <p class="mb-0">
-						                        <span><strong>${varCompra.subTotal}</strong></span>
+						                        <span><strong>S/. ${varCompra.subTotal}0</strong></span>
 						                      </p>
 						                    </div>
 						                </div>
 						              </div>
 						               <hr class="mb-4" />
-						              </c:forEach>  
+						              </c:forEach>
+						              <a href="javascript:window.history.go(-2);">SeguirComprando</a>  
 						            </div>
 						          </div>
 						          <!-- Card -->
@@ -176,13 +179,16 @@ if(!valido){
 					                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
 					                >
 					                  Sub Total
-					                  <span>S/. 50.00</span>
+					                  <span>S/. ${totalSinIgv }</span>
+
+					                  
 					                </li>
 					                <li
 					                  class="list-group-item d-flex justify-content-between align-items-center px-0"
 					                >
 					                  Igv
-					                  <span>S/. 18.00</span>
+					                  <span>S/. ${TotlIgv}</span>
+
 					                </li>
 					                <li
 					                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
@@ -190,16 +196,13 @@ if(!valido){
 					                  <div>
 					                    <strong>Monto Total</strong>
 					                  </div>
-					                  <span><strong>S/. 68.00</strong></span>
+					                  <span><strong>S/. ${totalConIgv}</strong></span>
+
 					                </li>
 					              </ul>
 					
-					              <button
-					                type="button"
-					                class="btn btn-primary btn-block waves-effect waves-light"
-					              >
-					                Pagar
-					              </button>
+					              <button type="button" class="btn btn-primary btn-block waves-effect waves-light">Pagar</button>
+					              
 					            </div>
 					          </div>
 					          <!-- Card -->

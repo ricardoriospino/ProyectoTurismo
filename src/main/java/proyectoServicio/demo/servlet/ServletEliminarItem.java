@@ -15,20 +15,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import proyectoServicio.demo.Bean.carritoCompraBean;
-import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 
 /**
- * Servlet implementation class ServletDatosVentaPaquete
+ * Servlet implementation class ServletEliminarItem
  */
-@WebServlet("/ServletDatosVentaPaquete")
-public class ServletDatosVentaPaquete extends HttpServlet {
+@WebServlet("/ServletEliminarItem")
+public class ServletEliminarItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log= LogManager.getLogger(ServletDatosVentaPaquete.class);
+	private static final Logger log= LogManager.getLogger(ServletEliminarItem.class);
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletDatosVentaPaquete() {
+    public ServletEliminarItem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,23 +39,53 @@ public class ServletDatosVentaPaquete extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		log.info(" ini : ServletDatosVentaPaquete - doGe()");
-		
-		String pagina ="/carritoCompra.jsp";
-		String accion = request.getParameter("p_accion");
+		log.info("init: ServletGestionarLugaresTuristicos - doGet ");
 		
 		HttpSession misession = request.getSession(true);  
 		
-		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
-		misession.getAttribute("totalSinIgv");
-		misession.getAttribute("TotlIgv");
-		misession.getAttribute("totalConIgv");
-
-		RequestDispatcher despachador = null;
-		despachador = request.getRequestDispatcher("/carritoCompra.jsp");
-		despachador.forward(request, response);		
+		int idTour = Integer.parseInt(request.getParameter("idTour"));
 		
-		log.info(" fin : ServletDatosVentaPaquete - doGe()");
+		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
+		
+		double totalSinIgv =0;
+		double totalConIgv =0;
+		double PorcentajeIgv = 0.18;
+		double totalIgvPaquete = 0;
+		
+		for (carritoCompraBean lista : lstCarrito) {
+			totalSinIgv+=Math.round(lista.getSubTotal()*100)/100.0;
+			log.debug("total : " + totalSinIgv);		
+		}
+		
+		totalIgvPaquete = Math.round((totalSinIgv * PorcentajeIgv)*100)/100.0;
+		totalConIgv = Math.round( (totalSinIgv + totalIgvPaquete)*100)/100.0;
+		
+		misession.setAttribute("totalSinIgv", totalSinIgv);
+		misession.setAttribute("TotlIgv", totalIgvPaquete);
+		misession.setAttribute("totalConIgv", totalConIgv);
+		
+		
+		if(lstCarrito != null) {
+			for (carritoCompraBean carrito : lstCarrito) {
+					if(carrito.getIdTour() == idTour) {
+						lstCarrito.remove(carrito);
+						
+						break;
+					}
+				
+			}
+			
+			
+		}
+		
+		
+		String pagina = "carritoCompra.jsp";
+		RequestDispatcher despachador = null;
+		despachador = request.getRequestDispatcher(pagina);
+		despachador.forward(request, response);	
+		
+		
+		log.info("fin: ServletGestionarLugaresTuristicos - doGet ");
 	}
 
 	/**
@@ -64,28 +93,7 @@ public class ServletDatosVentaPaquete extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
-		log.info(" ini : ServletDatosVentaPaquete - doPost()");
-		
-		HttpSession misession = request.getSession(true); 
-		
-		// usuario
-		UsuarioJPA usuario = (UsuarioJPA) misession.getAttribute("usuarioSession");
-		log.debug("Usuario "+ usuario.getNombreUsuario());
-		
-		//detalle venta
-		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
-		
-		double totalSinIgv = (double) misession.getAttribute("totalSinIgv");
-		double igvTotal = (double) misession.getAttribute("TotlIgv");
-		double totalConIgv = (double) misession.getAttribute("totalConIgv");
-		
-		
-		
-		
-		
-		log.info(" fin : ServletDatosVentaPaquete - doPost()");
+		doGet(request, response);
 	}
 
 }

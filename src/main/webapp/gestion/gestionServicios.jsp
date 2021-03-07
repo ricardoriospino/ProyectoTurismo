@@ -155,9 +155,7 @@ if(!valido){
 																		</div>
 																		<input type="text" id="cajaCosto<%=contador%>" class="form-control"   name="costoServicio"  disabled="disabled" value="<c:out value='${lstServicios.costo}'/>" >
 							
-																		<div class="input-group-append">
-																					    
-																		</div>
+																		
 																	</div>		
 															    </div>
 															    <script type="text/javascript" >

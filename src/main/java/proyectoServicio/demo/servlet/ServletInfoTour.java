@@ -101,23 +101,46 @@ public class ServletInfoTour extends HttpServlet {
 		
 		carritoCompraBean carritoCompra = new carritoCompraBean(idTour, tourAgregado.getNombre(), tourAgregado.getUrlImagen1(),tourAgregado.getPrecioXpersona(), 
 																cantidad, subTotal);
+		// si el producto ya existe le suma cantidad y subtotal
+		boolean flag = false;
+		if(lstCarrito.size() > 0) {
+			for (carritoCompraBean carrito : lstCarrito) {
+				if(idTour == carrito.getIdTour()) {
+					carrito.setCantidad(carrito.getCantidad() + cantidad);
+					carrito.setSubTotal(  carrito.getSubTotal() + subTotal);
+					flag = true;
+					break;
+				}
+			}
+		}
+		if(!flag) {
+			
+			lstCarrito.add(carritoCompra);
+		}
 
-		lstCarrito.add(carritoCompra);
-		
-		misession.setAttribute("carriCompras", lstCarrito);
+		misession.setAttribute("carritoCompras", lstCarrito);
 		
 		//suma total
-		double totalLista =0;
-		for (carritoCompraBean lista : lstCarrito)
-			totalLista+=lista.getSubTotal();
-			log.debug("total : " + totalLista);
-			
-		request.setAttribute("total", totalLista);
+		double totalSinIgv =0;
+		double totalConIgv =0;
+		double PorcentajeIgv = 0.18;
+		double totalIgvPaquete = 0;
+		for (carritoCompraBean lista : lstCarrito) {
+			totalSinIgv+=Math.round(lista.getSubTotal()*100)/100.0;
+			log.debug("total : " + totalSinIgv);		
+		}
+		
+		totalIgvPaquete = Math.round((totalSinIgv * PorcentajeIgv)*100)/100.0;
+		totalConIgv = Math.round( (totalSinIgv + totalIgvPaquete)*100)/100.0;
+	
+		misession.setAttribute("totalSinIgv", totalSinIgv);
+		misession.setAttribute("TotlIgv", totalIgvPaquete);
+		misession.setAttribute("totalConIgv", totalConIgv);
 		 
 		 log.debug("el carrito de compras id y cantidad : " + carritoCompra);
 		
 		String pagina = "carritoCompra.jsp";
-		String mensaje = "<strong>Ingresado!</strong> Datos Ingresados al carrito compra.";
+		String mensaje = "<strong>Agregado!</strong> Ingresado al carrito compra.";
 		request.setAttribute("ingresado", true);
 		request.setAttribute("msg", mensaje);
 		
