@@ -72,7 +72,6 @@ public class LugarTuristicoJPA implements Serializable {
 		
 	}
 
-	
 
 	public int getIdLugarTuristico() {
 		return idLugarTuristico;
@@ -316,6 +315,15 @@ public class LugarTuristicoJPA implements Serializable {
 		this.habilitadoODeshabilitado = habilitadoODeshabilitado;
 		this.climaTour = climaTour;
 	}
+	
+
+	public LugarTuristicoJPA(int idLugarTuristico, String modificadoPor, Date fechaUpdate) {
+		super();
+		this.idLugarTuristico = idLugarTuristico;
+		this.modificadoPor = modificadoPor;
+		this.fechaUpdate = fechaUpdate;
+	}
+
 
 	@Override
 	public String toString() {

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import proyectoServicio.demo.Bean.carritoCompraBean;
+import proyectoServicio.demo.bean.CarritoCompraBean;
 
 /**
  * Servlet implementation class ServletEliminarItem
@@ -45,16 +45,22 @@ public class ServletEliminarItem extends HttpServlet {
 		
 		int idTour = Integer.parseInt(request.getParameter("idTour"));
 		
-		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
+		List<CarritoCompraBean> lstCarrito = (List<CarritoCompraBean>) misession.getAttribute("carritoCompras");
 		
 		double totalSinIgv =0;
 		double totalConIgv =0;
 		double PorcentajeIgv = 0.18;
 		double totalIgvPaquete = 0;
+		int contador = 0;
 		
-		for (carritoCompraBean lista : lstCarrito) {
+		for (CarritoCompraBean lista : lstCarrito) {
 			totalSinIgv+=Math.round(lista.getSubTotal()*100)/100.0;
 			log.debug("total : " + totalSinIgv);		
+		}
+		
+		// contador
+		for (CarritoCompraBean compras : lstCarrito) {
+			 contador++;	
 		}
 		
 		totalIgvPaquete = Math.round((totalSinIgv * PorcentajeIgv)*100)/100.0;
@@ -63,22 +69,17 @@ public class ServletEliminarItem extends HttpServlet {
 		misession.setAttribute("totalSinIgv", totalSinIgv);
 		misession.setAttribute("TotlIgv", totalIgvPaquete);
 		misession.setAttribute("totalConIgv", totalConIgv);
-		
+		misession.setAttribute("contadorCarrito", contador);
 		
 		if(lstCarrito != null) {
-			for (carritoCompraBean carrito : lstCarrito) {
+			for (CarritoCompraBean carrito : lstCarrito) {
 					if(carrito.getIdTour() == idTour) {
-						lstCarrito.remove(carrito);
-						
+						lstCarrito.remove(carrito);				
 						break;
 					}
-				
-			}
-			
-			
+			}		
 		}
-		
-		
+			
 		String pagina = "carritoCompra.jsp";
 		RequestDispatcher despachador = null;
 		despachador = request.getRequestDispatcher(pagina);

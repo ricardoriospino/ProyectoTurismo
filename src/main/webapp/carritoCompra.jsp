@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+
 </head>
+	<meta charset="ISO-8859-1">
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,6 +54,12 @@ if(!valido){
 	        	<!-- fin:navbar principal -->
 	        	
 	        	<div class="col-md-12 ">
+	        	<c:if test="${Comprado == true}">
+					<div class="alert alert-success" role="alert">
+						${msg}
+					</div>
+				</c:if>
+	        	
 	        	
 	        		<div class="container-fluid  ">
 		        		<span class="anchor" id="formUserEdit"></span>
@@ -114,6 +120,7 @@ if(!valido){
 						                    
 						                      <div>
 						                        <h5>${varCompra.nombreTour}</h5>
+						                        <font size=2 >Fecha de viaje : ${varCompra.fechaDeViaje}</font>
 						                      </div>
 						                        <div class="col-md-3 offset-md-3">
 							                        <label class="form-check-label" >Cantidad</label>
@@ -171,6 +178,9 @@ if(!valido){
 					        <div class="col-lg-4">
 					          <!-- Card -->
 					          <div class="card mb-3">
+					          
+					          <form  autocomplete="off"
+									action="ServletDatosVentaPaquete" method="post" novalidate>
 					            <div class="card-body">
 					              <h5 class="mb-3">Monto Total</h5>
 					
@@ -201,9 +211,11 @@ if(!valido){
 					                </li>
 					              </ul>
 					
-					              <button type="button" class="btn btn-primary btn-block waves-effect waves-light">Pagar</button>
+					              <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">Pagar</button>
 					              
 					            </div>
+					            
+					            </form>
 					          </div>
 					          <!-- Card -->
 					        </div>

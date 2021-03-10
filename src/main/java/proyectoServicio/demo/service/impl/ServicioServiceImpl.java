@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import proyectoServicio.demo.Bean.ServicioBean;
+import proyectoServicio.demo.bean.ServicioBean;
 import proyectoServicio.demo.dao.ServicioDAO;
 import proyectoServicio.demo.dao.impl.ServicioDAOImpl;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;

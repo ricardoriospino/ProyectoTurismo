@@ -51,7 +51,7 @@ public class TestUnitarioCreaciondeJpa {
 			lugarTuristico1.setUrlImagen2("https://i.imgur.com/bV5P1RK.jpg?1");
 			lugarTuristico1.setUrlImagen3("https://i.imgur.com/Led9fRe.jpg?1");
 			lugarTuristico1.setPrecioXpersona(250.50);
-			lugarTuristico1.setInsertadoPor("Ricardo");
+			lugarTuristico1.setInsertadoPor("ricardo123");
 			lugarTuristico1.setFechaInsert(sdf.parse("08/01/2021"));
 			lugarTuristico1.setCalificacionEstrellas(5);
 			lugarTuristico1.setHabilitadoODeshabilitado("Habilitado");

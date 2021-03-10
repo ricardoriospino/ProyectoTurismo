@@ -1,5 +1,6 @@
 package proyectoServicio.demo.service;
 
+import java.util.Date;
 import java.util.List;
 
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
@@ -15,5 +16,8 @@ public interface LugarTuristicoService {
 	public Long validarTourExist(String codigo);
 	
 	public int actualizarPrecioPaquete (int idTour, double costoNuevo);
+	
+	public int actualizarAuditoriaPaquete (int idTour, String modificadoPor , Date fechaModificada);
+	
 
 }

@@ -3,6 +3,7 @@ package proyectoServicio.demo.servlet;
 import java.io.IOException;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import java.util.stream.DoubleStream;
@@ -18,10 +19,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import proyectoServicio.demo.Bean.ServicioBean;
+import proyectoServicio.demo.bean.ServicioBean;
 import proyectoServicio.demo.jpa.entity.IncluyeJPA;
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
+import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 import proyectoServicio.demo.service.CRUDService;
 import proyectoServicio.demo.service.IncluyeService;
 import proyectoServicio.demo.service.LugarTuristicoService;
@@ -105,6 +107,12 @@ public class ServletGestionServicios extends HttpServlet {
 		log.info(" ini : ServletGestionServicios - doPost()");
 		HttpSession misession = request.getSession(true); 
 		
+		// auditoria 
+		UsuarioJPA usuario = (UsuarioJPA) misession.getAttribute("usuarioSession");
+		String modificadoPor = usuario.getUsuario();
+		Date fechaUpdate = new Date();
+		
+		
 		LugarTuristicoJPA tour = (LugarTuristicoJPA) misession.getAttribute("tourSeleccionado");
 		log.debug("idPaqueteTuristico :" + tour.getIdLugarTuristico()  );
 		
@@ -119,6 +127,9 @@ public class ServletGestionServicios extends HttpServlet {
 		// actualiza el precio
 		LugarTuristicoService lugarTuristicoService = new LugarTuristicoServiceImpl();
 		lugarTuristicoService.actualizarPrecioPaquete(idTour, sumaCostos);
+		
+		//actualizar modificacion auditoria 
+		lugarTuristicoService.actualizarAuditoriaPaquete(idTour, modificadoPor, fechaUpdate);
 		
 		// elimininar todo lo corespondiente al paquete turistico
 		IncluyeService incluyeService = new IncluyeServiceImpl();
@@ -141,7 +152,7 @@ public class ServletGestionServicios extends HttpServlet {
 			serviceCrud.insertar(inclusion);
 
 		} 
-
+		
 		String mensaje = "<strong>Ingresado!</strong> Datos Ingresado correctamente a la base de datos.";
 		request.setAttribute("ingresado", true);
 		request.setAttribute("msg", mensaje);

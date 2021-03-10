@@ -40,6 +40,11 @@ public class ServletLogout extends HttpServlet {
 		// destruir la sesion 
 		HttpSession misession = request.getSession(true);  
 		misession.removeAttribute("usuarioSession");
+		misession.removeAttribute("carritoCompras");
+		misession.removeAttribute("totalSinIgv");
+		misession.removeAttribute("TotlIgv");
+		misession.removeAttribute("totalConIgv");
+		misession.removeAttribute("contadorCarrito");
 		
 		RequestDispatcher despachador = null;
 		despachador= request.getRequestDispatcher("/login.jsp");

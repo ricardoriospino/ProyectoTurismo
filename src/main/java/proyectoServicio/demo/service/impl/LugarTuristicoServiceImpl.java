@@ -1,5 +1,6 @@
 package proyectoServicio.demo.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import proyectoServicio.demo.dao.LugarTuristicoDAO;
@@ -43,6 +44,12 @@ public class LugarTuristicoServiceImpl implements LugarTuristicoService {
 	public int actualizarPrecioPaquete(int idTour, double costoNuevo) {
 		
 		return lugarTuristicoDAO.actualizarPrecioPaquete(idTour, costoNuevo);
+	}
+
+	@Override
+	public int actualizarAuditoriaPaquete(int idTour, String modificadoPor, Date fechaModificada) {
+		
+		return lugarTuristicoDAO.actualizarAuditoriaPaquete(idTour, modificadoPor, fechaModificada);
 	}
 
 	

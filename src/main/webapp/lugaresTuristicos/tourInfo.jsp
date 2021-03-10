@@ -20,6 +20,9 @@
 	<!--ini :css -->
 	<jsp:include page="../importCss.jsp"/>
 	<!--fin :css -->
+	<!-- ini:calendar -->
+	<jsp:include page="../calendar.jsp" />
+	<!-- fin:calendar -->
 	
 	<link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
@@ -158,11 +161,29 @@ response.sendRedirect("login.jsp");
 								            	<li class="list-group-item">${lstServiciosIncluidos.nombreServicio}</li>   
 								          </ul>	
 							          </c:forEach>
-						          
-						          <br />
-						          
-						          <form autocomplete="off" action="ServletInfoTour"  method="post" novalidate>
-						          	
+							         
+							         <form autocomplete="off" action="ServletInfoTour"  method="post" novalidate>
+							         
+								         <p><b>Fecha de Viaje : </b><p>
+								         <div class="form-group row">
+											<div class="col-lg-9">
+												<input class="form-control" id="datepicker" width="276"
+													name="fecha_viaje" value="" required >
+												<div class="valid-feedback">Dato ingresado correctamente</div>
+												<div class="invalid-feedback">complete el campo</div>
+												<script>
+								                  $('#datepicker').datepicker({
+								                    datepicker: true,
+								                    uiLibrary : 'bootstrap4',
+								                    locale: 'es-es',
+								                    format:'yyyy-mm-dd'
+								                  });
+										  		</script>
+											</div>
+										</div>
+							          
+							          <br />
+
 							          <input type="hidden" name="hdnLugaresTuristicos" value="${idLugarTuristico}"/><!-- es una variable oculta o un comodin -->
 							          	  
 							          <label>Cantidad: </label>
@@ -181,6 +202,7 @@ response.sendRedirect("login.jsp");
 							          	<input type="submit" class="btn btn-primary" value="Agregar al carrito" >
 							         
 						          </form>
+
 					        </div>
 			      </div>
 			    </div>
@@ -194,4 +216,7 @@ response.sendRedirect("login.jsp");
 	<!--ini:Js -->
 	<jsp:include page="../importJs.jsp"/>	
 	<!--fin:Js -->   
+	
+	
+ 
 </html>

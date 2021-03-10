@@ -1,6 +1,7 @@
 package proyectoServicio.demo.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -133,5 +134,34 @@ public class LugarTuristicoDAOImpl implements LugarTuristicoDAO {
 		return exito;
 	}
 
-
+	@Override
+	public int actualizarAuditoriaPaquete(int idTour, String modificadoPor, Date fechaModificada) {
+		
+		EntityManager manager = null;
+		int exito = 1;
+		
+		try {
+			manager = JPAUtil.getEntityManager();
+			manager.getTransaction().begin(); 
+			String hql =("UPDATE LugarTuristicoJPA SET modificadoPor = :p_modificadoPor , fechaUpdate = :p_fechaModificada " +
+				 	 " WHERE idLugarTuristico = :p_idTour ");
+			
+			Query q = manager.createQuery(hql);
+			q.setParameter("p_idTour", idTour);
+			q.setParameter("p_modificadoPor",modificadoPor );
+			q.setParameter("p_fechaModificada",fechaModificada );
+			q.executeUpdate();
+			manager.getTransaction().commit();
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			manager.getTransaction().rollback();
+			log.error("Error al realizar actualizarPrecioPaquete  : " + e);
+			exito = 0;
+		}finally {
+			manager.close();
+		}
+		return exito;
+	}
 }

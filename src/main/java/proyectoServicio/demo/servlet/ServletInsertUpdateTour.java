@@ -71,8 +71,8 @@ public class ServletInsertUpdateTour extends HttpServlet {
 		String urlImagen2Form = request.getParameter("url_imagen2");
 		String urlImagen3Form = request.getParameter("url_imagen3");
 		double precioxPersonaForm = Double.parseDouble(request.getParameter("precio_x_persona"));
-		String insertadoPorForm = usuario.getNombreUsuario();
-		String modificadoPorForm = usuario.getNombreUsuario();
+		String insertadoPorForm = usuario.getUsuario();
+		String modificadoPorForm = usuario.getUsuario();
 		
 		Date fechaInsertForm =  new Date();
 		Date fechaUpdateForm = new Date();

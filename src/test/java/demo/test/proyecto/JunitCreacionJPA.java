@@ -1,5 +1,7 @@
 package demo.test.proyecto;
 
+import java.util.Date;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -426,6 +428,7 @@ public class JunitCreacionJPA {
 		log.info("ini : ju5crearCompra()");
 		
 		try {
+			Date fechaCompra =  new Date();
 			
 			LugarTuristicoService lugaresTuristicoService = new LugarTuristicoServiceImpl();
 			UsuarioService usuarioService = new UsuarioServiceImpl();
@@ -435,7 +438,9 @@ public class JunitCreacionJPA {
 			UsuarioJPA usuario1 = usuarioService.getUsuarioById(3);
 			CompraJPA compra1 = new CompraJPA();
 			compra1.setCantidadPersonas(1);
-			compra1.setMontoTotal(170.50);
+			compra1.setSubTotal(170.50);
+			compra1.setFechaCompra(fechaCompra);
+			compra1.setFechaViaje(fechaCompra);
 			compra1.setUsuario(usuario1);
 			compra1.setLugarTuristico(huascaran);
 			

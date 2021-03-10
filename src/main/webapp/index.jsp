@@ -131,8 +131,8 @@ if(!valido){
 	
 			              		<!-- buscador secundario  -->
 				              	<form class="form-inline my-2 my-lg-0">
-	      							<input class="form-control mr-sm-2" type="search" placeholder="Buscar">
-	      							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+	      							<input class="form-control mr-sm-2" id="buscar" type="search" placeholder="Buscar">
+	      							<button class="btn btn-outline-success my-2 my-sm-0" id="boton" type="submit">Buscar</button>
 	   							</form>
 			            </div>
 			        </nav>
@@ -142,7 +142,7 @@ if(!valido){
 			        <section class="text-center mb-4">
 			          <div class="row">
 			          
-			          <c:forEach var ="lugaresTuristicos" items="${lstLugaresTuristicos }">
+			          <c:forEach  var ="lugaresTuristicos" items="${lstLugaresTuristicos }">
 				            <div class="col-lg-4 col-md-12 mb-4">
 				              <div  class="card">
 				                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -152,7 +152,7 @@ if(!valido){
 				                  </a>
 				                </div>
 				                <div class="card-body">
-				                  <h5 class="card-title">${lugaresTuristicos.nombre}</h5>
+				                  <h5 id="listaPaquetes" class="card-title">${lugaresTuristicos.nombre}</h5>
 				                  <h6> S/. ${lugaresTuristicos.precioXpersona }</h6>
 				                  <p class="card-text">${lugaresTuristicos.descripcion}</p>
 				                  
@@ -187,4 +187,9 @@ if(!valido){
 	<!--ini:Js -->
 	<jsp:include page="importJs.jsp"/>	
 	<!--fin:Js --> 	
+	<script type="text/javascript">
+	
+	</script>
+	
+	
 </html>

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import proyectoServicio.demo.Bean.carritoCompraBean;
+import proyectoServicio.demo.bean.CarritoCompraBean;
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
 import proyectoServicio.demo.jpa.entity.ServicioJPA;
 import proyectoServicio.demo.service.LugarTuristicoService;
@@ -87,6 +87,7 @@ public class ServletInfoTour extends HttpServlet {
 		HttpSession misession = request.getSession(true);  
 
 		int idTour = Integer.parseInt(request.getParameter("hdnLugaresTuristicos"));
+		String fechaViaje = request.getParameter("fecha_viaje");
 		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 		log.debug("el idTour es : " + idTour + " la cantidad es : " + cantidad);
 		
@@ -95,16 +96,16 @@ public class ServletInfoTour extends HttpServlet {
 		double subTotal = cantidad * tourAgregado.getPrecioXpersona();
 		
 		//carrito de compras 	
-		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
+		List<CarritoCompraBean> lstCarrito = (List<CarritoCompraBean>) misession.getAttribute("carritoCompras");
 		
 		if(lstCarrito == null)lstCarrito = new ArrayList<>();
 		
-		carritoCompraBean carritoCompra = new carritoCompraBean(idTour, tourAgregado.getNombre(), tourAgregado.getUrlImagen1(),tourAgregado.getPrecioXpersona(), 
-																cantidad, subTotal);
+		CarritoCompraBean carritoCompra = new CarritoCompraBean(idTour, tourAgregado.getNombre(), tourAgregado.getUrlImagen1(),tourAgregado.getPrecioXpersona(), 
+																cantidad, fechaViaje ,subTotal);
 		// si el producto ya existe le suma cantidad y subtotal
 		boolean flag = false;
 		if(lstCarrito.size() > 0) {
-			for (carritoCompraBean carrito : lstCarrito) {
+			for (CarritoCompraBean carrito : lstCarrito) {
 				if(idTour == carrito.getIdTour()) {
 					carrito.setCantidad(carrito.getCantidad() + cantidad);
 					carrito.setSubTotal(  carrito.getSubTotal() + subTotal);
@@ -120,12 +121,21 @@ public class ServletInfoTour extends HttpServlet {
 
 		misession.setAttribute("carritoCompras", lstCarrito);
 		
+		// contador carrito
+		int contador = 0;
+		for (CarritoCompraBean compras : lstCarrito) {
+			 contador++;	
+		}
+		
+		misession.setAttribute("contadorCarrito", contador);
+		
+		
 		//suma total
 		double totalSinIgv =0;
 		double totalConIgv =0;
 		double PorcentajeIgv = 0.18;
 		double totalIgvPaquete = 0;
-		for (carritoCompraBean lista : lstCarrito) {
+		for (CarritoCompraBean lista : lstCarrito) {
 			totalSinIgv+=Math.round(lista.getSubTotal()*100)/100.0;
 			log.debug("total : " + totalSinIgv);		
 		}

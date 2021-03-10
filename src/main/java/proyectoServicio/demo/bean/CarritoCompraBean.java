@@ -1,8 +1,8 @@
-package proyectoServicio.demo.Bean;
+package proyectoServicio.demo.bean;
 
 import java.io.Serializable;
 
-public class carritoCompraBean implements Serializable {
+public class CarritoCompraBean implements Serializable {
 	
 	private int idDetalleCompra;
 	private int idTour;
@@ -10,25 +10,24 @@ public class carritoCompraBean implements Serializable {
 	private String imagenTour;
 	private double precio;
 	private int cantidad;
+	private String fechaDeViaje;
 	private double subTotal;
 	
 	
 	
-	public carritoCompraBean () {
+	public CarritoCompraBean () {
 		
 	}
 
 
-	public carritoCompraBean(int idTour, int cantidad) {
+	public CarritoCompraBean(int idTour, int cantidad) {
 		super();
 		this.idTour = idTour;
 		this.cantidad = cantidad;
 	}
 
-
-
-	public carritoCompraBean(int idDetalleCompra, int idTour, String nombreTour, String imagenTour, double precio,
-			int cantidad, double subTotal) {
+	public CarritoCompraBean(int idDetalleCompra, int idTour, String nombreTour, String imagenTour, double precio,
+			int cantidad, String fechaDeViaje, double subTotal) {
 		super();
 		this.idDetalleCompra = idDetalleCompra;
 		this.idTour = idTour;
@@ -36,20 +35,22 @@ public class carritoCompraBean implements Serializable {
 		this.imagenTour = imagenTour;
 		this.precio = precio;
 		this.cantidad = cantidad;
+		this.fechaDeViaje = fechaDeViaje;
 		this.subTotal = subTotal;
 	}
-	
-	
 
 
-	public carritoCompraBean(int idTour, String nombreTour, String imagenTour, double precio, int cantidad,
-			double subTotal) {
+
+
+	public CarritoCompraBean(int idTour, String nombreTour, String imagenTour, double precio, int cantidad,
+			String fechaDeViaje, double subTotal) {
 		super();
 		this.idTour = idTour;
 		this.nombreTour = nombreTour;
 		this.imagenTour = imagenTour;
 		this.precio = precio;
 		this.cantidad = cantidad;
+		this.fechaDeViaje = fechaDeViaje;
 		this.subTotal = subTotal;
 	}
 
@@ -83,6 +84,17 @@ public class carritoCompraBean implements Serializable {
 		this.nombreTour = nombreTour;
 	}
 
+
+	public String getImagenTour() {
+		return imagenTour;
+	}
+
+
+	public void setImagenTour(String imagenTour) {
+		this.imagenTour = imagenTour;
+	}
+
+
 	public double getPrecio() {
 		return precio;
 	}
@@ -103,6 +115,16 @@ public class carritoCompraBean implements Serializable {
 	}
 
 
+	public String getFechaDeViaje() {
+		return fechaDeViaje;
+	}
+
+
+	public void setFechaDeViaje(String fechaDeViaje) {
+		this.fechaDeViaje = fechaDeViaje;
+	}
+
+
 	public double getSubTotal() {
 		return subTotal;
 	}
@@ -112,15 +134,6 @@ public class carritoCompraBean implements Serializable {
 		this.subTotal = subTotal;
 	}
 
-
-	public String getImagenTour() {
-		return imagenTour;
-	}
-
-
-	public void setImagenTour(String imagenTour) {
-		this.imagenTour = imagenTour;
-	}
 
 	
 	

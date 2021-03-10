@@ -1,6 +1,10 @@
 package proyectoServicio.demo.servlet;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +17,18 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.tool.schema.extract.spi.ForeignKeyInformation;
 
-import proyectoServicio.demo.Bean.carritoCompraBean;
+import proyectoServicio.demo.bean.CarritoCompraBean;
+import proyectoServicio.demo.jpa.entity.CompraJPA;
+import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
 import proyectoServicio.demo.jpa.entity.UsuarioJPA;
+import proyectoServicio.demo.service.CRUDService;
+import proyectoServicio.demo.service.LugarTuristicoService;
+import proyectoServicio.demo.service.UsuarioService;
+import proyectoServicio.demo.service.impl.CRUDServiceImpl;
+import proyectoServicio.demo.service.impl.LugarTuristicoServiceImpl;
+import proyectoServicio.demo.service.impl.UsuarioServiceImpl;
 
 /**
  * Servlet implementation class ServletDatosVentaPaquete
@@ -46,14 +59,16 @@ public class ServletDatosVentaPaquete extends HttpServlet {
 		String accion = request.getParameter("p_accion");
 		
 		HttpSession misession = request.getSession(true);  
+
+		List<CarritoCompraBean> lstCarrito = (List<CarritoCompraBean>) misession.getAttribute("carritoCompras");
 		
-		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
 		misession.getAttribute("totalSinIgv");
 		misession.getAttribute("TotlIgv");
 		misession.getAttribute("totalConIgv");
+		misession.getAttribute("contadorCarrito");
 
 		RequestDispatcher despachador = null;
-		despachador = request.getRequestDispatcher("/carritoCompra.jsp");
+		despachador = request.getRequestDispatcher(pagina);
 		despachador.forward(request, response);		
 		
 		log.info(" fin : ServletDatosVentaPaquete - doGe()");
@@ -75,16 +90,58 @@ public class ServletDatosVentaPaquete extends HttpServlet {
 		log.debug("Usuario "+ usuario.getNombreUsuario());
 		
 		//detalle venta
-		List<carritoCompraBean> lstCarrito = (List<carritoCompraBean>) misession.getAttribute("carritoCompras");
+		List<CarritoCompraBean> lstCarrito = (List<CarritoCompraBean>) misession.getAttribute("carritoCompras");
 		
-		double totalSinIgv = (double) misession.getAttribute("totalSinIgv");
-		double igvTotal = (double) misession.getAttribute("TotlIgv");
-		double totalConIgv = (double) misession.getAttribute("totalConIgv");
+//		DOUBLE TOTALSINIGV = (DOUBLE) MISESSION.GETATTRIBUTE("TOTALSINIGV");
+//		DOUBLE IGVTOTAL = (DOUBLE) MISESSION.GETATTRIBUTE("TOTLIGV");
+//		DOUBLE TOTALCONIGV = (DOUBLE) MISESSION.GETATTRIBUTE("TOTALCONIGV");
 		
+		CRUDService crudService = new CRUDServiceImpl();
+		LugarTuristicoService lugaresTuristicoService = new LugarTuristicoServiceImpl();
 		
+		//fecha de compra
+		Date fechaCompra =  new Date();
 		
+		// fecha de viajes 
+		for(CarritoCompraBean carrito : lstCarrito) {
+			CompraJPA compra = new CompraJPA();
+			
+			String fechaParse = carrito.getFechaDeViaje();
+			
+			Date fechaViaje = null;
+			try {
+				fechaViaje = new SimpleDateFormat("yyyy-MM-dd").parse(fechaParse);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			// insertando a la bbdd
+			LugarTuristicoJPA paquete = lugaresTuristicoService.getLugarTuristicoById(carrito.getIdTour());
+			compra.setCantidadPersonas(carrito.getCantidad());
+			compra.setSubTotal(carrito.getSubTotal());
+			compra.setFechaViaje(fechaViaje);
+			compra.setFechaCompra(fechaCompra);
+			compra.setUsuario(usuario);
+			compra.setLugarTuristico(paquete);
+			
+			crudService.insertar(compra);
+			
+		}
 		
+		misession.removeAttribute("carritoCompras");
+		misession.removeAttribute("totalSinIgv");
+		misession.removeAttribute("TotlIgv");
+		misession.removeAttribute("totalConIgv");
+		misession.removeAttribute("contadorCarrito");
 		
+		String mensaje= "<strong>Compra Exitosa!</strong> Gracias por realizar su compra.";
+		request.setAttribute("Comprado", true);
+		request.setAttribute("msg", mensaje);
+		
+		RequestDispatcher despachador =null;
+		despachador= request.getRequestDispatcher("carritoCompra.jsp");
+		despachador.forward(request, response);	
+
 		log.info(" fin : ServletDatosVentaPaquete - doPost()");
 	}
 

@@ -85,7 +85,9 @@ FOREIGN KEY (id_rol) REFERENCES tb_rol(id_rol)
 CREATE TABLE IF NOT EXISTS tb_compra (
 id_compra INTEGER UNSIGNED PRIMARY KEY auto_increment , 
 cantidad_personas INT(50)NOT NULL , 
-monto_total DECIMAL(10,2) NOT NULL , 
+sub_total DECIMAL(10,2) NOT NULL , 
+fecha_compra TIMESTAMP  NULL ,
+fecha_viaje DATE NULL,
 id_usuario INTEGER UNSIGNED,
 id_lugar_turistico INTEGER UNSIGNED,
 FOREIGN KEY (id_usuario) REFERENCES tb_usuario(id_usuario),

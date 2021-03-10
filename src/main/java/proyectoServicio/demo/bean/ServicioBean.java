@@ -1,4 +1,4 @@
-package proyectoServicio.demo.Bean;
+package proyectoServicio.demo.bean;
 
 import java.io.Serializable;
 

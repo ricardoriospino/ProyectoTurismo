@@ -1,5 +1,6 @@
 package proyectoServicio.demo.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
@@ -16,6 +17,7 @@ public interface LugarTuristicoDAO {
 	
 	public int actualizarPrecioPaquete (int idTour, double costoNuevo);
 	
+	public int actualizarAuditoriaPaquete (int idTour, String modificadoPor , Date fechaModificada);
 	
 
 }
