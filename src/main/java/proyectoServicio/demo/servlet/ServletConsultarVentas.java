@@ -46,13 +46,16 @@ public class ServletConsultarVentas extends HttpServlet {
 		log.info(" ini : ServletConsultarVentas - doGe()");
 		
 		String pagina ="/consultar/consultarVenta.jsp";
-		//String accion = request.getParameter("p_accion");
+		String accion = request.getParameter("p_accion");
 		
-		LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
-		
-		List<LugarTuristicoJPA> lista = serviceTour.listarLugaresTuristicos();
-		
-		request.setAttribute("lstNombrePaquete", lista);
+		if("inicioConsulta".equals(accion)) {
+			
+			LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
+			List<LugarTuristicoJPA> lista = serviceTour.listarLugaresTuristicos();
+			request.setAttribute("lstNombrePaquete", lista);	
+		}else if ("consultar".equals(accion)) {
+	
+		}
 		
 		RequestDispatcher despachador = null;
 		despachador = request.getRequestDispatcher(pagina);
@@ -72,10 +75,11 @@ public class ServletConsultarVentas extends HttpServlet {
 		log.info(" ini : ServletConsultarVentas - doPost()");
 		
 		LugarTuristicoJPA codigoTour = new LugarTuristicoJPA();
-		
-		//String codigoTodos = request.getParameter("TDP");
 		codigoTour.setCodigoLugarTuristico(request.getParameter("codigo_paquete"));
 		String codigo = codigoTour.getCodigoLugarTuristico() ;
+		ListaComprasBean listaBean = new ListaComprasBean();
+		
+		
 		
 		//flag
 		int semaforo = 0;	
@@ -84,7 +88,6 @@ public class ServletConsultarVentas extends HttpServlet {
 		}else if(!codigo.equals("TDP")) {
 			semaforo = 2;
 		}
-
 		String fechaIni = request.getParameter("fecha_inicio");
 		String fechaFin = request.getParameter("fecha_fin");
 		
@@ -93,18 +96,51 @@ public class ServletConsultarVentas extends HttpServlet {
 		
 		if (semaforo == 1  && fechaIni.equals("") && fechaFin.equals("")) {
 			
-		//	List<ListaComprasBean> lista =  compraService.listarCompra();
+			List<ListaComprasBean> lista1 =  compraService.listarCompra();
+			log.debug(lista1);
+			request.setAttribute("lstVentas", lista1);
+				
 			
-
 		} else if (semaforo == 2 && fechaIni.equals("") && fechaFin.equals("") ) {
-			log.debug("entro 2");
+			
+			List<ListaComprasBean> lista2 = compraService.listarCompraById(codigo);
+			request.setAttribute("lstVentas", lista2);
+			
+			if (lista2.isEmpty()) {
+				String mensaje = "<strong>Alerta!</strong> No se encuentra informacion";
+				request.setAttribute("info", true);
+				request.setAttribute("msg", mensaje);
+			}
 		
 		}else if( semaforo== 1  && fechaIni!= null && fechaFin!= null) {
-			log.debug("entro 3");
+			
+			List<ListaComprasBean> lista3 = compraService.listarCompraByFechas(fechaIni, fechaFin);
+			request.setAttribute("lstVentas", lista3);
+			
+			if (lista3.isEmpty()) {
+				String mensaje = " No se encuentra informacion";
+				request.setAttribute("info", true);
+				request.setAttribute("msg", mensaje);
+			}
 			
 		}else if(semaforo == 2 && fechaIni!= null && fechaFin!= null ) {
-			log.debug("entro 4");
+			
+			List<ListaComprasBean> lista4 = compraService.listarCompraByFechasAndCodigoTour(fechaIni, fechaFin, codigo);
+			request.setAttribute("lstVentas", lista4);
+			
+			if (lista4.isEmpty()) {
+				String mensaje = " No se encuentra informacion";
+				request.setAttribute("info", true);
+				request.setAttribute("msg", mensaje);
+			}
 		}
+		
+		
+		
+		
+		LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
+		List<LugarTuristicoJPA> lista = serviceTour.listarLugaresTuristicos();
+		request.setAttribute("lstNombrePaquete", lista);	
 		
 		
 		RequestDispatcher despachador = null;

@@ -2,7 +2,6 @@ package proyectoServicio.demo.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,7 +9,7 @@ import javax.persistence.Query;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.w3c.dom.ls.LSInput;
+
 
 import proyectoServicio.demo.cnx.JPAUtil;
 import proyectoServicio.demo.dao.ServicioDAO;

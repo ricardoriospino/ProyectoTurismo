@@ -130,6 +130,7 @@ if(!valido){
 		        		
 		        			<form  autocomplete="off"
 									action="ServletGestionServicios" method="post" novalidate>
+									
 								<c:if test="${not empty lstServicios}">
 									<div class="card-header">
 										<h5 class="mb-0">Servicios Incluidos Paquete Turistico</h5>

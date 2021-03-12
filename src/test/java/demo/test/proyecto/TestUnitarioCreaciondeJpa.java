@@ -265,7 +265,7 @@ public class TestUnitarioCreaciondeJpa {
 			MenuJPA menu6 = new MenuJPA();
 			menu6.setCodigoMenu("006");
 			menu6.setMenu("Consultar ventas");
-			menu6.setUrlMenu("/ServletConsultarVentas");
+			menu6.setUrlMenu("/ServletConsultarVentas?p_accion=inicioConsulta");
 			
 			crudService.insertar(menu1);
 			crudService.insertar(menu2);

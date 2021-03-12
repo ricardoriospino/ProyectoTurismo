@@ -61,6 +61,11 @@ if(!valido){
 	        	<div class="col-md-12 ">
 	        		<h3 class="text-center ">Consulta de ventas </h3>
 						<hr>
+						<c:if test="${info == true}">
+								<div class="alert alert-warning" role="alert">
+									${msg}
+								</div>
+						</c:if>
 	        		<div class="container-fluid  border-left-primary">
 		        		<span class="anchor" id="formUserEdit"></span>
 		        		
@@ -126,14 +131,14 @@ if(!valido){
 						</div> 
 		        	</div> 
 		        	<br>
-		        	<c:if test="${not empty varVenta}">
 		        	
+		        	<c:if test="${not empty lstVentas}">
 		        	<div class="container-fluid  border-left-primary ">
 		        		<div class="card card-outline-secondary">	
 		        			<br>
 							<h5 class="text-center">Lista de Paquetes Vendidos</h5>
 							<br>
-							<table id="tblVentas" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">
+							<table   id="tblVentas" class="table table-striped table-bordered table-sm "  cellspacing="0" width="100%">
 				
 							<thead>
 								<tr>
@@ -146,14 +151,13 @@ if(!valido){
 								</tr>
 							</thead>
 							<tbody>
-							
 								<c:forEach var="varVenta" items="${lstVentas}">
 									<tr>
-										<td>${varVenta.lugarTuristico.codigoLugarTuristico}</td>
-										<td>${varVenta.lugarTuristico.nombre}</td>
-										<td>${varVenta.usuario.usuario}</td>
-										<td>${varVenta.usuario.nombreUsuario}</td>
-										<td>${varVenta.fechaViaje}</td>
+										<td>${varVenta.codigoTour}</td>
+										<td>${varVenta.nombreTour}</td>
+										<td>${varVenta.usuario}</td>
+										<td>${varVenta.nombreUsuario}</td>
+										<td>${varVenta.fechaSalida}</td>
 										<td>${varVenta.subTotal}</td>
 										
 									</tr>							
@@ -175,7 +179,7 @@ if(!valido){
 							});
 						</script>  
 		        	</div>
-		        	</c:if>
+		        </c:if>
 	        	</div>	
         	</div>
         	
