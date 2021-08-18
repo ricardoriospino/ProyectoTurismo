@@ -79,21 +79,23 @@ if(!valido){
 										<div class="col-md-4 mb-4">
 											<label for="validationDefault01">Paquete Turistico :</label> 
 											<select class="form-control" name="codigo_paquete" >
-														<option value="TDP"  selected="">Todos Los paquetes</option>
-												<c:forEach var="nombrePaquete" items="${lstNombrePaquete}"> 	
-												 		<option value="${nombrePaquete.codigoLugarTuristico }">${nombrePaquete.nombre}</option>					
+														<option value="TDP" >Todos Los paquetes</option>
+												<c:forEach var="nombrePaquete"  items="${lstNombrePaquete}"> 	
+												 		<option value="${nombrePaquete.codigoLugarTuristico }" >${nombrePaquete.nombre}</option>					
 												</c:forEach>
 											</select>
 										</div>
 										<div class="col-md-6 mb-4">
-											<a href="<%=request.getContextPath()%>/" class="btn btn-primary offset-lg-6">Exportar a Excel  </a>
+											<a href="<%=request.getContextPath()%>/ServletListaExportarExcel?p_reporte=REPLISTAUSU0003" class="btn btn-primary offset-lg-6">Exportar a Excel  </a>
+											<br><br>
+											<a href="<%=request.getContextPath()%>/" class="btn btn-primary offset-lg-6">Exportar &nbsp;a &nbsp;PDF  </a>
 										</div>
 									</div>
 									<div class="form-group row" >
 										<div class="col-md-6 mb-4">
 											<label for="validationDefault02">Fecha Inicio :</label> 
 											<input class="form-control" id="datepickerIni" width="276" 
-												name="fecha_inicio" value=""  >
+												name="fecha_inicio" value= "${fechaIni}"  >
 	
 											<script>
 							                  $('#datepickerIni').datepicker({
@@ -108,7 +110,7 @@ if(!valido){
 										<div class="col-md-6 mb-4">
 											<label for="validationDefault02">Fecha Fin :</label>
 											<input class="form-control" id="datepickerFin" width="276" 
-												name="fecha_fin" value=""  >
+												name="fecha_fin" value="${fechaFin}"  >
 											
 											<script>
 							                  $('#datepickerFin').datepicker({

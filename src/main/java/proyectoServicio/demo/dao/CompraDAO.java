@@ -2,10 +2,6 @@ package proyectoServicio.demo.dao;
 
 import java.util.List;
 
-import proyectoServicio.demo.bean.CarritoCompraBean;
-import proyectoServicio.demo.bean.ListaComprasBean;
-import proyectoServicio.demo.jpa.entity.CompraJPA;
-import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 
 public interface CompraDAO {
 	

@@ -15,11 +15,14 @@ import org.apache.logging.log4j.Logger;
 
 import com.sun.org.apache.bcel.internal.generic.LSTORE;
 
+import proyectoServicio.demo.bean.ListaComprasBean;
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
 import proyectoServicio.demo.jpa.entity.RolJPA;
 import proyectoServicio.demo.jpa.entity.UsuarioJPA;
+import proyectoServicio.demo.service.CompraService;
 import proyectoServicio.demo.service.LugarTuristicoService;
 import proyectoServicio.demo.service.UsuarioService;
+import proyectoServicio.demo.service.impl.CompraServiceImpl;
 import proyectoServicio.demo.service.impl.LugarTuristicoServiceImpl;
 import proyectoServicio.demo.service.impl.UsuarioServiceImpl;
 
@@ -114,6 +117,32 @@ public class ServletListaExportarExcel extends HttpServlet {
 				out.println("</body>");
 			out.println("</html>");
 			
+		}else if ("REPLISTAUSU0003".equals(p_reporte)) {
+			
+			response.setHeader("Content-Disposition", "attachment; filename=ListaVenta.xls");
+			response.setHeader("Pragma", "no-cache"); 
+			response.setHeader("Cache-control", "no-store");
+			
+			PrintWriter out = response.getWriter();
+			CompraService compraService = new CompraServiceImpl();
+			List<ListaComprasBean> lista =  compraService.listarCompra();
+			
+			out.println("<html>");
+			out.println("<head>");
+			out.println("</head>");
+				out.println("<body>");
+					out.println("<table>");
+					 out.println("<tr><th>Orden </th><th>Codigo Paquete </th><th>Nombre Paquete</th><th>Usuario</th><th>Nombre Cliente</th><th> Fecha Salida</th><th>Sub Total</th></tr>");
+					 for(int i=0;i<lista.size();i++) {
+						 ListaComprasBean listaCompras = lista.get(i);
+						 out.println("<tr><td>"+(i+1)+"</td><td>" + listaCompras.getCodigoTour() + "</td><td>"+ listaCompras.getNombreTour() + "</td><td>"
+								 	+ listaCompras.getUsuario() + "</td><td>" + listaCompras.getNombreUsuario() + "</td><td>" + listaCompras.getFechaSalida() +"</td><td>"
+								 	+ listaCompras.getSubTotal() +"</td></tr>");
+					 }
+					out.println("</table>");
+				out.println("</body>");
+			out.println("</html>");
+	
 		}
 		
 		log.info("FIN: get ServletListaExportarExcel()");

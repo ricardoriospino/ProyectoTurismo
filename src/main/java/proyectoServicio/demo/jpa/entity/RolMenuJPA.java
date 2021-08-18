@@ -24,6 +24,7 @@ public class RolMenuJPA implements Serializable {
 	@ManyToOne
 	private RolJPA rol;
 	
+	
 	@JoinColumn(name="id_menu", referencedColumnName = "id_menu")
 	@ManyToOne
 	private MenuJPA menu;

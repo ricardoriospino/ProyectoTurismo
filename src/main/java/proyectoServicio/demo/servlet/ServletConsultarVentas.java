@@ -1,6 +1,9 @@
 package proyectoServicio.demo.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import proyectoServicio.demo.bean.ListaComprasBean;
 import proyectoServicio.demo.jpa.entity.CompraJPA;
 import proyectoServicio.demo.jpa.entity.LugarTuristicoJPA;
+import proyectoServicio.demo.jpa.entity.UsuarioJPA;
 import proyectoServicio.demo.service.CompraService;
 import proyectoServicio.demo.service.LugarTuristicoService;
 import proyectoServicio.demo.service.impl.CompraServiceImpl;
@@ -77,10 +81,7 @@ public class ServletConsultarVentas extends HttpServlet {
 		LugarTuristicoJPA codigoTour = new LugarTuristicoJPA();
 		codigoTour.setCodigoLugarTuristico(request.getParameter("codigo_paquete"));
 		String codigo = codigoTour.getCodigoLugarTuristico() ;
-		ListaComprasBean listaBean = new ListaComprasBean();
-		
-		
-		
+	
 		//flag
 		int semaforo = 0;	
 		if (codigo.equals("TDP")) {
@@ -91,56 +92,79 @@ public class ServletConsultarVentas extends HttpServlet {
 		String fechaIni = request.getParameter("fecha_inicio");
 		String fechaFin = request.getParameter("fecha_fin");
 		
-		CompraJPA compra = new CompraJPA();
-		CompraService compraService = new CompraServiceImpl();
 		
-		if (semaforo == 1  && fechaIni.equals("") && fechaFin.equals("")) {
-			
-			List<ListaComprasBean> lista1 =  compraService.listarCompra();
-			log.debug(lista1);
-			request.setAttribute("lstVentas", lista1);
-				
-			
-		} else if (semaforo == 2 && fechaIni.equals("") && fechaFin.equals("") ) {
-			
-			List<ListaComprasBean> lista2 = compraService.listarCompraById(codigo);
-			request.setAttribute("lstVentas", lista2);
-			
-			if (lista2.isEmpty()) {
-				String mensaje = "<strong>Alerta!</strong> No se encuentra informacion";
-				request.setAttribute("info", true);
-				request.setAttribute("msg", mensaje);
-			}
+		// combertirlo a Date para comparacion
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		}else if( semaforo== 1  && fechaIni!= null && fechaFin!= null) {
-			
-			List<ListaComprasBean> lista3 = compraService.listarCompraByFechas(fechaIni, fechaFin);
-			request.setAttribute("lstVentas", lista3);
-			
-			if (lista3.isEmpty()) {
-				String mensaje = " No se encuentra informacion";
-				request.setAttribute("info", true);
-				request.setAttribute("msg", mensaje);
-			}
-			
-		}else if(semaforo == 2 && fechaIni!= null && fechaFin!= null ) {
-			
-			List<ListaComprasBean> lista4 = compraService.listarCompraByFechasAndCodigoTour(fechaIni, fechaFin, codigo);
-			request.setAttribute("lstVentas", lista4);
-			
-			if (lista4.isEmpty()) {
-				String mensaje = " No se encuentra informacion";
-				request.setAttribute("info", true);
-				request.setAttribute("msg", mensaje);
-			}
+		Date fechaIniCast=null;
+		Date fechaFinCast= null;
+		try {
+			fechaIniCast = sdf.parse(fechaIni);
+			fechaFinCast = sdf.parse(fechaFin);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		
-		
-		
+
+		if (fechaIniCast.after(fechaFinCast)) {
+			
+			String mensaje = "<strong>Alerta!</strong>La Fecha Final no puede ser mayor a Fecha Inicial";
+			request.setAttribute("info", true);
+			request.setAttribute("msg", mensaje);
+			
+		}else {
+			
+			CompraService compraService = new CompraServiceImpl();
+			
+			if (semaforo == 1  && fechaIni.equals("") && fechaFin.equals("")) {
+				
+				List<ListaComprasBean> lista1 =  compraService.listarCompra();
+				log.debug(lista1);
+				request.setAttribute("lstVentas", lista1);
+					
+				
+			} else if (semaforo == 2 && fechaIni.equals("") && fechaFin.equals("") ) {
+				
+				List<ListaComprasBean> lista2 = compraService.listarCompraById(codigo);
+				request.setAttribute("lstVentas", lista2);
+				
+				if (lista2.isEmpty()) {
+					String mensaje = "<strong>Alerta!</strong> No se encuentra informacion";
+					request.setAttribute("info", true);
+					request.setAttribute("msg", mensaje);
+				}
+			
+			}else if( semaforo== 1  && fechaIni!= null && fechaFin!= null) {
+				
+				List<ListaComprasBean> lista3 = compraService.listarCompraByFechas(fechaIni, fechaFin);
+				request.setAttribute("lstVentas", lista3);
+				
+				if (lista3.isEmpty()) {
+					String mensaje = " No se encuentra informacion";
+					request.setAttribute("info", true);
+					request.setAttribute("msg", mensaje);
+				}
+				
+			}else if(semaforo == 2 && fechaIni!= null && fechaFin!= null ) {
+				
+				List<ListaComprasBean> lista4 = compraService.listarCompraByFechasAndCodigoTour(fechaIni, fechaFin, codigo);
+				request.setAttribute("lstVentas", lista4);
+				
+				if (lista4.isEmpty()) {
+					String mensaje = " No se encuentra informacion";
+					request.setAttribute("info", true);
+					request.setAttribute("msg", mensaje);
+				}
+			}
+			
+		}
+
 		
 		LugarTuristicoService serviceTour = new LugarTuristicoServiceImpl();
 		List<LugarTuristicoJPA> lista = serviceTour.listarLugaresTuristicos();
-		request.setAttribute("lstNombrePaquete", lista);	
+		request.setAttribute("lstNombrePaquete", lista);
+		
+		request.setAttribute("fechaIni", fechaIni  );
+		request.setAttribute("fechaFin", fechaFin  );
 		
 		
 		RequestDispatcher despachador = null;
